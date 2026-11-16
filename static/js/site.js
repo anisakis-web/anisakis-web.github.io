@@ -1,0 +1,10 @@
+// Redirige las direcciones de la web anterior (?p=, ?page_id=, ?cat=) a las nuevas.
+(function () {
+  var q = location.search;
+  if (!q || (location.pathname !== '/' && location.pathname !== '/index.php')) return;
+  var map = {"2162":"/noticias/control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta/","2152":"/noticias/inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis/","2144":"/noticias/mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el/","2138":"/noticias/descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control/","2129":"/noticias/el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar/","2122":"/noticias/alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul/","2110":"/noticias/retirada-preventiva-por-presencia-extraordinaria-de-anisakis/","2102":"/noticias/empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis/","2097":"/noticias/anisakis-como-causante-de-alergia-a-la-carne/","2088":"/noticias/alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave/","1848":"/noticias/el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una/","1838":"/noticias/alerta-por-parasitos-en-una-caballa-saludable-en-espana/","1826":"/noticias/primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi/","1762":"/noticias/falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso/","1820":"/noticias/nuevas-recomendaciones-para-prevenir-el-anisakis/","1760":"/noticias/el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del/","1586":"/noticias/investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos/","page_id=82":"/anisakis/","page_id=79":"/informacion-cientifica/","page_id=843":"/legislacion/"};
+  var p = q.match(/[?&]p=(\d+)/), pg = q.match(/[?&]page_id=(\d+)/);
+  var to = p ? (map[p[1]] || '/noticias/') : pg ? (map['page_id=' + pg[1]] || '/') :
+           /[?&](cat|m|paged)=/.test(q) ? '/noticias/' : null;
+  if (to) location.replace(to);
+})();
