@@ -67,8 +67,8 @@ body {
 
 /* Solo se entra con token: se ocultan «Iniciar sesión con GitHub» (necesitaría un servidor de autenticación que no
    usamos) y «Trabajar con un repositorio local» (solo aparece al probar en local). Queda el último botón: el del token. */
-.buttons > button.sui.button:not(:last-of-type),
-.buttons > button.sui.button.primary + div[role='none'] { display: none !important; }
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) .buttons > button.sui.button:not(:last-of-type),
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) .buttons > button.sui.button.primary + div[role='none'] { display: none !important; }
 
 .app-shell > .outer > .main:not(:has(.toolbar-wrapper)) {
   background:

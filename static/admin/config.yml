@@ -13,12 +13,6 @@ backend:
   name: github
   repo: anisakis-web/anisakis-web.github.io
   branch: main
-  commit_messages:
-    create: "Noticia nueva: {{slug}}"
-    update: "Noticia editada: {{slug}}"
-    delete: "Noticia borrada: {{slug}}"
-    uploadMedia: "Imagen subida: {{path}}"
-    deleteMedia: "Imagen borrada: {{path}}"
 
 # Imágenes de las noticias: se guardan en static/img/noticias y se publican en /img/noticias.
 # Se convierten a WebP (máx. 1600 px) y el nombre se limpia (sin espacios ni acentos).
@@ -98,6 +92,35 @@ collections:
       - name: body
         label: Texto
         widget: markdown
-        buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote]
+        hint: Solo texto (negrita, cursiva, subtítulos, listas y citas). Los enlaces van abajo, en «Fuentes y enlaces».
+        buttons: [bold, italic, heading-two, heading-three, bulleted-list, numbered-list, quote]
         editor_components: []
-        modes: [rich_text, raw]
+        modes: [rich_text]
+      - name: enlaces
+        label: Fuentes y enlaces
+        label_singular: enlace
+        widget: list
+        required: false
+        max: 12
+        collapsed: false
+        add_to_top: false
+        hint: Fuentes de la noticia y, si hace falta, un vídeo o enlace relacionado. Solo direcciones https:// de webs reales (no se admiten acortadores ni archivos descargables).
+        summary: "{{fields.tipo}} · {{fields.nombre}}"
+        fields:
+          - name: tipo
+            label: Tipo
+            widget: select
+            default: fuente
+            options:
+              - { label: Fuente, value: fuente }
+              - { label: Vídeo relacionado, value: video }
+              - { label: Enlace relacionado, value: enlace }
+          - name: nombre
+            label: Nombre visible
+            widget: string
+            hint: "Ej.: elCorreo, RTVE, AZTI…"
+            pattern: ['^.{1,80}$', 'Entre 1 y 80 caracteres']
+          - name: url
+            label: Dirección (https://…)
+            widget: string
+            pattern: ['^https://(?!(?:www\.)?(?:bit\.ly|bitly\.com|t\.co|tinyurl\.com|goo\.gl|ow\.ly|is\.gd|buff\.ly|cutt\.ly|shorturl\.at|rb\.gy|tiny\.cc|linktr\.ee)/)[^\s/@:]+\.[a-zA-Z]{2,}(/[^\s]*)?$', 'Debe ser la dirección completa de la web (https://…), sin acortadores como bit.ly']

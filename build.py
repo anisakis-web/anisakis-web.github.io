@@ -49,26 +49,46 @@ def read_doc(path):
                 continue
             k, v = line.split(':', 1)
             v = v.strip()
+            if v == '' and i < len(lines) and lines[i].lstrip().startswith('- '):   # lista de elementos clave: valor
+                items = []
+                while i < len(lines) and (lines[i][:1] in ' \t-' and lines[i].strip()):
+                    s_ = lines[i].strip()
+                    i += 1
+                    if s_.startswith('- '):
+                        items.append({})
+                        s_ = s_[2:].strip()
+                    if items and ':' in s_:
+                        kk, vv = s_.split(':', 1)
+                        items[-1][kk.strip()] = clean_text(str(yaml_scalar(vv.strip())))
+                meta[k.strip()] = items[:MAX_LINKS]
+                continue
             if v in ('|', '|-', '>', '>-'):          # bloque multilínea de YAML
                 block = []
                 while i < len(lines) and (lines[i][:1] in ' \t' or not lines[i].strip()):
                     block.append(lines[i].strip())
                     i += 1
                 v = ('\n' if v[0] == '|' else ' ').join(block).strip()
-            elif len(v) >= 2 and v[0] == v[-1] == '"':
-                try:
-                    v = json.loads(v)                 # comillas dobles: mismos escapes que JSON (\" \\ \n \uXXXX)
-                except ValueError:
-                    v = v[1:-1].replace('\\"', '"').replace('\\\\', '\\')
-            elif len(v) >= 2 and v[0] == v[-1] == "'":
-                v = v[1:-1].replace("''", "'")
+            else:
+                v = yaml_scalar(v)
             meta[k.strip()] = clean_text(str(v))
     return meta, body
 
 
+def yaml_scalar(v):
+    """Valor de una línea YAML: entre comillas dobles (escapes como JSON), simples o sin comillas."""
+    if len(v) >= 2 and v[0] == v[-1] == '"':
+        try:
+            return json.loads(v)
+        except ValueError:
+            return v[1:-1].replace('\\"', '"').replace('\\\\', '\\')
+    if len(v) >= 2 and v[0] == v[-1] == "'":
+        return v[1:-1].replace("''", "'")
+    return v
+
+
 def clean_text(t):
     """Quita caracteres de control y sustitutos Unicode sueltos (romperían el HTML, el RSS o la compilación)."""
-    return re.sub('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\ud800-\udfff﷐-﷯￾￿]', '', t)
+    return re.sub('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\ud800-\udfff\ufdd0-\ufdef\ufffe\uffff]', '', t)
 
 
 # Lo que llega del panel de noticias se trata como no fiable (ver README, «Panel de noticias»)
@@ -76,6 +96,94 @@ SLUG_OK = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
 IMG_OK = re.compile(r'/img/noticias/[A-Za-z0-9._-]+\.(?:webp|jpe?g|png|gif|avif)')
 IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
 MAX_NEWS_BYTES = 200_000                       # una noticia normal ocupa 2–10 KB
+MAX_LINKS = 12                                 # «Fuentes y enlaces» por noticia
+
+# Noticias publicadas antes del panel (19/11/2026): conservan sus enlaces dentro del texto tal como están.
+# En las nuevas, el texto no admite enlaces: van en el apartado «Fuentes y enlaces» (campo `enlaces`).
+LEGACY_NEWS = {
+    '2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md',
+    '2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md',
+    '2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md',
+    '2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md',
+    '2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md',
+    '2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md',
+    '2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md',
+    '2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md',
+    '2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md',
+    '2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md',
+    '2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md',
+    '2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md',
+    '2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md',
+    '2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md',
+    '2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md',
+    '2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md',
+    '2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md',
+}
+
+# Comprobación de las direcciones de «Fuentes y enlaces»
+LINK_TYPES = {'fuente': ('Fuente', 'Fuentes'), 'video': ('Vídeo relacionado', 'Vídeos relacionados'),
+              'enlace': ('Enlace relacionado', 'Enlaces relacionados')}
+SHORTENERS = {'bit.ly', 'bitly.com', 't.co', 'tinyurl.com', 'goo.gl', 'ow.ly', 'is.gd', 'buff.ly', 'rebrand.ly',
+              'cutt.ly', 'shorturl.at', 'shorturl.fm', 'tiny.cc', 'rb.gy', 's.id', 'v.gd', 'lnkd.in', 'trib.al',
+              'dlvr.it', 'shorte.st', 'adf.ly', 'bl.ink', 'short.io', 'qrco.de', 'linktr.ee', 'x.gd', 'urlz.fr'}
+RISKY_EXT = ('.exe', '.msi', '.bat', '.cmd', '.com', '.scr', '.ps1', '.vbs', '.js', '.jar', '.apk', '.dmg',
+             '.pkg', '.app', '.deb', '.rpm', '.sh', '.zip', '.rar', '.7z', '.gz', '.tgz', '.iso', '.img',
+             '.svg', '.hta', '.lnk', '.reg', '.docm', '.xlsm', '.pptm')
+
+
+def check_external_url(url):
+    """Devuelve (url, '') si la dirección es aceptable o (None, motivo) si no. Solo https a un dominio público."""
+    from urllib.parse import urlsplit
+    u = (url or '').strip()
+    if not u or len(u) > 500:
+        return None, 'vacía o demasiado larga'
+    if not re.fullmatch(r'https://[!#$%&()*+,\-./0-9:;=?@A-Z_a-z~\[\]]+', u):
+        return None, 'debe empezar por https:// y no llevar espacios ni caracteres raros'
+    try:
+        p = urlsplit(u)
+        host = (p.hostname or '').lower().rstrip('.')
+        port = p.port
+    except ValueError:
+        return None, 'dirección mal formada'
+    if '@' in p.netloc:
+        return None, 'lleva usuario o contraseña'
+    if port not in (None, 443):
+        return None, 'usa un puerto no estándar'
+    if not re.fullmatch(r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}', host):
+        return None, 'el servidor debe ser un dominio (no una IP ni un nombre interno)'
+    if 'xn--' in host:
+        return None, 'dominio con caracteres internacionales (posible imitación de otro)'
+    if host.endswith(('.local', '.internal', '.localhost', '.test', '.example', '.invalid')):
+        return None, 'dominio interno o de pruebas'
+    if host in SHORTENERS or any(host.endswith('.' + s) for s in SHORTENERS):
+        return None, 'acortador de enlaces (oculta el destino real)'
+    if p.path.lower().rstrip('/').endswith(RISKY_EXT):
+        return None, 'apunta a un archivo descargable o ejecutable'
+    return u, ''
+
+
+def render_links(items, fname):
+    """Bloque «Fuente: …» / «Vídeo relacionado: …» al final de la noticia, con direcciones ya comprobadas."""
+    groups = {k: [] for k in LINK_TYPES}
+    for it in items if isinstance(items, list) else []:
+        kind = it.get('tipo', 'fuente') if it.get('tipo') in LINK_TYPES else 'fuente'
+        name = re.sub(r'\s+', ' ', it.get('nombre', '')).strip()[:80]
+        url, why = check_external_url(it.get('url', ''))
+        if not url:
+            print(f'AVISO: {fname}: enlace descartado ({why}): {it.get("url", "")!r}')
+            continue
+        name = name or (urlsplit_host(url))
+        groups[kind].append(f'<a href="{esc(url)}" rel="nofollow noopener noreferrer">{esc(name)}</a>')
+    out = []
+    for kind, (one, many) in LINK_TYPES.items():
+        if groups[kind]:
+            out.append(f'<p class="fuentes">{one if len(groups[kind]) == 1 else many}: {", ".join(groups[kind])}</p>')
+    return '\n'.join(out)
+
+
+def urlsplit_host(url):
+    from urllib.parse import urlsplit
+    return (urlsplit(url).hostname or url).removeprefix('www.')
 
 
 def safe_url(url):
@@ -97,7 +205,8 @@ def plain(h):
 
 
 # ------------------------------------------------------------------ Markdown (subconjunto)
-def md_inline(t):
+def md_inline(t, links=True):
+    """links=False: los enlaces se publican como texto (noticias nuevas: los enlaces van en «Fuentes y enlaces»)."""
     t = esc(t.replace('\x00', ''), quote=False)
     hold = []                                  # etiquetas ya generadas: no se vuelven a procesar
 
@@ -109,7 +218,7 @@ def md_inline(t):
     t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', '', t)
 
     def link(m):
-        url = safe_url(html.unescape(m.group(2)))
+        url = safe_url(html.unescape(m.group(2))) if links else None
         if not url:
             return m.group(1)
         ext = re.match(r'https?://', url) and not re.match(r'https?://(www\.)?anisakis\.com(?=[/:?#]|$)', url)
@@ -121,25 +230,26 @@ def md_inline(t):
     return re.sub(r'\x00(\d+)\x00', lambda m: hold[int(m.group(1))], t)
 
 
-def markdown(src):
+def markdown(src, links=True):
     out = []
+    il = lambda x: md_inline(x, links)
     src = re.sub(r'(?m)^(#{2,4} .*)$', r'\n\1\n', src)      # cada subtítulo, en su propio bloque
     for block in re.split(r'\n\s*\n', src.strip()):
         lines = block.split('\n')
         first = lines[0]
         if re.match(r'#{2,4} ', first):
             n = len(first) - len(first.lstrip('#'))
-            out.append(f'<h{n}>{md_inline(first[n:].strip())}</h{n}>')
+            out.append(f'<h{n}>{il(first[n:].strip())}</h{n}>')
         elif all(re.match(r'[-*] ', l) for l in lines):
-            out.append('<ul>' + ''.join(f'<li>{md_inline(l[2:].strip())}</li>' for l in lines) + '</ul>')
+            out.append('<ul>' + ''.join(f'<li>{il(l[2:].strip())}</li>' for l in lines) + '</ul>')
         elif all(re.match(r'\d+\. ', l) for l in lines):
-            out.append('<ol>' + ''.join(f'<li>{md_inline(l.split(". ", 1)[1].strip())}</li>' for l in lines) + '</ol>')
+            out.append('<ol>' + ''.join(f'<li>{il(l.split(". ", 1)[1].strip())}</li>' for l in lines) + '</ol>')
         elif all(l.startswith('>') for l in lines):
-            out.append('<blockquote><p>' + md_inline('\n'.join(l[1:].lstrip() for l in lines)) + '</p></blockquote>')
+            out.append('<blockquote><p>' + il('\n'.join(l[1:].lstrip() for l in lines)) + '</p></blockquote>')
         elif re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', block.strip()):
             continue                                # imagen suelta en el texto: no se publica (ver md_inline)
         else:
-            out.append('<p>' + md_inline(block) + '</p>')
+            out.append('<p>' + il(block) + '</p>')
     return '\n'.join(out)
 
 
@@ -236,6 +346,9 @@ def load_news():
             print(f'AVISO: {f} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
             continue
         meta, body = read_doc(os.path.join(d, f))
+        # cada campo con su tipo: solo «enlaces» es una lista; el resto, texto
+        meta = {k: (v if (k == 'enlaces') == isinstance(v, list) else ([] if k == 'enlaces' else ''))
+                for k, v in meta.items()}
         if meta.get('draft', '').lower() in ('true', 'si', 'sí', 'yes'):
             continue
         slug = meta.get('slug') or re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])
@@ -255,7 +368,11 @@ def load_news():
         if image and not IMG_OK.fullmatch(image):
             print(f'AVISO: {f}: imagen no válida, se publica sin imagen ({image!r})')
             image = ''
-        h = markdown(body)
+        legacy = f in LEGACY_NEWS
+        h = markdown(body, links=legacy)
+        links_html = render_links(meta.get('enlaces', []), f)
+        if links_html:
+            h = h + '\n' + links_html
         title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
         summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
         items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': title, 'date': dt,
