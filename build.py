@@ -35,20 +35,57 @@ esc = html.escape
 # ------------------------------------------------------------------ lectura de contenido
 def read_doc(path):
     """Devuelve (metadatos, cuerpo) de un archivo con cabecera '---' tipo YAML sencillo."""
-    text = open(path, encoding='utf-8').read().replace('\r\n', '\n')
+    text = clean_text(open(path, encoding='utf-8', errors='replace').read().replace('\r\n', '\n'))
     meta, body = {}, text
     m = re.match(r'---\n(.*?)\n---\n?', text, re.S)
     if m:
         body = text[m.end():]
-        for line in m.group(1).split('\n'):
-            if ':' not in line or line.lstrip().startswith('#'):
+        lines = m.group(1).split('\n')
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+            i += 1
+            if ':' not in line or line.lstrip().startswith('#') or line[:1] in ' \t':
                 continue
             k, v = line.split(':', 1)
             v = v.strip()
-            if len(v) >= 2 and v[0] == v[-1] and v[0] in '"\'':
-                v = v[1:-1].replace('\\"', '"').replace('\\\\', '\\') if v[0] == '"' else v[1:-1].replace("''", "'")
-            meta[k.strip()] = v
+            if v in ('|', '|-', '>', '>-'):          # bloque multilínea de YAML
+                block = []
+                while i < len(lines) and (lines[i][:1] in ' \t' or not lines[i].strip()):
+                    block.append(lines[i].strip())
+                    i += 1
+                v = ('\n' if v[0] == '|' else ' ').join(block).strip()
+            elif len(v) >= 2 and v[0] == v[-1] == '"':
+                try:
+                    v = json.loads(v)                 # comillas dobles: mismos escapes que JSON (\" \\ \n \uXXXX)
+                except ValueError:
+                    v = v[1:-1].replace('\\"', '"').replace('\\\\', '\\')
+            elif len(v) >= 2 and v[0] == v[-1] == "'":
+                v = v[1:-1].replace("''", "'")
+            meta[k.strip()] = clean_text(str(v))
     return meta, body
+
+
+def clean_text(t):
+    """Quita caracteres de control y sustitutos Unicode sueltos (romperían el HTML, el RSS o la compilación)."""
+    return re.sub('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\ud800-\udfff﷐-﷯￾￿]', '', t)
+
+
+# Lo que llega del panel de noticias se trata como no fiable (ver README, «Panel de noticias»)
+SLUG_OK = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
+IMG_OK = re.compile(r'/img/noticias/[A-Za-z0-9._-]+\.(?:webp|jpe?g|png|gif|avif)')
+IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
+MAX_NEWS_BYTES = 200_000                       # una noticia normal ocupa 2–10 KB
+
+
+def safe_url(url):
+    """Solo enlaces web (http/https), de correo, o rutas internas de la web. Cualquier otra cosa → None."""
+    u = url.strip()
+    if re.match(r'(?i)https?://[^\s<>"]+$', u) or re.match(r'(?i)mailto:[^\s<>"]+$', u):
+        return u
+    if re.match(r'/(?![/\\])[^\s<>"\\]*$', u) or re.match(r'#[\w-]*$', u):
+        return u
+    return None
 
 
 def fecha(d):
@@ -61,22 +98,36 @@ def plain(h):
 
 # ------------------------------------------------------------------ Markdown (subconjunto)
 def md_inline(t):
-    t = esc(t, quote=False)
-    t = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)', lambda m: f'<img src="{m.group(2)}" alt="{m.group(1)}" loading="lazy">', t)
+    t = esc(t.replace('\x00', ''), quote=False)
+    hold = []                                  # etiquetas ya generadas: no se vuelven a procesar
+
+    def keep(tag):
+        hold.append(tag)
+        return f'\x00{len(hold) - 1}\x00'
+
+    def image(m):
+        src = html.unescape(m.group(2))
+        if not IMG_OK.fullmatch(src):           # solo imágenes de la propia web (la CSP bloquea las externas)
+            return ''
+        return keep(f'<img src="{esc(src)}" alt="{esc(html.unescape(m.group(1)))}" loading="lazy">')
+    t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', image, t)
 
     def link(m):
-        label, url = m.group(1), m.group(2).replace('&amp;', '&')
-        ext = re.match(r'https?://', url) and not re.match(r'https?://(www\.)?anisakis\.com', url)
-        return f'<a href="{esc(url)}"' + (' rel="noopener"' if ext else '') + f'>{label}</a>'
-    t = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', link, t)
-    t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
-    t = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
+        url = safe_url(html.unescape(m.group(2)))
+        if not url:
+            return m.group(1)
+        ext = re.match(r'https?://', url) and not re.match(r'https?://(www\.)?anisakis\.com(?=[/:?#]|$)', url)
+        return keep(f'<a href="{esc(url)}"' + (' rel="noopener"' if ext else '') + '>') + m.group(1) + keep('</a>')
+    t = re.sub(r'\[([^\[\]\x00]+)\]\(([^()\s\x00]+)\)', link, t)
+    t = re.sub(r'\*\*((?:[^*\n]|\*(?!\*))+?)\*\*', r'<strong>\1</strong>', t)
+    t = re.sub(r'(?<![\w*])\*(?![\s*])([^*\n]+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
     t = t.replace('  \n', '<br>\n')
-    return t
+    return re.sub(r'\x00(\d+)\x00', lambda m: hold[int(m.group(1))], t)
 
 
 def markdown(src):
     out = []
+    src = re.sub(r'(?m)^(#{2,4} .*)$', r'\n\1\n', src)      # cada subtítulo, en su propio bloque
     for block in re.split(r'\n\s*\n', src.strip()):
         lines = block.split('\n')
         first = lines[0]
@@ -177,19 +228,42 @@ def write(rel, content):
 
 def load_news():
     d = os.path.join(ROOT, 'content', 'noticias')
-    items = []
+    items, seen = [], set()
     for f in sorted(os.listdir(d)):
         if not f.endswith('.md'):
+            continue
+        p = os.path.join(d, f)
+        if not os.path.isfile(p) or os.path.islink(p):
+            print(f'AVISO: {f} se omite (no es un archivo normal)')
+            continue
+        if os.path.getsize(p) > MAX_NEWS_BYTES:
+            print(f'AVISO: {f} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
             continue
         meta, body = read_doc(os.path.join(d, f))
         if meta.get('draft', '').lower() in ('true', 'si', 'sí', 'yes'):
             continue
         slug = meta.get('slug') or re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])
-        dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
+        if not SLUG_OK.fullmatch(slug) or len(slug) > 120:
+            print(f'AVISO: {f} se omite (dirección no válida: {slug!r})')
+            continue
+        base, n = slug, 2
+        while slug in seen:                     # dos noticias con el mismo título: -2, -3…
+            slug, n = f'{base}-{n}', n + 1
+        seen.add(slug)
+        try:
+            dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
+        except ValueError:
+            print(f'AVISO: {f} se omite (fecha no válida: {meta.get("date")!r})')
+            continue
+        image = meta.get('image', '').strip()
+        if image and not IMG_OK.fullmatch(image):
+            print(f'AVISO: {f}: imagen no válida, se publica sin imagen ({image!r})')
+            image = ''
         h = markdown(body)
-        summary = meta.get('summary') or plain(h)[:200]
-        items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': meta.get('title', slug), 'date': dt,
-                      'image': meta.get('image', ''), 'summary': summary, 'html': h})
+        title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
+        summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
+        items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': title, 'date': dt,
+                      'image': image, 'summary': summary, 'html': h})
     items.sort(key=lambda n: (n['date'], n['slug']), reverse=True)
     return items
 
@@ -197,7 +271,23 @@ def load_news():
 def build():
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
-    shutil.copytree(os.path.join(ROOT, 'static'), OUT)
+    news_img = os.path.normcase(os.path.join(ROOT, 'static', 'img', 'noticias'))
+
+    def only_images(folder, names):
+        """En la carpeta de imágenes de noticias (la que escribe el panel) solo se publican imágenes:
+        un .svg o .html subido ahí podría ejecutar código en el dominio de la web."""
+        f = os.path.normcase(folder)
+        if f != news_img and not f.startswith(news_img + os.sep):
+            return []
+
+        def ok(n):
+            p = os.path.join(folder, n)
+            return n.lower().endswith(IMG_EXT) and os.path.isfile(p) and not os.path.islink(p)
+        bad = [n for n in names if not ok(n)]   # ni carpetas ni enlaces simbólicos, aunque se llamen .webp
+        for n in bad:
+            print(f'AVISO: static/img/noticias/{n} no se publica (solo se admiten imágenes {", ".join(IMG_EXT)})')
+        return bad
+    shutil.copytree(os.path.join(ROOT, 'static'), OUT, ignore=only_images)
     news = load_news()
     pages = []  # (url, lastmod) para el sitemap
 
@@ -292,7 +382,9 @@ def build():
                 f'<time datetime="{n["date"].isoformat()}">{fecha(n["date"])}</time></p>'
                 f'<h1>{esc(n["title"])}</h1>{img}\n{n["html"]}\n{nav}</article>')
         write(n['url'], layout(n['url'], n['title'], body, n['summary'], n['image'], 'article',
-                               f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n'.replace('<script type="application/ld+json">', '<script type="application/ld+json">')))
+                               '<script type="application/ld+json">'
+                               + json.dumps(ld, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
+                               + '</script>\n'))
         pages.append((n['url'], n['date']))
 
     # 404, sitemap, robots, RSS, CNAME

@@ -1,0 +1,97 @@
+# Panel de noticias (Sveltia CMS). SOLO gestiona las noticias: crear, editar y borrar.
+# El resto de la web se cambia editando el código del repositorio.
+# Para entrar hace falta una cuenta de GitHub con permiso de escritura en este repositorio
+# y una clave (token) limitada a él. Ver README.md, «Panel de noticias».
+
+backend:
+  name: github
+  repo: anisakis-web/anisakis-web.github.io
+  branch: main
+  commit_messages:
+    create: "Noticia nueva: {{slug}}"
+    update: "Noticia editada: {{slug}}"
+    delete: "Noticia borrada: {{slug}}"
+    uploadMedia: "Imagen subida: {{path}}"
+    deleteMedia: "Imagen borrada: {{path}}"
+
+# Imágenes de las noticias: se guardan en static/img/noticias y se publican en /img/noticias.
+# Se convierten a WebP (máx. 1600 px) y el nombre se limpia (sin espacios ni acentos).
+media_folder: static/img/noticias
+public_folder: /img/noticias
+media_libraries:
+  default:
+    config:
+      max_file_size: 8000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 1600
+          height: 1600
+
+# Nombres de archivo y direcciones: solo letras sin acentos, números y guiones.
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+  maxlength: 80
+
+# Formato de los archivos: comillas dobles y sin campos vacíos (lo lee build.py).
+output:
+  omit_empty_optional_fields: true
+  yaml:
+    quote: double
+
+collections:
+  - name: noticias
+    label: Noticias
+    label_singular: Noticia
+    description: Noticias de la web. Al guardar, la web se actualiza sola en uno o dos minutos.
+    folder: content/noticias
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    identifier_field: title
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title]
+    view_filters:
+      - label: Borradores
+        field: draft
+        pattern: true
+    fields:
+      - name: title
+        label: Título
+        widget: string
+        hint: Título de la noticia (se usa también para la dirección de la página).
+      - name: date
+        label: Fecha
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        default: "{{now}}"
+      - name: image
+        label: Imagen principal
+        widget: image
+        required: false
+        choose_url: false
+        accept: image/webp,image/jpeg,image/png,image/gif,image/avif
+        hint: Opcional. Formato horizontal; se convierte a WebP automáticamente.
+      - name: summary
+        label: Resumen
+        widget: text
+        required: false
+        hint: Opcional. 1–2 frases para la lista de noticias y Google. Si se deja vacío se usa el inicio del texto.
+      - name: draft
+        label: Borrador (no se publica)
+        widget: boolean
+        default: false
+        required: false
+      - name: body
+        label: Texto
+        widget: markdown
+        buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote]
+        editor_components: [image]
+        modes: [rich_text, raw]
