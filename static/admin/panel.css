@@ -1,0 +1,18 @@
+/* Aspecto de anisakis.com en el panel de noticias (variables de la interfaz de Sveltia CMS).
+   Se usa !important porque la hoja de estilos del panel se carga después y define las mismas variables. */
+:root,
+:root[data-theme='light'],
+:root[data-theme='dark'] {
+  --sui-primary-accent-color-light: #4a63b0 !important;
+  --sui-primary-accent-color: #263e8b !important;
+  --sui-primary-accent-color-dark: #1b2c63 !important;
+  --sui-primary-accent-color-inverted: #ffffff !important;
+  --sui-primary-accent-color-text: #2f8fd0 !important;
+}
+
+/* Pantalla de entrada: sin el pie «Con tecnología de…» ni la opción de repositorio local (no se usa). */
+.powered-by { display: none !important; }
+/* Solo se entra con token: se ocultan «Iniciar sesión con GitHub» (necesitaría un servidor de autenticación que no
+   usamos) y «Trabajar con un repositorio local» (solo aparece al probar en local). Queda el último botón: el del token. */
+.buttons > button.sui.button:not(:last-of-type),
+.buttons > button.sui.button.primary + div[role='none'] { display: none !important; }

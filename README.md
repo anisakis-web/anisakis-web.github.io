@@ -37,6 +37,7 @@ editando el repositorio.
   y textos de idioma de la versión fijada (`unpkg.com/@sveltia/cms@VERSIÓN/locales/`). `build.py` trata todo lo que
   llega del panel como no fiable: solo enlaces `https://`, `mailto:` o internos; imagen principal solo de
   `/img/noticias/`; dirección (slug) solo `a-z0-9-`; texto escapado.
+- **Aspecto:** nombre y logo de anisakis.com (`app_title`, `logo` en `config.yml`) y colores de la web en `static/admin/panel.css`, que también oculta el pie de Sveltia y los botones de acceso que no se usan.
 - **Copia fija:** `static/admin/sveltia-cms.js` y `static/admin/chunks/` son Sveltia CMS **0.258.1** (npm
   `@sveltia/cms`, integridad sha512 y certificado de origen comprobados: compilado por GitHub Actions desde
   `sveltia/sveltia-cms`, etiqueta `v0.258.1`). SHA-256 de `sveltia-cms.js`:

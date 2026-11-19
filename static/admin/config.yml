@@ -3,6 +3,12 @@
 # Para entrar hace falta una cuenta de GitHub con permiso de escritura en este repositorio
 # y una clave (token) limitada a él. Ver README.md, «Panel de noticias».
 
+app_title: Panel de noticias · anisakis.com
+logo:
+  src: /icon-512.png
+  show_in_header: true
+show_preview_links: false
+
 backend:
   name: github
   repo: anisakis-web/anisakis-web.github.io
