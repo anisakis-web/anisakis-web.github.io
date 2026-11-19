@@ -47,7 +47,7 @@ collections:
   - name: noticias
     label: Noticias
     label_singular: Noticia
-    description: Noticias de la web. Al guardar, la web se actualiza sola en uno o dos minutos.
+    description: "Noticias de anisakis.com. Al guardar, la noticia se publica sola en la web en uno o dos minutos (salvo si está marcada como borrador)."
     folder: content/noticias
     extension: md
     format: yaml-frontmatter
@@ -65,37 +65,42 @@ collections:
       - name: title
         label: Título
         widget: string
-        hint: Título de la noticia (se usa también para la dirección de la página).
+        hint: "Título de la noticia, tal como se verá en la web. También se usa para crear la dirección de la página, que no cambia aunque luego edites el título."
+        pattern: ['^.{5,200}$', 'Entre 5 y 200 caracteres']
       - name: date
         label: Fecha
         widget: datetime
         type: date
         format: YYYY-MM-DD
         default: "{{now}}"
+        hint: "Fecha de publicación de la noticia. Las noticias se ordenan por esta fecha, de la más reciente a la más antigua."
       - name: image
         label: Imagen principal
         widget: image
         required: false
         choose_url: false
         accept: image/webp,image/jpeg,image/png,image/gif,image/avif
-        hint: Opcional. Formato horizontal; se convierte a WebP automáticamente.
+        hint: "Opcional. Una sola imagen por noticia (JPG, PNG, WebP, GIF o AVIF; máximo 5 MB), mejor en horizontal. Se optimiza y se convierte a WebP automáticamente. No se admiten otros archivos."
       - name: summary
         label: Resumen
         widget: text
         required: false
-        hint: Opcional. 1–2 frases para la lista de noticias y Google. Si se deja vacío se usa el inicio del texto.
+        hint: "Opcional. Una o dos frases que aparecen en la lista de noticias y en Google. Si lo dejas vacío, se usa el principio del texto."
+        pattern: ['^[\s\S]{0,300}$', 'Máximo 300 caracteres']
       - name: draft
         label: Borrador (no se publica)
         widget: boolean
         default: false
         required: false
+        hint: "Actívalo para guardar la noticia sin que aparezca en la web. Desactívalo cuando quieras publicarla."
       - name: body
         label: Texto
         widget: markdown
-        hint: Solo texto (negrita, cursiva, subtítulos, listas y citas). Los enlaces van abajo, en «Fuentes y enlaces».
+        hint: "Solo texto, con negrita, cursiva, subtítulos, listas y citas. Por seguridad, el texto NO puede contener enlaces ni direcciones web (http…, www…) ni imágenes. Las fuentes, vídeos y enlaces se añaden abajo, en «Fuentes y enlaces»."
         buttons: [bold, italic, heading-two, heading-three, bulleted-list, numbered-list, quote]
         editor_components: []
         modes: [rich_text]
+        pattern: ['^(?![\s\S]*(\]\s*[\(\[]|[hH][tT][tT][pP][sS]?:|[wW][wW][wW]\s*\.|[mM][aA][iI][lL][tT][oO]:|<\s*/?\s*[aA]\b|<\s*[iI][mM][gG]\b))[\s\S]*$', 'El texto no puede contener enlaces ni direcciones web. Quítalos y añádelos en «Fuentes y enlaces».']
       - name: enlaces
         label: Fuentes y enlaces
         label_singular: enlace
@@ -104,13 +109,14 @@ collections:
         max: 12
         collapsed: false
         add_to_top: false
-        hint: Fuentes de la noticia y, si hace falta, un vídeo o enlace relacionado. Solo direcciones https:// de webs reales (no se admiten acortadores ni archivos descargables).
+        hint: "Aquí van TODOS los enlaces de la noticia (máximo 12). Pulsa «Agregar enlace» y elige el tipo; en la web se muestran al final, como «Fuente: …» o «Vídeo relacionado: …»."
         summary: "{{fields.tipo}} · {{fields.nombre}}"
         fields:
           - name: tipo
             label: Tipo
             widget: select
             default: fuente
+            hint: "«Fuente» para el medio o estudio de donde sale la noticia; «Vídeo relacionado» para un vídeo (YouTube, RTVE…); «Enlace relacionado» para cualquier otra página de interés."
             options:
               - { label: Fuente, value: fuente }
               - { label: Vídeo relacionado, value: video }
@@ -118,9 +124,10 @@ collections:
           - name: nombre
             label: Nombre visible
             widget: string
-            hint: "Ej.: elCorreo, RTVE, AZTI…"
+            hint: "El texto que se verá en la web en lugar de la dirección. Ej.: elCorreo, RTVE, AZTI."
             pattern: ['^.{1,80}$', 'Entre 1 y 80 caracteres']
           - name: url
             label: Dirección (https://…)
             widget: string
-            pattern: ['^https://(?!(?:www\.)?(?:bit\.ly|bitly\.com|t\.co|tinyurl\.com|goo\.gl|ow\.ly|is\.gd|buff\.ly|cutt\.ly|shorturl\.at|rb\.gy|tiny\.cc|linktr\.ee)/)[^\s/@:]+\.[a-zA-Z]{2,}(/[^\s]*)?$', 'Debe ser la dirección completa de la web (https://…), sin acortadores como bit.ly']
+            hint: "Copia la dirección completa de la página desde la barra del navegador. Solo se admiten direcciones seguras (https://) de webs reales; no se admiten acortadores (bit.ly…), direcciones IP ni enlaces a archivos descargables o programas. Si una dirección no cumple, no se publicará."
+            pattern: ['^https://(?!(?:www\.)?(?:bit\.ly|bitly\.com|t\.co|tinyurl\.com|goo\.gl|ow\.ly|is\.gd|buff\.ly|cutt\.ly|shorturl\.at|rb\.gy|tiny\.cc|linktr\.ee)/)[^\s/@:]+\.[a-zA-Z]{2,}(/[^\s]*)?$', 'Debe ser la dirección completa de la web, empezando por https://, sin acortadores como bit.ly']

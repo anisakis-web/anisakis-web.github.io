@@ -11,6 +11,7 @@ Contenido:
   content/legal/*.html    textos legales (cabecera + HTML)
   static/                 imágenes, CSS, JS e iconos (se copian tal cual)
 """
+import hashlib
 import html
 import json
 import os
@@ -50,17 +51,35 @@ def read_doc(path):
             k, v = line.split(':', 1)
             v = v.strip()
             if v == '' and i < len(lines) and lines[i].lstrip().startswith('- '):   # lista de elementos clave: valor
-                items = []
+                # formato estricto: «- clave: valor» y «  clave: valor» con la sangría del primer elemento
+                items, ok = [], True
+                ind = len(lines[i]) - len(lines[i].lstrip())
                 while i < len(lines) and (lines[i][:1] in ' \t-' and lines[i].strip()):
-                    s_ = lines[i].strip()
+                    raw = lines[i]
                     i += 1
+                    lead = len(raw) - len(raw.lstrip())
+                    s_ = raw.strip()
+                    if s_ in ('-', '- ') or (s_.startswith('- ') and lead != ind):
+                        ok = False
+                        items.append({'__mal_formado': '1'})   # el elemento entero se descarta
+                        continue
                     if s_.startswith('- '):
                         items.append({})
                         s_ = s_[2:].strip()
-                    if items and ':' in s_:
-                        kk, vv = s_.split(':', 1)
-                        items[-1][kk.strip()] = clean_text(str(yaml_scalar(vv.strip())))
-                meta[k.strip()] = items[:MAX_LINKS]
+                    elif lead != ind + 2 or not items or ':' not in s_:
+                        ok = False
+                        if items:
+                            items[-1]['__mal_formado'] = '1'
+                        continue
+                    kk, vv = s_.split(':', 1)
+                    kk = kk.strip()
+                    if kk in items[-1]:
+                        ok = False                      # clave repetida
+                    items[-1][kk] = clean_text(str(yaml_scalar(vv.strip())))
+                if not ok:
+                    print(f'AVISO: {os.path.basename(path)}: «{k.strip()}» con formato no válido; se ignoran sus elementos dudosos')
+                if k.strip() not in meta:               # si la clave se repite, vale la primera
+                    meta[k.strip()] = items[:MAX_LINKS]
                 continue
             if v in ('|', '|-', '>', '>-'):          # bloque multilínea de YAML
                 block = []
@@ -98,26 +117,44 @@ IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
 MAX_NEWS_BYTES = 200_000                       # una noticia normal ocupa 2–10 KB
 MAX_LINKS = 12                                 # «Fuentes y enlaces» por noticia
 
-# Noticias publicadas antes del panel (19/11/2026): conservan sus enlaces dentro del texto tal como están.
-# En las nuevas, el texto no admite enlaces: van en el apartado «Fuentes y enlaces» (campo `enlaces`).
+# Noticias publicadas antes del panel (19/11/2026): conservan sus enlaces dentro del texto, pero SOLO si el texto
+# no ha cambiado (huella SHA-256 del cuerpo). Si se edita, pasa a regirse como una noticia nueva.
+# En las noticias nuevas el texto no puede llevar enlaces: van en «Fuentes y enlaces» (campo `enlaces`).
 LEGACY_NEWS = {
-    '2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md',
-    '2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md',
-    '2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md',
-    '2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md',
-    '2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md',
-    '2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md',
-    '2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md',
-    '2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md',
-    '2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md',
-    '2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md',
-    '2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md',
-    '2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md',
-    '2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md',
-    '2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md',
-    '2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md',
-    '2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md',
-    '2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md',
+    '2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md':
+        '3fa031cfe801015895cdc75069d8444dffac7cb06e7a24001a47c00250b26574',
+    '2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
+        'd3dd80b8652ea9b5b668879202745fb87d967e6b49b5f08c0f0140bcf4d440ac',
+    '2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
+        '69aa30e4978b38b20a68ac17d3f233ad1cc15373cc64d1e0c0f7558b55d09481',
+    '2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
+        '1b68ee6c86fc2b3ce927ed6de772e01110fcc10b08beb43ee49c6e1f0b3fe193',
+    '2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
+        'b599cf3be3c3adcb367e9ceb956190cc80f5d58711a0701ed3fef25ef4ad97df',
+    '2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
+        '1098bd285e88cf0ce35e54ca52268e80bdbb1b55bfd76089ef476900cf0f6aca',
+    '2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
+        '5f4bce15316e812308b1a28233caaa2b93911e28eb165bfe619c4d6c3757897a',
+    '2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
+        '8c29416cd8319db240d32e6f536079611e2ac683b58d9989234260604b7494f8',
+    '2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
+        'a580fd16085e2315f3d4dbb5b8368d7b99a0d9625413cce5aadeb41118a23101',
+    '2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
+        'fe1182e58a7fe2fddf85607798b565c4205cb276d5687e2c1c537d9ea1c7798b',
+    '2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md':
+        '4b859116fa6724391cb945e73d5481c29501cbec27c840c20e21450a175d3a5d',
+    '2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md':
+        'b58f9a29e82e0cd2313a6e643dd361e320a7176f33dcf0989288af797881cb4b',
+    '2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md':
+        '7880d96475f4019c8fa02444b9e30574ca3c2a159db7c6f2f7146fdf0513c523',
+    '2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md':
+        '1b612da88ff9e4271a73da50fd1219773569293149b04c0b80706ced4fa27def',
+    '2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md':
+        '1b19e5bb9ddb11142c805e4000747f4e0421f5074f76331f3f2b43402ec4be22',
+    '2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md':
+        'b547ca782bc32b730647e80196aee178293880ce140f90e6506fba19c7d11980',
+    '2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md':
+        '79e22733a784b924920e18bedec8184668389cb109d09b6d94bbac2b9897c916',
 }
 
 # Comprobación de las direcciones de «Fuentes y enlaces»
@@ -126,7 +163,8 @@ LINK_TYPES = {'fuente': ('Fuente', 'Fuentes'), 'video': ('Vídeo relacionado', '
 SHORTENERS = {'bit.ly', 'bitly.com', 't.co', 'tinyurl.com', 'goo.gl', 'ow.ly', 'is.gd', 'buff.ly', 'rebrand.ly',
               'cutt.ly', 'shorturl.at', 'shorturl.fm', 'tiny.cc', 'rb.gy', 's.id', 'v.gd', 'lnkd.in', 'trib.al',
               'dlvr.it', 'shorte.st', 'adf.ly', 'bl.ink', 'short.io', 'qrco.de', 'linktr.ee', 'x.gd', 'urlz.fr'}
-RISKY_EXT = ('.exe', '.msi', '.bat', '.cmd', '.com', '.scr', '.ps1', '.vbs', '.js', '.jar', '.apk', '.dmg',
+# Orientativo: un servidor puede servir un ejecutable en cualquier ruta; esto solo evita los enlaces evidentes.
+RISKY_EXT = ('.exe', '.msi', '.bat', '.cmd', '.scr', '.ps1', '.vbs', '.js', '.jar', '.apk', '.dmg',
              '.pkg', '.app', '.deb', '.rpm', '.sh', '.zip', '.rar', '.7z', '.gz', '.tgz', '.iso', '.img',
              '.svg', '.hta', '.lnk', '.reg', '.docm', '.xlsm', '.pptm')
 
@@ -157,15 +195,32 @@ def check_external_url(url):
         return None, 'dominio interno o de pruebas'
     if host in SHORTENERS or any(host.endswith('.' + s) for s in SHORTENERS):
         return None, 'acortador de enlaces (oculta el destino real)'
-    if p.path.lower().rstrip('/').endswith(RISKY_EXT):
+    from urllib.parse import unquote
+    path = unquote(unquote(p.path)).lower().rstrip('/;. ')
+    if path.endswith(RISKY_EXT) or re.search(r'\.(?:exe|msi|apk|dmg|zip|rar|7z|iso|scr|bat|jar)[;.]', path):
         return None, 'apunta a un archivo descargable o ejecutable'
     return u, ''
+
+
+# Texto de las noticias nuevas: sin enlaces ni imágenes de ningún tipo (van en «Fuentes y enlaces»)
+BODY_FORBIDDEN = re.compile(r'\]\s*\(|\]\s*\[|<\s*/?\s*(?:a|img|iframe)\b|\b(?:https?|ftp|mailto|javascript|data|file)\s*:'
+                            r'|\bwww\s*\.|\[[^\]\n]*\]:\s*\S', re.I)
+
+
+def body_problem(body):
+    """Motivo por el que el texto de una noticia nueva no se puede publicar, o '' si está bien."""
+    m = BODY_FORBIDDEN.search(body)
+    return f'el texto contiene un enlace o dirección web («{m.group(0).strip()}»): los enlaces van en «Fuentes y enlaces»' if m else ''
 
 
 def render_links(items, fname):
     """Bloque «Fuente: …» / «Vídeo relacionado: …» al final de la noticia, con direcciones ya comprobadas."""
     groups = {k: [] for k in LINK_TYPES}
     for it in items if isinstance(items, list) else []:
+        extra = set(it) - {'tipo', 'nombre', 'url'}
+        if extra:
+            print(f'AVISO: {fname}: enlace descartado (campos no permitidos: {", ".join(sorted(extra))})')
+            continue
         kind = it.get('tipo', 'fuente') if it.get('tipo') in LINK_TYPES else 'fuente'
         name = re.sub(r'\s+', ' ', it.get('nombre', '')).strip()[:80]
         url, why = check_external_url(it.get('url', ''))
@@ -218,7 +273,10 @@ def md_inline(t, links=True):
     t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', '', t)
 
     def link(m):
-        url = safe_url(html.unescape(m.group(2))) if links else None
+        url = None
+        if links:                               # solo noticias antiguas sin cambios: internas o https comprobadas
+            raw = html.unescape(m.group(2))
+            url = safe_url(raw) if raw.startswith(('/', '#')) else check_external_url(raw)[0]
         if not url:
             return m.group(1)
         ext = re.match(r'https?://', url) and not re.match(r'https?://(www\.)?anisakis\.com(?=[/:?#]|$)', url)
@@ -368,13 +426,16 @@ def load_news():
         if image and not IMG_OK.fullmatch(image):
             print(f'AVISO: {f}: imagen no válida, se publica sin imagen ({image!r})')
             image = ''
-        legacy = f in LEGACY_NEWS
+        legacy = LEGACY_NEWS.get(f) == hashlib.sha256(body.strip().encode('utf-8', 'replace')).hexdigest()
+        if not legacy and body_problem(body):
+            print(f'AVISO: {f} NO se publica: {body_problem(body)}')
+            continue
         h = markdown(body, links=legacy)
+        title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
+        summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
         links_html = render_links(meta.get('enlaces', []), f)
         if links_html:
             h = h + '\n' + links_html
-        title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
-        summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
         items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': title, 'date': dt,
                       'image': image, 'summary': summary, 'html': h})
     items.sort(key=lambda n: (n['date'], n['slug']), reverse=True)
