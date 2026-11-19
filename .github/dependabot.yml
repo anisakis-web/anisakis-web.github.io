@@ -1,0 +1,8 @@
+# Avisa (con un PR) cuando haya versiones nuevas de las acciones de GitHub usadas en la publicación.
+# Los PR de Dependabot NO se aplican solos: se revisan y se fusionan a mano (y se actualiza la huella).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

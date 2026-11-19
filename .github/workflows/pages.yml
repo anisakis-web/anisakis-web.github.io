@@ -16,26 +16,42 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      # Acciones oficiales de GitHub fijadas por su huella exacta (no por etiqueta, que podría cambiar)
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+
+      # Control de integridad: con la clave de un editor solo se pueden cambiar noticias e imágenes de noticias.
+      # Si cambia cualquier otra cosa, la huella no coincide y NO se publica (GitHub avisa por correo).
+      # Tras cambiar el código de la web: commit, `bash tools/huella_codigo.sh --update` y commit de este archivo.
+      - name: Comprobar que solo han cambiado noticias
+        env:
+          CODE_TREE: 0000000000000000000000000000000000000000000000000000000000000000
+        run: |
+          set -euo pipefail
+          bad=$(git ls-tree -r -l HEAD -- content/noticias static/img/noticias | awk '$1!="100644" || $2!="blob" || $4>5000000')
+          if [ -n "$bad" ]; then echo "::error::Archivo no permitido en noticias (no es un archivo normal o pasa de 5 MB): $bad"; exit 1; fi
+          h=$(bash tools/huella_codigo.sh)
+          if [ "$h" != "$CODE_TREE" ]; then echo "::error::Hay cambios fuera de las noticias (huella $h). Revisar el historial antes de publicar."; exit 1; fi
+
+      - name: Comprobar que las reglas del panel coinciden con las de la web
+        run: python3 tools/reglas_panel.py --check
+
       - name: Generar la web
-        run: python build.py
-      - uses: actions/upload-pages-artifact@v3
+        run: python3 build.py
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
         with:
           path: _site
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       pages: write
@@ -45,4 +61,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5.0.1

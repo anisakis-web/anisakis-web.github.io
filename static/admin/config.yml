@@ -92,7 +92,7 @@ collections:
         widget: boolean
         default: false
         required: false
-        hint: "Actívalo para guardar la noticia sin que aparezca en la web. Desactívalo cuando quieras publicarla."
+        hint: "Actívalo para guardar la noticia sin que aparezca en la web. Desactívalo cuando quieras publicarla. Ojo: un borrador no es privado; su contenido queda guardado en GitHub y su imagen se sube igualmente, así que no escribas nada confidencial."
       - name: body
         label: Texto
         widget: markdown
@@ -100,7 +100,7 @@ collections:
         buttons: [bold, italic, heading-two, heading-three, bulleted-list, numbered-list, quote]
         editor_components: []
         modes: [rich_text]
-        pattern: ['^(?![\s\S]*(\]\s*[\(\[]|[hH][tT][tT][pP][sS]?:|[wW][wW][wW]\s*\.|[mM][aA][iI][lL][tT][oO]:|<\s*/?\s*[aA]\b|<\s*[iI][mM][gG]\b))[\s\S]*$', 'El texto no puede contener enlaces ni direcciones web. Quítalos y añádelos en «Fuentes y enlaces».']
+        pattern: ['^(?![\s\S]*(?:\]\s*[(\[]|\[[^\]\n]*\]:\s*\S|<\s*/?\s*(?:[aA]|[iI][mM][gG]|[iI][fF][rR][aA][mM][eE]|[sS][cC][rR][iI][pP][tT]|[oO][bB][jJ][eE][cC][tT]|[eE][mM][bB][eE][dD])\b|\b(?:[hH][tT][tT][pP][sS]?|[fF][tT][pP]|[mM][aA][iI][lL][tT][oO]|[jJ][aA][vV][aA][sS][cC][rR][iI][pP][tT]|[dD][aA][tT][aA]|[fF][iI][lL][eE]|[hH][xX][xX][pP][sS]?)\s*:|\b[wW][wW][wW]\s*\.|\b[a-z0-9-A-Z]+\.(?:[cC][oO][mM]|[eE][sS]|[oO][rR][gG]|[nN][eE][tT]|[eE][uU]|[iI][nN][fF][oO]|[iI][oO]|[lL][yY]|[mM][eE]|[gG][aA][lL]|[cC][aA][tT]|[cC][oO]|[uU][kK]|[dD][eE]|[fF][rR]|[iI][tT]|[pP][tT]|[gG][oO][vV]|[eE][dD][uU]|[tT][vV]|[bB][iI][zZ]|[aA][pP][pP]|[dD][eE][vV])\b))[\s\S]*$', 'El texto no puede contener enlaces ni direcciones web. Quítalos y añádelos en «Fuentes y enlaces».']
       - name: enlaces
         label: Fuentes y enlaces
         label_singular: enlace
@@ -130,4 +130,4 @@ collections:
             label: Dirección (https://…)
             widget: string
             hint: "Copia la dirección completa de la página desde la barra del navegador. Solo se admiten direcciones seguras (https://) de webs reales; no se admiten acortadores (bit.ly…), direcciones IP ni enlaces a archivos descargables o programas. Si una dirección no cumple, no se publicará."
-            pattern: ['^https://(?!(?:www\.)?(?:bit\.ly|bitly\.com|t\.co|tinyurl\.com|goo\.gl|ow\.ly|is\.gd|buff\.ly|cutt\.ly|shorturl\.at|rb\.gy|tiny\.cc|linktr\.ee)/)[^\s/@:]+\.[a-zA-Z]{2,}(/[^\s]*)?$', 'Debe ser la dirección completa de la web, empezando por https://, sin acortadores como bit.ly']
+            pattern: ['^https://(?!(?:[a-zA-Z0-9-]+\.)*(?:[aA][dD][fF]\.[lL][yY]|[bB][iI][tT]\.[lL][yY]|[bB][iI][tT][lL][yY]\.[cC][oO][mM]|[bB][lL]\.[iI][nN][kK]|[bB][uU][fF][fF]\.[lL][yY]|[cC][uU][tT][tT]\.[lL][yY]|[dD][lL][vV][rR]\.[iI][tT]|[gG][oO][oO]\.[gG][lL]|[iI][sS]\.[gG][dD]|[lL][iI][nN][kK][tT][rR]\.[eE][eE]|[lL][nN][kK][dD]\.[iI][nN]|[oO][wW]\.[lL][yY]|[qQ][rR][cC][oO]\.[dD][eE]|[rR][bB]\.[gG][yY]|[rR][eE][bB][rR][aA][nN][dD]\.[lL][yY]|[sS]\.[iI][dD]|[sS][hH][oO][rR][tT]\.[iI][oO]|[sS][hH][oO][rR][tT][eE]\.[sS][tT]|[sS][hH][oO][rR][tT][uU][rR][lL]\.[aA][tT]|[sS][hH][oO][rR][tT][uU][rR][lL]\.[fF][mM]|[tT]\.[cC][oO]|[tT][iI][nN][yY]\.[cC][cC]|[tT][iI][nN][yY][uU][rR][lL]\.[cC][oO][mM]|[tT][rR][iI][bB]\.[aA][lL]|[uU][rR][lL][zZ]\.[fF][rR]|[vV]\.[gG][dD]|[xX]\.[gG][dD])(?:[/?#]|$))[^\s/@:]+\.[a-zA-Z]{2,}(?:[/?#][^\s]*)?$', 'Debe ser la dirección completa de la web, empezando por https://, sin acortadores como bit.ly']

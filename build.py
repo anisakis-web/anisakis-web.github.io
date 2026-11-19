@@ -77,7 +77,7 @@ def read_doc(path):
                         ok = False                      # clave repetida
                     items[-1][kk] = clean_text(str(yaml_scalar(vv.strip())))
                 if not ok:
-                    print(f'AVISO: {os.path.basename(path)}: «{k.strip()}» con formato no válido; se ignoran sus elementos dudosos')
+                    warn(f'{os.path.basename(path)}: «{k.strip()}» con formato no válido; se ignoran sus elementos dudosos')
                 if k.strip() not in meta:               # si la clave se repite, vale la primera
                     meta[k.strip()] = items[:MAX_LINKS]
                 continue
@@ -93,13 +93,29 @@ def read_doc(path):
     return meta, body
 
 
+YAML_ESC = {'0': chr(0), 'a': chr(7), 'b': chr(8), 't': chr(9), 'n': chr(10), 'v': chr(11), 'f': chr(12),
+            'r': chr(13), 'e': chr(27), ' ': ' ', '"': '"', '/': '/', '\\': '\\', 'N': chr(0x85),
+            '_': chr(0xA0), 'L': chr(0x2028), 'P': chr(0x2029), '\t': chr(9)}
+
+
+def yaml_dq(inner):
+    """Escapes de las cadenas YAML entre comillas dobles (los que escribe el panel: \\_ espacio duro, \\N, \\x…)."""
+    def rep(m):
+        e = m.group(1)
+        if e[0] in 'xuU':
+            try:
+                c = int(e[1:], 16)
+                return '' if 0xD800 <= c <= 0xDFFF or c > 0x10FFFF else chr(c)
+            except ValueError:
+                return ''
+        return YAML_ESC.get(e, '')
+    return re.sub(r'\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8}|[\s\S])', rep, inner)
+
+
 def yaml_scalar(v):
-    """Valor de una línea YAML: entre comillas dobles (escapes como JSON), simples o sin comillas."""
+    """Valor de una línea YAML: entre comillas dobles (con sus escapes), simples o sin comillas."""
     if len(v) >= 2 and v[0] == v[-1] == '"':
-        try:
-            return json.loads(v)
-        except ValueError:
-            return v[1:-1].replace('\\"', '"').replace('\\\\', '\\')
+        return yaml_dq(v[1:-1])
     if len(v) >= 2 and v[0] == v[-1] == "'":
         return v[1:-1].replace("''", "'")
     return v
@@ -108,6 +124,14 @@ def yaml_scalar(v):
 def clean_text(t):
     """Quita caracteres de control y sustitutos Unicode sueltos (romperían el HTML, el RSS o la compilación)."""
     return re.sub('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\ud800-\udfff\ufdd0-\ufdef\ufffe\uffff]', '', t)
+
+
+PROBLEMS = []          # avisos de contenido: si hay alguno, la publicación se detiene (y GitHub avisa por correo)
+
+
+def warn(msg):
+    print('AVISO: ' + msg)
+    PROBLEMS.append(msg)
 
 
 # Lo que llega del panel de noticias se trata como no fiable (ver README, «Panel de noticias»)
@@ -203,8 +227,16 @@ def check_external_url(url):
 
 
 # Texto de las noticias nuevas: sin enlaces ni imágenes de ningún tipo (van en «Fuentes y enlaces»)
-BODY_FORBIDDEN = re.compile(r'\]\s*\(|\]\s*\[|<\s*/?\s*(?:a|img|iframe)\b|\b(?:https?|ftp|mailto|javascript|data|file)\s*:'
-                            r'|\bwww\s*\.|\[[^\]\n]*\]:\s*\S', re.I)
+# Las mismas reglas se copian al panel con tools/reglas_panel.py (que la publicación comprueba).
+BODY_RULES = [
+    r'\]\s*[(\[]',                                   # sintaxis de enlace o imagen [texto](…) / [texto][…]
+    r'\[[^\]\n]*\]:\s*\S',                           # definición de enlace [1]: …
+    r'<\s*/?\s*(?:a|img|iframe|script|object|embed)\b',   # etiquetas HTML de enlace, imagen o contenido externo
+    r'\b(?:https?|ftp|mailto|javascript|data|file|hxxps?)\s*:',   # direcciones con protocolo
+    r'\bwww\s*\.',                                   # www.…
+    r'\b[a-z0-9-]+\.(?:com|es|org|net|eu|info|io|ly|me|gal|cat|co|uk|de|fr|it|pt|gov|edu|tv|biz|app|dev)\b',   # dominio suelto
+]
+BODY_FORBIDDEN = re.compile('|'.join(BODY_RULES), re.I)
 
 
 def body_problem(body):
@@ -219,13 +251,13 @@ def render_links(items, fname):
     for it in items if isinstance(items, list) else []:
         extra = set(it) - {'tipo', 'nombre', 'url'}
         if extra:
-            print(f'AVISO: {fname}: enlace descartado (campos no permitidos: {", ".join(sorted(extra))})')
+            warn(f'{fname}: enlace descartado (campos no permitidos: {", ".join(sorted(extra))})')
             continue
         kind = it.get('tipo', 'fuente') if it.get('tipo') in LINK_TYPES else 'fuente'
         name = re.sub(r'\s+', ' ', it.get('nombre', '')).strip()[:80]
         url, why = check_external_url(it.get('url', ''))
         if not url:
-            print(f'AVISO: {fname}: enlace descartado ({why}): {it.get("url", "")!r}')
+            warn(f'{fname}: enlace descartado ({why}): {it.get("url", "")!r}')
             continue
         name = name or (urlsplit_host(url))
         groups[kind].append(f'<a href="{esc(url)}" rel="nofollow noopener noreferrer">{esc(name)}</a>')
@@ -268,6 +300,9 @@ def md_inline(t, links=True):
     def keep(tag):
         hold.append(tag)
         return f'\x00{len(hold) - 1}\x00'
+
+    if not links:                               # noticias nuevas: el editor escapa caracteres (\* \_ \[ …): se muestran tal cual
+        t = re.sub(r'\\(&lt;|&gt;|&amp;|[\\`*_{}\[\]()#+\-.!|~])', lambda m: keep(m.group(1)), t)
 
     # Las noticias solo llevan una imagen (la principal, en la cabecera): las imágenes dentro del texto se quitan
     t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', '', t)
@@ -393,15 +428,16 @@ def write(rel, content):
 def load_news():
     d = os.path.join(ROOT, 'content', 'noticias')
     items, seen = [], set()
-    for f in sorted(os.listdir(d)):
+    # las noticias antiguas primero: una nueva nunca puede quitarles su dirección
+    for f in sorted(os.listdir(d), key=lambda f: (f not in LEGACY_NEWS, f)):
         if not f.endswith('.md'):
             continue
         p = os.path.join(d, f)
         if not os.path.isfile(p) or os.path.islink(p):
-            print(f'AVISO: {f} se omite (no es un archivo normal)')
+            warn(f'{f} se omite (no es un archivo normal)')
             continue
         if os.path.getsize(p) > MAX_NEWS_BYTES:
-            print(f'AVISO: {f} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
+            warn(f'{f} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
             continue
         meta, body = read_doc(os.path.join(d, f))
         # cada campo con su tipo: solo «enlaces» es una lista; el resto, texto
@@ -409,9 +445,9 @@ def load_news():
                 for k, v in meta.items()}
         if meta.get('draft', '').lower() in ('true', 'si', 'sí', 'yes'):
             continue
-        slug = meta.get('slug') or re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])
+        slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])      # la dirección sale del nombre del archivo
         if not SLUG_OK.fullmatch(slug) or len(slug) > 120:
-            print(f'AVISO: {f} se omite (dirección no válida: {slug!r})')
+            warn(f'{f} se omite (dirección no válida: {slug!r})')
             continue
         base, n = slug, 2
         while slug in seen:                     # dos noticias con el mismo título: -2, -3…
@@ -420,15 +456,15 @@ def load_news():
         try:
             dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
         except ValueError:
-            print(f'AVISO: {f} se omite (fecha no válida: {meta.get("date")!r})')
+            warn(f'{f} se omite (fecha no válida: {meta.get("date")!r})')
             continue
         image = meta.get('image', '').strip()
         if image and not IMG_OK.fullmatch(image):
-            print(f'AVISO: {f}: imagen no válida, se publica sin imagen ({image!r})')
+            warn(f'{f}: imagen no válida, se publica sin imagen ({image!r})')
             image = ''
         legacy = LEGACY_NEWS.get(f) == hashlib.sha256(body.strip().encode('utf-8', 'replace')).hexdigest()
         if not legacy and body_problem(body):
-            print(f'AVISO: {f} NO se publica: {body_problem(body)}')
+            warn(f'{f} NO se publica: {body_problem(body)}')
             continue
         h = markdown(body, links=legacy)
         title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
@@ -459,7 +495,7 @@ def build():
             return n.lower().endswith(IMG_EXT) and os.path.isfile(p) and not os.path.islink(p)
         bad = [n for n in names if not ok(n)]   # ni carpetas ni enlaces simbólicos, aunque se llamen .webp
         for n in bad:
-            print(f'AVISO: static/img/noticias/{n} no se publica (solo se admiten imágenes {", ".join(IMG_EXT)})')
+            warn(f'static/img/noticias/{n} no se publica (solo se admiten imágenes {", ".join(IMG_EXT)})')
         return bad
     shutil.copytree(os.path.join(ROOT, 'static'), OUT, ignore=only_images)
     news = load_news()
@@ -571,7 +607,7 @@ def build():
         sm.append(f'<url><loc>{SITE}{url}</loc>' + (f'<lastmod>{lm.isoformat()}</lastmod>' if lm else '') + '</url>')
     sm.append('</urlset>')
     write('sitemap.xml', '\n'.join(sm) + '\n')
-    write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
+    write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {SITE}/sitemap.xml\n')
     items = []
     for n in news[:20]:
         dt = datetime(n['date'].year, n['date'].month, n['date'].day, 9, 0, tzinfo=timezone.utc)
@@ -583,6 +619,11 @@ def build():
     write('CNAME', 'www.anisakis.com\n')
     write('.nojekyll', '')
     print(f'OK: {len(news)} noticias, {len(pages)} páginas en el sitemap → {OUT}')
+    if PROBLEMS:
+        for m in PROBLEMS:
+            print(f'::error::{m}')
+        print(f'ERROR: {len(PROBLEMS)} problema(s) en el contenido: NO se publica (la web sigue como estaba).')
+        sys.exit(1)
 
 
 def serve():
