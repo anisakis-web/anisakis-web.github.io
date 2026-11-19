@@ -52,7 +52,9 @@ editando el repositorio.
   enlaces relacionados van en el apartado **«Fuentes y enlaces»** (campo `enlaces`: `tipo`, `nombre`, `url`) y se
   muestran al final («Fuente: …», «Vídeo relacionado: …»). `build.py` comprueba cada dirección
   (`check_external_url`): solo `https://` a un dominio público, sin usuario/contraseña, IP, puerto raro, dominios
-  `xn--`, acortadores ni archivos ejecutables o comprimidos; las que no pasan detienen la publicación. Las 17
+  `xn--`, acortadores, redirecciones (otra dirección dentro), dominios comodín de IP (nip.io…) ni archivos
+  ejecutables o comprimidos; las que no pasan detienen la publicación. Las mismas normas del texto se aplican al título,
+  al resumen y al nombre visible de cada enlace. Las 17
   noticias anteriores al panel (`LEGACY_NEWS`, por huella SHA-256 de su texto) conservan sus enlaces dentro del texto
   mientras no se edite ese texto.
 - **Aspecto:** nombre y logo de anisakis.com (`app_title`, `logo` en `config.yml`) y colores de la web en `static/admin/panel.css`, que también oculta el pie de Sveltia y los botones de acceso que no se usan.

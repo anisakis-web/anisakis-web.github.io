@@ -219,29 +219,46 @@ def check_external_url(url):
         return None, 'dominio interno o de pruebas'
     if host in SHORTENERS or any(host.endswith('.' + s) for s in SHORTENERS):
         return None, 'acortador de enlaces (oculta el destino real)'
-    from urllib.parse import unquote
+    if host.endswith(WILDCARD_DNS) or host in {d.lstrip('.') for d in WILDCARD_DNS} or re.search(r'(?:^|\.)\d{1,3}(?:[.-]\d{1,3}){3}\.', host):
+        return None, 'dominio que apunta a una IP cualquiera (nip.io, sslip.io…)'
+    from urllib.parse import unquote, parse_qsl
     path = unquote(unquote(p.path)).lower().rstrip('/;. ')
     if path.endswith(RISKY_EXT) or re.search(r'\.(?:exe|msi|apk|dmg|zip|rar|7z|iso|scr|bat|jar)[;.]', path):
         return None, 'apunta a un archivo descargable o ejecutable'
+    for _, v in parse_qsl(p.query + '&' + p.fragment, keep_blank_values=True):
+        v = unquote(unquote(v)).lower().strip()
+        if re.search(r'(?:https?:|^//|^www\.)', v):
+            return None, 'lleva dentro otra dirección (redirección): enlazar directamente al destino'
+        if v.rstrip('/;. ').endswith(RISKY_EXT):
+            return None, 'apunta a un archivo descargable o ejecutable'
     return u, ''
+
+
+# Dominios que resuelven a cualquier IP que se ponga en el nombre (sirven para esconder servidores propios)
+WILDCARD_DNS = ('.nip.io', '.sslip.io', '.xip.io', '.lvh.me', '.localtest.me', '.traefik.me', '.local.gd')
 
 
 # Texto de las noticias nuevas: sin enlaces ni imágenes de ningún tipo (van en «Fuentes y enlaces»)
 # Las mismas reglas se copian al panel con tools/reglas_panel.py (que la publicación comprueba).
 BODY_RULES = [
     r'\]\s*[(\[]',                                   # sintaxis de enlace o imagen [texto](…) / [texto][…]
-    r'\[[^\]\n]*\]:\s*\S',                           # definición de enlace [1]: …
+    r'\[[^\]\n]{0,300}\]:\s*\S',                     # definición de enlace [1]: … (acotado: evita esperas)
+    r'\[\s*\.\s*\]|\(\s*\.\s*\)',                    # dominios «desactivados» como evil[.]com
     r'<\s*/?\s*(?:a|img|iframe|script|object|embed)\b',   # etiquetas HTML de enlace, imagen o contenido externo
     r'\b(?:https?|ftp|mailto|javascript|data|file|hxxps?)\s*:',   # direcciones con protocolo
     r'\bwww\s*\.',                                   # www.…
-    r'\b[a-z0-9-]+\.(?:com|es|org|net|eu|info|io|ly|me|gal|cat|co|uk|de|fr|it|pt|gov|edu|tv|biz|app|dev)\b',   # dominio suelto
+    r'\b[a-z0-9-]{1,63}\.(?:com|es|org|net|eu|info|io|ly|me|gal|cat|co|uk|de|fr|it|pt|gov|edu|tv|biz|app|dev|ru|su|cn'
+    r'|xyz|top|site|online|shop|store|club|link|click|live|pro|cc|ws|us|ca|mx|ar|cl|br|nl|be|ch|at|pl|se|no|dk|fi|ie'
+    r'|ro|gr|tr|ua|jp|kr|in|au|nz|za|ai|to|gg|zip|mov|vip|win|bid|loc|lat|icu|cfd|sbs|rest|fun|space|website|tech)\b',   # dominio suelto
 ]
-BODY_FORBIDDEN = re.compile('|'.join(BODY_RULES), re.I)
+BODY_FORBIDDEN = re.compile('|'.join(BODY_RULES), re.I | re.A)
 
 
 def body_problem(body):
-    """Motivo por el que el texto de una noticia nueva no se puede publicar, o '' si está bien."""
-    m = BODY_FORBIDDEN.search(body)
+    """Motivo por el que el texto de una noticia nueva no se puede publicar, o '' si está bien.
+    Se normaliza antes (NFKC) para que caracteres «disfrazados» (p. ej. los dos puntos de ancho completo) no se cuelen."""
+    import unicodedata
+    m = BODY_FORBIDDEN.search(unicodedata.normalize('NFKC', body or ''))
     return f'el texto contiene un enlace o dirección web («{m.group(0).strip()}»): los enlaces van en «Fuentes y enlaces»' if m else ''
 
 
@@ -256,6 +273,8 @@ def render_links(items, fname):
         kind = it.get('tipo', 'fuente') if it.get('tipo') in LINK_TYPES else 'fuente'
         name = re.sub(r'\s+', ' ', it.get('nombre', '')).strip()[:80]
         url, why = check_external_url(it.get('url', ''))
+        if url and body_problem(name):
+            url, why = None, 'el nombre visible no puede ser otra dirección web'
         if not url:
             warn(f'{fname}: enlace descartado ({why}): {it.get("url", "")!r}')
             continue
@@ -463,8 +482,11 @@ def load_news():
             warn(f'{f}: imagen no válida, se publica sin imagen ({image!r})')
             image = ''
         legacy = LEGACY_NEWS.get(f) == hashlib.sha256(body.strip().encode('utf-8', 'replace')).hexdigest()
-        if not legacy and body_problem(body):
-            warn(f'{f} NO se publica: {body_problem(body)}')
+        why = '' if legacy else (body_problem(body) or next((f'«{k}»: ' + body_problem(meta.get(k, ''))
+                                                            for k in ('title', 'summary', 'description')
+                                                            if body_problem(meta.get(k, ''))), ''))
+        if why:
+            warn(f'{f} NO se publica: {why}')
             continue
         h = markdown(body, links=legacy)
         title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
