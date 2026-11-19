@@ -105,12 +105,8 @@ def md_inline(t):
         hold.append(tag)
         return f'\x00{len(hold) - 1}\x00'
 
-    def image(m):
-        src = html.unescape(m.group(2))
-        if not IMG_OK.fullmatch(src):           # solo imágenes de la propia web (la CSP bloquea las externas)
-            return ''
-        return keep(f'<img src="{esc(src)}" alt="{esc(html.unescape(m.group(1)))}" loading="lazy">')
-    t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', image, t)
+    # Las noticias solo llevan una imagen (la principal, en la cabecera): las imágenes dentro del texto se quitan
+    t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', '', t)
 
     def link(m):
         url = safe_url(html.unescape(m.group(2)))
@@ -141,7 +137,7 @@ def markdown(src):
         elif all(l.startswith('>') for l in lines):
             out.append('<blockquote><p>' + md_inline('\n'.join(l[1:].lstrip() for l in lines)) + '</p></blockquote>')
         elif re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', block.strip()):
-            out.append('<figure>' + md_inline(block.strip()) + '</figure>')
+            continue                                # imagen suelta en el texto: no se publica (ver md_inline)
         else:
             out.append('<p>' + md_inline(block) + '</p>')
     return '\n'.join(out)

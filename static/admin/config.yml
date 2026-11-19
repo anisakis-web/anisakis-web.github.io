@@ -21,7 +21,7 @@ public_folder: /img/noticias
 media_libraries:
   default:
     config:
-      max_file_size: 8000000
+      max_file_size: 5000000
       slugify_filename: true
       transformations:
         raster_image:
@@ -93,5 +93,5 @@ collections:
         label: Texto
         widget: markdown
         buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote]
-        editor_components: [image]
+        editor_components: []
         modes: [rich_text, raw]
