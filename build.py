@@ -11,6 +11,7 @@ Contenido:
   content/legal/*.html    textos legales (cabecera + HTML)
   static/                 imágenes, CSS, JS e iconos (se copian tal cual)
 """
+import hashlib
 import html
 import json
 import os
@@ -35,20 +36,270 @@ esc = html.escape
 # ------------------------------------------------------------------ lectura de contenido
 def read_doc(path):
     """Devuelve (metadatos, cuerpo) de un archivo con cabecera '---' tipo YAML sencillo."""
-    text = open(path, encoding='utf-8').read().replace('\r\n', '\n')
+    text = clean_text(open(path, encoding='utf-8', errors='replace').read().replace('\r\n', '\n'))
     meta, body = {}, text
     m = re.match(r'---\n(.*?)\n---\n?', text, re.S)
     if m:
         body = text[m.end():]
-        for line in m.group(1).split('\n'):
-            if ':' not in line or line.lstrip().startswith('#'):
+        lines = m.group(1).split('\n')
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+            i += 1
+            if ':' not in line or line.lstrip().startswith('#') or line[:1] in ' \t':
                 continue
             k, v = line.split(':', 1)
             v = v.strip()
-            if len(v) >= 2 and v[0] == v[-1] and v[0] in '"\'':
-                v = v[1:-1].replace('\\"', '"').replace('\\\\', '\\') if v[0] == '"' else v[1:-1].replace("''", "'")
-            meta[k.strip()] = v
+            if v == '' and i < len(lines) and lines[i].lstrip().startswith('- '):   # lista de elementos clave: valor
+                # formato estricto: «- clave: valor» y «  clave: valor» con la sangría del primer elemento
+                items, ok = [], True
+                ind = len(lines[i]) - len(lines[i].lstrip())
+                while i < len(lines) and (lines[i][:1] in ' \t-' and lines[i].strip()):
+                    raw = lines[i]
+                    i += 1
+                    lead = len(raw) - len(raw.lstrip())
+                    s_ = raw.strip()
+                    if s_ in ('-', '- ') or (s_.startswith('- ') and lead != ind):
+                        ok = False
+                        items.append({'__mal_formado': '1'})   # el elemento entero se descarta
+                        continue
+                    if s_.startswith('- '):
+                        items.append({})
+                        s_ = s_[2:].strip()
+                    elif lead != ind + 2 or not items or ':' not in s_:
+                        ok = False
+                        if items:
+                            items[-1]['__mal_formado'] = '1'
+                        continue
+                    kk, vv = s_.split(':', 1)
+                    kk = kk.strip()
+                    if kk in items[-1]:
+                        ok = False                      # clave repetida
+                    items[-1][kk] = clean_text(str(yaml_scalar(vv.strip())))
+                if not ok:
+                    warn(f'{os.path.basename(path)}: «{k.strip()}» con formato no válido; se ignoran sus elementos dudosos')
+                if k.strip() not in meta:               # si la clave se repite, vale la primera
+                    meta[k.strip()] = items[:MAX_LINKS]
+                continue
+            if v in ('|', '|-', '>', '>-'):          # bloque multilínea de YAML
+                block = []
+                while i < len(lines) and (lines[i][:1] in ' \t' or not lines[i].strip()):
+                    block.append(lines[i].strip())
+                    i += 1
+                v = ('\n' if v[0] == '|' else ' ').join(block).strip()
+            else:
+                v = yaml_scalar(v)
+            meta[k.strip()] = clean_text(str(v))
     return meta, body
+
+
+YAML_ESC = {'0': chr(0), 'a': chr(7), 'b': chr(8), 't': chr(9), 'n': chr(10), 'v': chr(11), 'f': chr(12),
+            'r': chr(13), 'e': chr(27), ' ': ' ', '"': '"', '/': '/', '\\': '\\', 'N': chr(0x85),
+            '_': chr(0xA0), 'L': chr(0x2028), 'P': chr(0x2029), '\t': chr(9)}
+
+
+def yaml_dq(inner):
+    """Escapes de las cadenas YAML entre comillas dobles (los que escribe el panel: \\_ espacio duro, \\N, \\x…)."""
+    def rep(m):
+        e = m.group(1)
+        if e[0] in 'xuU':
+            try:
+                c = int(e[1:], 16)
+                return '' if 0xD800 <= c <= 0xDFFF or c > 0x10FFFF else chr(c)
+            except ValueError:
+                return ''
+        return YAML_ESC.get(e, '')
+    return re.sub(r'\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8}|[\s\S])', rep, inner)
+
+
+def yaml_scalar(v):
+    """Valor de una línea YAML: entre comillas dobles (con sus escapes), simples o sin comillas."""
+    if len(v) >= 2 and v[0] == v[-1] == '"':
+        return yaml_dq(v[1:-1])
+    if len(v) >= 2 and v[0] == v[-1] == "'":
+        return v[1:-1].replace("''", "'")
+    return v
+
+
+def clean_text(t):
+    """Quita caracteres de control y sustitutos Unicode sueltos (romperían el HTML, el RSS o la compilación)."""
+    return re.sub('[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\ud800-\udfff\ufdd0-\ufdef\ufffe\uffff]', '', t)
+
+
+PROBLEMS = []          # avisos de contenido: si hay alguno, la publicación se detiene (y GitHub avisa por correo)
+
+
+def warn(msg):
+    print('AVISO: ' + msg)
+    PROBLEMS.append(msg)
+
+
+# Lo que llega del panel de noticias se trata como no fiable (ver README, «Panel de noticias»)
+SLUG_OK = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
+IMG_OK = re.compile(r'/img/noticias/[A-Za-z0-9._-]+\.(?:webp|jpe?g|png|gif|avif)')
+IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
+MAX_NEWS_BYTES = 200_000                       # una noticia normal ocupa 2–10 KB
+MAX_LINKS = 12                                 # «Fuentes y enlaces» por noticia
+
+# Noticias publicadas antes del panel (19/11/2026): conservan sus enlaces dentro del texto, pero SOLO si el texto
+# no ha cambiado (huella SHA-256 del cuerpo). Si se edita, pasa a regirse como una noticia nueva.
+# En las noticias nuevas el texto no puede llevar enlaces: van en «Fuentes y enlaces» (campo `enlaces`).
+LEGACY_NEWS = {
+    '2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md':
+        '3fa031cfe801015895cdc75069d8444dffac7cb06e7a24001a47c00250b26574',
+    '2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
+        'd3dd80b8652ea9b5b668879202745fb87d967e6b49b5f08c0f0140bcf4d440ac',
+    '2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
+        '69aa30e4978b38b20a68ac17d3f233ad1cc15373cc64d1e0c0f7558b55d09481',
+    '2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
+        '1b68ee6c86fc2b3ce927ed6de772e01110fcc10b08beb43ee49c6e1f0b3fe193',
+    '2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
+        'b599cf3be3c3adcb367e9ceb956190cc80f5d58711a0701ed3fef25ef4ad97df',
+    '2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
+        '1098bd285e88cf0ce35e54ca52268e80bdbb1b55bfd76089ef476900cf0f6aca',
+    '2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
+        '5f4bce15316e812308b1a28233caaa2b93911e28eb165bfe619c4d6c3757897a',
+    '2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
+        '8c29416cd8319db240d32e6f536079611e2ac683b58d9989234260604b7494f8',
+    '2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
+        'a580fd16085e2315f3d4dbb5b8368d7b99a0d9625413cce5aadeb41118a23101',
+    '2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
+        'fe1182e58a7fe2fddf85607798b565c4205cb276d5687e2c1c537d9ea1c7798b',
+    '2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md':
+        '4b859116fa6724391cb945e73d5481c29501cbec27c840c20e21450a175d3a5d',
+    '2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md':
+        'b58f9a29e82e0cd2313a6e643dd361e320a7176f33dcf0989288af797881cb4b',
+    '2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md':
+        '7880d96475f4019c8fa02444b9e30574ca3c2a159db7c6f2f7146fdf0513c523',
+    '2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md':
+        '1b612da88ff9e4271a73da50fd1219773569293149b04c0b80706ced4fa27def',
+    '2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md':
+        '1b19e5bb9ddb11142c805e4000747f4e0421f5074f76331f3f2b43402ec4be22',
+    '2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md':
+        'b547ca782bc32b730647e80196aee178293880ce140f90e6506fba19c7d11980',
+    '2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md':
+        '79e22733a784b924920e18bedec8184668389cb109d09b6d94bbac2b9897c916',
+}
+
+# Comprobación de las direcciones de «Fuentes y enlaces»
+LINK_TYPES = {'fuente': ('Fuente', 'Fuentes'), 'video': ('Vídeo relacionado', 'Vídeos relacionados'),
+              'enlace': ('Enlace relacionado', 'Enlaces relacionados')}
+SHORTENERS = {'bit.ly', 'bitly.com', 't.co', 'tinyurl.com', 'goo.gl', 'ow.ly', 'is.gd', 'buff.ly', 'rebrand.ly',
+              'cutt.ly', 'shorturl.at', 'shorturl.fm', 'tiny.cc', 'rb.gy', 's.id', 'v.gd', 'lnkd.in', 'trib.al',
+              'dlvr.it', 'shorte.st', 'adf.ly', 'bl.ink', 'short.io', 'qrco.de', 'linktr.ee', 'x.gd', 'urlz.fr'}
+# Orientativo: un servidor puede servir un ejecutable en cualquier ruta; esto solo evita los enlaces evidentes.
+RISKY_EXT = ('.exe', '.msi', '.bat', '.cmd', '.scr', '.ps1', '.vbs', '.js', '.jar', '.apk', '.dmg',
+             '.pkg', '.app', '.deb', '.rpm', '.sh', '.zip', '.rar', '.7z', '.gz', '.tgz', '.iso', '.img',
+             '.svg', '.hta', '.lnk', '.reg', '.docm', '.xlsm', '.pptm')
+
+
+def check_external_url(url):
+    """Devuelve (url, '') si la dirección es aceptable o (None, motivo) si no. Solo https a un dominio público."""
+    from urllib.parse import urlsplit
+    u = (url or '').strip()
+    if not u or len(u) > 500:
+        return None, 'vacía o demasiado larga'
+    if not re.fullmatch(r'https://[!#$%&()*+,\-./0-9:;=?@A-Z_a-z~\[\]]+', u):
+        return None, 'debe empezar por https:// y no llevar espacios ni caracteres raros'
+    try:
+        p = urlsplit(u)
+        host = (p.hostname or '').lower().rstrip('.')
+        port = p.port
+    except ValueError:
+        return None, 'dirección mal formada'
+    if '@' in p.netloc:
+        return None, 'lleva usuario o contraseña'
+    if port not in (None, 443):
+        return None, 'usa un puerto no estándar'
+    if not re.fullmatch(r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}', host):
+        return None, 'el servidor debe ser un dominio (no una IP ni un nombre interno)'
+    if 'xn--' in host:
+        return None, 'dominio con caracteres internacionales (posible imitación de otro)'
+    if host.endswith(('.local', '.internal', '.localhost', '.test', '.example', '.invalid')):
+        return None, 'dominio interno o de pruebas'
+    if host in SHORTENERS or any(host.endswith('.' + s) for s in SHORTENERS):
+        return None, 'acortador de enlaces (oculta el destino real)'
+    if host.endswith(WILDCARD_DNS) or host in {d.lstrip('.') for d in WILDCARD_DNS} or re.search(r'(?:^|\.)\d{1,3}(?:[.-]\d{1,3}){3}\.', host):
+        return None, 'dominio que apunta a una IP cualquiera (nip.io, sslip.io…)'
+    from urllib.parse import unquote, parse_qsl
+    path = unquote(unquote(p.path)).lower().rstrip('/;. ')
+    if path.endswith(RISKY_EXT) or re.search(r'\.(?:exe|msi|apk|dmg|zip|rar|7z|iso|scr|bat|jar)[;.]', path):
+        return None, 'apunta a un archivo descargable o ejecutable'
+    for _, v in parse_qsl(p.query + '&' + p.fragment, keep_blank_values=True):
+        v = unquote(unquote(v)).lower().strip()
+        if re.search(r'(?:https?:|^//|^www\.)', v):
+            return None, 'lleva dentro otra dirección (redirección): enlazar directamente al destino'
+        if v.rstrip('/;. ').endswith(RISKY_EXT):
+            return None, 'apunta a un archivo descargable o ejecutable'
+    return u, ''
+
+
+# Dominios que resuelven a cualquier IP que se ponga en el nombre (sirven para esconder servidores propios)
+WILDCARD_DNS = ('.nip.io', '.sslip.io', '.xip.io', '.lvh.me', '.localtest.me', '.traefik.me', '.local.gd')
+
+
+# Texto de las noticias nuevas: sin enlaces ni imágenes de ningún tipo (van en «Fuentes y enlaces»)
+# Las mismas reglas se copian al panel con tools/reglas_panel.py (que la publicación comprueba).
+BODY_RULES = [
+    r'\]\s*[(\[]',                                   # sintaxis de enlace o imagen [texto](…) / [texto][…]
+    r'\[[^\]\n]{0,300}\]:\s*\S',                     # definición de enlace [1]: … (acotado: evita esperas)
+    r'\[\s*\.\s*\]|\(\s*\.\s*\)',                    # dominios «desactivados» como evil[.]com
+    r'<\s*/?\s*(?:a|img|iframe|script|object|embed)\b',   # etiquetas HTML de enlace, imagen o contenido externo
+    r'\b(?:https?|ftp|mailto|javascript|data|file|hxxps?)\s*:',   # direcciones con protocolo
+    r'\bwww\s*\.',                                   # www.…
+    r'\b[a-z0-9-]{1,63}\.(?:com|es|org|net|eu|info|io|ly|me|gal|cat|co|uk|de|fr|it|pt|gov|edu|tv|biz|app|dev|ru|su|cn'
+    r'|xyz|top|site|online|shop|store|club|link|click|live|pro|cc|ws|us|ca|mx|ar|cl|br|nl|be|ch|at|pl|se|no|dk|fi|ie'
+    r'|ro|gr|tr|ua|jp|kr|in|au|nz|za|ai|to|gg|zip|mov|vip|win|bid|loc|lat|icu|cfd|sbs|rest|fun|space|website|tech)\b',   # dominio suelto
+]
+BODY_FORBIDDEN = re.compile('|'.join(BODY_RULES), re.I | re.A)
+
+
+def body_problem(body):
+    """Motivo por el que el texto de una noticia nueva no se puede publicar, o '' si está bien.
+    Se normaliza antes (NFKC) para que caracteres «disfrazados» (p. ej. los dos puntos de ancho completo) no se cuelen."""
+    import unicodedata
+    m = BODY_FORBIDDEN.search(unicodedata.normalize('NFKC', body or ''))
+    return f'el texto contiene un enlace o dirección web («{m.group(0).strip()}»): los enlaces van en «Fuentes y enlaces»' if m else ''
+
+
+def render_links(items, fname):
+    """Bloque «Fuente: …» / «Vídeo relacionado: …» al final de la noticia, con direcciones ya comprobadas."""
+    groups = {k: [] for k in LINK_TYPES}
+    for it in items if isinstance(items, list) else []:
+        extra = set(it) - {'tipo', 'nombre', 'url'}
+        if extra:
+            warn(f'{fname}: enlace descartado (campos no permitidos: {", ".join(sorted(extra))})')
+            continue
+        kind = it.get('tipo', 'fuente') if it.get('tipo') in LINK_TYPES else 'fuente'
+        name = re.sub(r'\s+', ' ', it.get('nombre', '')).strip()[:80]
+        url, why = check_external_url(it.get('url', ''))
+        if url and body_problem(name):
+            url, why = None, 'el nombre visible no puede ser otra dirección web'
+        if not url:
+            warn(f'{fname}: enlace descartado ({why}): {it.get("url", "")!r}')
+            continue
+        name = name or (urlsplit_host(url))
+        groups[kind].append(f'<a href="{esc(url)}" rel="nofollow noopener noreferrer">{esc(name)}</a>')
+    out = []
+    for kind, (one, many) in LINK_TYPES.items():
+        if groups[kind]:
+            out.append(f'<p class="fuentes">{one if len(groups[kind]) == 1 else many}: {", ".join(groups[kind])}</p>')
+    return '\n'.join(out)
+
+
+def urlsplit_host(url):
+    from urllib.parse import urlsplit
+    return (urlsplit(url).hostname or url).removeprefix('www.')
+
+
+def safe_url(url):
+    """Solo enlaces web (http/https), de correo, o rutas internas de la web. Cualquier otra cosa → None."""
+    u = url.strip()
+    if re.match(r'(?i)https?://[^\s<>"]+$', u) or re.match(r'(?i)mailto:[^\s<>"]+$', u):
+        return u
+    if re.match(r'/(?![/\\])[^\s<>"\\]*$', u) or re.match(r'#[\w-]*$', u):
+        return u
+    return None
 
 
 def fecha(d):
@@ -60,39 +311,57 @@ def plain(h):
 
 
 # ------------------------------------------------------------------ Markdown (subconjunto)
-def md_inline(t):
-    t = esc(t, quote=False)
-    t = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)', lambda m: f'<img src="{m.group(2)}" alt="{m.group(1)}" loading="lazy">', t)
+def md_inline(t, links=True):
+    """links=False: los enlaces se publican como texto (noticias nuevas: los enlaces van en «Fuentes y enlaces»)."""
+    t = esc(t.replace('\x00', ''), quote=False)
+    hold = []                                  # etiquetas ya generadas: no se vuelven a procesar
+
+    def keep(tag):
+        hold.append(tag)
+        return f'\x00{len(hold) - 1}\x00'
+
+    if not links:                               # noticias nuevas: el editor escapa caracteres (\* \_ \[ …): se muestran tal cual
+        t = re.sub(r'\\(&lt;|&gt;|&amp;|[\\`*_{}\[\]()#+\-.!|~])', lambda m: keep(m.group(1)), t)
+
+    # Las noticias solo llevan una imagen (la principal, en la cabecera): las imágenes dentro del texto se quitan
+    t = re.sub(r'!\[([^\[\]\x00]*)\]\(([^()\s\x00]+)\)', '', t)
 
     def link(m):
-        label, url = m.group(1), m.group(2).replace('&amp;', '&')
-        ext = re.match(r'https?://', url) and not re.match(r'https?://(www\.)?anisakis\.com', url)
-        return f'<a href="{esc(url)}"' + (' rel="noopener"' if ext else '') + f'>{label}</a>'
-    t = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', link, t)
-    t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
-    t = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
+        url = None
+        if links:                               # solo noticias antiguas sin cambios: internas o https comprobadas
+            raw = html.unescape(m.group(2))
+            url = safe_url(raw) if raw.startswith(('/', '#')) else check_external_url(raw)[0]
+        if not url:
+            return m.group(1)
+        ext = re.match(r'https?://', url) and not re.match(r'https?://(www\.)?anisakis\.com(?=[/:?#]|$)', url)
+        return keep(f'<a href="{esc(url)}"' + (' rel="noopener"' if ext else '') + '>') + m.group(1) + keep('</a>')
+    t = re.sub(r'\[([^\[\]\x00]+)\]\(([^()\s\x00]+)\)', link, t)
+    t = re.sub(r'\*\*((?:[^*\n]|\*(?!\*))+?)\*\*', r'<strong>\1</strong>', t)
+    t = re.sub(r'(?<![\w*])\*(?![\s*])([^*\n]+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
     t = t.replace('  \n', '<br>\n')
-    return t
+    return re.sub(r'\x00(\d+)\x00', lambda m: hold[int(m.group(1))], t)
 
 
-def markdown(src):
+def markdown(src, links=True):
     out = []
+    il = lambda x: md_inline(x, links)
+    src = re.sub(r'(?m)^(#{2,4} .*)$', r'\n\1\n', src)      # cada subtítulo, en su propio bloque
     for block in re.split(r'\n\s*\n', src.strip()):
         lines = block.split('\n')
         first = lines[0]
         if re.match(r'#{2,4} ', first):
             n = len(first) - len(first.lstrip('#'))
-            out.append(f'<h{n}>{md_inline(first[n:].strip())}</h{n}>')
+            out.append(f'<h{n}>{il(first[n:].strip())}</h{n}>')
         elif all(re.match(r'[-*] ', l) for l in lines):
-            out.append('<ul>' + ''.join(f'<li>{md_inline(l[2:].strip())}</li>' for l in lines) + '</ul>')
+            out.append('<ul>' + ''.join(f'<li>{il(l[2:].strip())}</li>' for l in lines) + '</ul>')
         elif all(re.match(r'\d+\. ', l) for l in lines):
-            out.append('<ol>' + ''.join(f'<li>{md_inline(l.split(". ", 1)[1].strip())}</li>' for l in lines) + '</ol>')
+            out.append('<ol>' + ''.join(f'<li>{il(l.split(". ", 1)[1].strip())}</li>' for l in lines) + '</ol>')
         elif all(l.startswith('>') for l in lines):
-            out.append('<blockquote><p>' + md_inline('\n'.join(l[1:].lstrip() for l in lines)) + '</p></blockquote>')
+            out.append('<blockquote><p>' + il('\n'.join(l[1:].lstrip() for l in lines)) + '</p></blockquote>')
         elif re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', block.strip()):
-            out.append('<figure>' + md_inline(block.strip()) + '</figure>')
+            continue                                # imagen suelta en el texto: no se publica (ver md_inline)
         else:
-            out.append('<p>' + md_inline(block) + '</p>')
+            out.append('<p>' + il(block) + '</p>')
     return '\n'.join(out)
 
 
@@ -177,19 +446,56 @@ def write(rel, content):
 
 def load_news():
     d = os.path.join(ROOT, 'content', 'noticias')
-    items = []
-    for f in sorted(os.listdir(d)):
+    items, seen = [], set()
+    # las noticias antiguas primero: una nueva nunca puede quitarles su dirección
+    for f in sorted(os.listdir(d), key=lambda f: (f not in LEGACY_NEWS, f)):
         if not f.endswith('.md'):
             continue
+        p = os.path.join(d, f)
+        if not os.path.isfile(p) or os.path.islink(p):
+            warn(f'{f} se omite (no es un archivo normal)')
+            continue
+        if os.path.getsize(p) > MAX_NEWS_BYTES:
+            warn(f'{f} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
+            continue
         meta, body = read_doc(os.path.join(d, f))
+        # cada campo con su tipo: solo «enlaces» es una lista; el resto, texto
+        meta = {k: (v if (k == 'enlaces') == isinstance(v, list) else ([] if k == 'enlaces' else ''))
+                for k, v in meta.items()}
         if meta.get('draft', '').lower() in ('true', 'si', 'sí', 'yes'):
             continue
-        slug = meta.get('slug') or re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])
-        dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
-        h = markdown(body)
-        summary = meta.get('summary') or plain(h)[:200]
-        items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': meta.get('title', slug), 'date': dt,
-                      'image': meta.get('image', ''), 'summary': summary, 'html': h})
+        slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])      # la dirección sale del nombre del archivo
+        if not SLUG_OK.fullmatch(slug) or len(slug) > 120:
+            warn(f'{f} se omite (dirección no válida: {slug!r})')
+            continue
+        base, n = slug, 2
+        while slug in seen:                     # dos noticias con el mismo título: -2, -3…
+            slug, n = f'{base}-{n}', n + 1
+        seen.add(slug)
+        try:
+            dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
+        except ValueError:
+            warn(f'{f} se omite (fecha no válida: {meta.get("date")!r})')
+            continue
+        image = meta.get('image', '').strip()
+        if image and not IMG_OK.fullmatch(image):
+            warn(f'{f}: imagen no válida, se publica sin imagen ({image!r})')
+            image = ''
+        legacy = LEGACY_NEWS.get(f) == hashlib.sha256(body.strip().encode('utf-8', 'replace')).hexdigest()
+        why = '' if legacy else (body_problem(body) or next((f'«{k}»: ' + body_problem(meta.get(k, ''))
+                                                            for k in ('title', 'summary', 'description')
+                                                            if body_problem(meta.get(k, ''))), ''))
+        if why:
+            warn(f'{f} NO se publica: {why}')
+            continue
+        h = markdown(body, links=legacy)
+        title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
+        summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
+        links_html = render_links(meta.get('enlaces', []), f)
+        if links_html:
+            h = h + '\n' + links_html
+        items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': title, 'date': dt,
+                      'image': image, 'summary': summary, 'html': h})
     items.sort(key=lambda n: (n['date'], n['slug']), reverse=True)
     return items
 
@@ -197,7 +503,23 @@ def load_news():
 def build():
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
-    shutil.copytree(os.path.join(ROOT, 'static'), OUT)
+    news_img = os.path.normcase(os.path.join(ROOT, 'static', 'img', 'noticias'))
+
+    def only_images(folder, names):
+        """En la carpeta de imágenes de noticias (la que escribe el panel) solo se publican imágenes:
+        un .svg o .html subido ahí podría ejecutar código en el dominio de la web."""
+        f = os.path.normcase(folder)
+        if f != news_img and not f.startswith(news_img + os.sep):
+            return []
+
+        def ok(n):
+            p = os.path.join(folder, n)
+            return n.lower().endswith(IMG_EXT) and os.path.isfile(p) and not os.path.islink(p)
+        bad = [n for n in names if not ok(n)]   # ni carpetas ni enlaces simbólicos, aunque se llamen .webp
+        for n in bad:
+            warn(f'static/img/noticias/{n} no se publica (solo se admiten imágenes {", ".join(IMG_EXT)})')
+        return bad
+    shutil.copytree(os.path.join(ROOT, 'static'), OUT, ignore=only_images)
     news = load_news()
     pages = []  # (url, lastmod) para el sitemap
 
@@ -292,7 +614,9 @@ def build():
                 f'<time datetime="{n["date"].isoformat()}">{fecha(n["date"])}</time></p>'
                 f'<h1>{esc(n["title"])}</h1>{img}\n{n["html"]}\n{nav}</article>')
         write(n['url'], layout(n['url'], n['title'], body, n['summary'], n['image'], 'article',
-                               f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n'.replace('<script type="application/ld+json">', '<script type="application/ld+json">')))
+                               '<script type="application/ld+json">'
+                               + json.dumps(ld, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
+                               + '</script>\n'))
         pages.append((n['url'], n['date']))
 
     # 404, sitemap, robots, RSS, CNAME
@@ -305,7 +629,7 @@ def build():
         sm.append(f'<url><loc>{SITE}{url}</loc>' + (f'<lastmod>{lm.isoformat()}</lastmod>' if lm else '') + '</url>')
     sm.append('</urlset>')
     write('sitemap.xml', '\n'.join(sm) + '\n')
-    write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
+    write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {SITE}/sitemap.xml\n')
     items = []
     for n in news[:20]:
         dt = datetime(n['date'].year, n['date'].month, n['date'].day, 9, 0, tzinfo=timezone.utc)
@@ -317,6 +641,11 @@ def build():
     write('CNAME', 'www.anisakis.com\n')
     write('.nojekyll', '')
     print(f'OK: {len(news)} noticias, {len(pages)} páginas en el sitemap → {OUT}')
+    if PROBLEMS:
+        for m in PROBLEMS:
+            print(f'::error::{m}')
+        print(f'ERROR: {len(PROBLEMS)} problema(s) en el contenido: NO se publica (la web sigue como estaba).')
+        sys.exit(1)
 
 
 def serve():

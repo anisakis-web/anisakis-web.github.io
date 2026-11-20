@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Panel de noticias de anisakis.com: aspecto de la web sobre Sveltia CMS.
+   Solo CSS (no cambia el funcionamiento). Las reglas usan !important porque la
+   hoja de estilos del panel se carga después y define las mismas variables.
+   Si una actualización de Sveltia cambia sus clases, revisar este archivo.
+   ========================================================================== */
+
+/* ---- Paleta y tipografía (siempre en claro, como la web) ---------------- */
+:root,
+:root[data-theme='light'],
+:root[data-theme='dark'] {
+  color-scheme: light !important;
+  --sui-base-hue: 226 !important;
+
+  --sui-foreground-color-1-hsl: 226 22% 14% !important;   /* títulos */
+  --sui-foreground-color-2-hsl: 222 12% 20% !important;   /* texto (#2b2f38) */
+  --sui-foreground-color-3-hsl: 220 9% 32% !important;
+  --sui-foreground-color-4-hsl: 220 8% 40% !important;    /* secundario (#5d6470) */
+  --sui-foreground-color-5-hsl: 220 10% 62% !important;
+
+  --sui-background-color-1-hsl: 0 0% 100% !important;     /* tarjetas */
+  --sui-background-color-2-hsl: 216 45% 97% !important;   /* fondo (#f4f7fb) */
+  --sui-background-color-3-hsl: 218 40% 94.5% !important;
+  --sui-background-color-4-hsl: 220 38% 91% !important;
+  --sui-background-color-5-hsl: 220 32% 84% !important;
+
+  --sui-border-color-1-hsl: 222 18% 70% !important;
+  --sui-border-color-2-hsl: 222 26% 82% !important;
+  --sui-border-color-3-hsl: 222 34% 90% !important;       /* líneas (#dfe4ee) */
+  --sui-shadow-color: 226 50% 20% !important;
+
+  --sui-primary-accent-color-light: #3a56b0 !important;
+  --sui-primary-accent-color: #263e8b !important;
+  --sui-primary-accent-color-dark: #1b2c63 !important;
+  --sui-primary-accent-color-inverted: #ffffff !important;
+  --sui-primary-accent-color-text: #263e8b !important;
+  --sui-primary-accent-color-translucent: hsl(226 57% 35% / 55%) !important;
+  --sui-primary-accent-color-translucent-light: hsl(226 57% 35% / 14%) !important;
+
+  --sui-alert-foreground-color-lightness: 25% !important;
+  --sui-alert-background-color-lightness: 94% !important;
+  --sui-alert-border-color-lightness: 72% !important;
+
+  --sui-font-family-default: Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  --sui-control-font-family: var(--sui-font-family-default) !important;
+  --sui-textbox-font-family: var(--sui-font-family-default) !important;
+  --sui-heading-font-weight: 700 !important;
+
+  --sui-control-medium-border-radius: 8px !important;
+  --sui-button-medium-border-radius: 8px !important;
+  --sui-textbox-border-radius: 8px !important;
+  --sui-focus-ring-color: hsl(205 63% 50% / 55%) !important;  /* celeste #2f8fd0 */
+
+  --panel-azul: #263e8b;
+  --panel-azul-osc: #1b2c63;
+  --panel-celeste: #2f8fd0;
+  --panel-sombra: 0 1px 2px hsl(226 50% 20% / 6%), 0 6px 22px hsl(226 50% 20% / 8%);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Pantalla de entrada ------------------------------------------------ */
+.powered-by { display: none !important; }
+
+/* Solo se entra con token: se ocultan «Iniciar sesión con GitHub» (necesitaría un servidor de autenticación que no
+   usamos) y «Trabajar con un repositorio local» (solo aparece al probar en local). Queda el último botón: el del token. */
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) .buttons > button.sui.button:not(:last-of-type),
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) .buttons > button.sui.button.primary + div[role='none'] { display: none !important; }
+
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) {
+  background:
+    radial-gradient(1200px 520px at 50% -10%, hsl(226 57% 35% / 12%), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%) !important;
+}
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) h1 {
+  color: var(--panel-azul-osc) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) .buttons > button.sui.button:last-of-type {
+  background: linear-gradient(135deg, var(--panel-azul) 0%, var(--panel-azul-osc) 100%) !important;
+  color: #fff !important;
+  border: 0 !important;
+  min-height: 44px;
+  padding: 0 28px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 8px 24px hsl(226 57% 30% / 28%) !important;
+  font-weight: 600 !important;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.app-shell > .outer > .main:not(:has(.toolbar-wrapper)) .buttons > button.sui.button:last-of-type:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px hsl(226 57% 30% / 34%) !important;
+}
+
+/* ---- Barra superior: azul corporativo ----------------------------------- */
+.toolbar-wrapper > .sui.toolbar.primary {
+  background: linear-gradient(90deg, var(--panel-azul-osc) 0%, var(--panel-azul) 100%) !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 2px 12px hsl(226 57% 20% / 25%);
+  --sui-primary-foreground-color: #ffffff;
+  --sui-secondary-foreground-color: hsl(0 0% 100% / 85%);
+  --sui-tertiary-foreground-color: hsl(0 0% 100% / 70%);
+  --sui-hover-background-color: hsl(0 0% 100% / 12%);
+  --sui-active-background-color: hsl(0 0% 100% / 20%);
+  --sui-selected-background-color: hsl(0 0% 100% / 18%);
+  color: #fff !important;
+}
+.toolbar-wrapper > .sui.toolbar.primary .sui.button,
+.toolbar-wrapper > .sui.toolbar.primary .sui.button .icon { color: #fff !important; }
+.toolbar-wrapper > .sui.toolbar.primary .sui.button:hover { background-color: hsl(0 0% 100% / 12%) !important; }
+.toolbar-wrapper > .sui.toolbar.primary .sui.button[aria-pressed='true'],
+.toolbar-wrapper > .sui.toolbar.primary .sui.button[aria-current] { background-color: hsl(0 0% 100% / 20%) !important; }
+/* Buscador de la barra */
+.toolbar-wrapper > .sui.toolbar.primary .sui.search-bar,
+.toolbar-wrapper > .sui.toolbar.primary .sui.text-input,
+.toolbar-wrapper > .sui.toolbar.primary [role='search'] > div {
+  background: hsl(0 0% 100% / 14%) !important;
+  border-color: hsl(0 0% 100% / 22%) !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+}
+.toolbar-wrapper > .sui.toolbar.primary .sui.search-bar .sui.text-input { background: transparent !important; border: 0 !important; }
+.toolbar-wrapper > .sui.toolbar.primary input { color: #fff !important; background: transparent !important; border: 0 !important; }
+.toolbar-wrapper > .sui.toolbar.primary input::placeholder { color: hsl(0 0% 100% / 75%) !important; }
+.toolbar-wrapper > .sui.toolbar.primary img { filter: brightness(0) invert(1); }   /* logo en blanco */
+
+/* ---- Zona de trabajo ---------------------------------------------------- */
+.page-root { background: #f4f7fb !important; }
+nav.primary-sidebar {
+  background: #f4f7fb !important;
+  padding-top: 8px;
+}
+nav.primary-sidebar [aria-selected='true'],
+nav.primary-sidebar [aria-current='page'] {
+  background: #ffffff !important;
+  color: var(--panel-azul) !important;
+  box-shadow: var(--panel-sombra);
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+}
+.page-root main.wrapper,
+.page-root .sui.resizable-pane > main {
+  background: #ffffff !important;
+  border-radius: 14px 0 0 0 !important;
+  box-shadow: var(--panel-sombra);
+}
+.sui.resizable-handle { background: transparent !important; }
+
+/* Títulos de la zona de trabajo */
+.page-root h2 { color: var(--panel-azul-osc) !important; letter-spacing: -0.01em; }
+
+/* Botones principales (Nuevo, Guardar…) */
+.page-root .sui.button.primary,
+.sui.dialog .sui.button.primary {
+  background: linear-gradient(135deg, var(--panel-azul) 0%, var(--panel-azul-osc) 100%) !important;
+  border: 0 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px hsl(226 57% 30% / 22%) !important;
+  font-weight: 600 !important;
+}
+.page-root .sui.button.primary:hover,
+.sui.dialog .sui.button.primary:hover { filter: brightness(1.08); }
+
+/* Campos del editor */
+.page-root .sui.text-input,
+.page-root .sui.text-area,
+.page-root .sui.select,
+.page-root .sui.combobox {
+  border-radius: 8px !important;
+  background: #ffffff !important;
+}
+.page-root :is(.sui.text-input, .sui.text-area, .sui.combobox):focus-within {
+  border-color: var(--panel-celeste) !important;
+  box-shadow: 0 0 0 3px hsl(205 63% 50% / 18%) !important;
+}
+
+/* Zona para soltar la imagen principal */
+.page-root .drop-target > .empty {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%) !important;
+  border: 2px dashed hsl(222 34% 80%) !important;
+  border-radius: 12px !important;
+  transition: border-color .15s ease, background .15s ease;
+}
+.page-root .drop-target:hover > .empty,
+.page-root .drop-target[data-dragging='true'] > .empty {
+  border-color: var(--panel-celeste) !important;
+  background: hsl(205 63% 50% / 6%) !important;
+}
+.page-root .drop-target > .empty .icon { color: var(--panel-azul) !important; }
+
+/* Botones secundarios (Hoy, Pegar imagen…) */
+.page-root .sui.button.tertiary,
+.page-root .sui.button.secondary {
+  border-radius: 8px !important;
+  color: var(--panel-azul) !important;
+  font-weight: 500 !important;
+}
+
+/* Tarjetas de la lista de noticias */
+.page-root [role='grid'] [role='row'],
+.page-root .entry-list [role='listitem'] { border-radius: 10px; }
+
+/* Diálogos */
+.sui.dialog, .sui.dialog [role='dialog'], dialog.sui {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px hsl(226 50% 15% / 28%) !important;
+}
+
+/* Barra de desplazamiento discreta */
+* { scrollbar-color: hsl(222 26% 78%) transparent; }
