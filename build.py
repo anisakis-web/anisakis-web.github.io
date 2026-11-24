@@ -148,11 +148,11 @@ LEGACY_NEWS = {
     '2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md':
         '3fa031cfe801015895cdc75069d8444dffac7cb06e7a24001a47c00250b26574',
     '2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
-        'd3dd80b8652ea9b5b668879202745fb87d967e6b49b5f08c0f0140bcf4d440ac',
+        'fd70bb6cc0d54fdba892ea7e1b720effb1dbddb6ad165bbbfcebbb25eda0b081',
     '2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
         '69aa30e4978b38b20a68ac17d3f233ad1cc15373cc64d1e0c0f7558b55d09481',
     '2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
-        '1b68ee6c86fc2b3ce927ed6de772e01110fcc10b08beb43ee49c6e1f0b3fe193',
+        'ec526eb6922e0a8479dae2c6a10778f9a16e31b8eb718a0b6acd84dec92e6bd8',
     '2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
         'b599cf3be3c3adcb367e9ceb956190cc80f5d58711a0701ed3fef25ef4ad97df',
     '2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
@@ -160,7 +160,7 @@ LEGACY_NEWS = {
     '2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
         '5f4bce15316e812308b1a28233caaa2b93911e28eb165bfe619c4d6c3757897a',
     '2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
-        '8c29416cd8319db240d32e6f536079611e2ac683b58d9989234260604b7494f8',
+        '73e4a72c293e4f17f39154f389268a3d5bb6c419200dfde1c02997d3440fb768',
     '2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
         'a580fd16085e2315f3d4dbb5b8368d7b99a0d9625413cce5aadeb41118a23101',
     '2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
