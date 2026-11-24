@@ -1,28 +1,19 @@
 ---
-title: "Falta de información sobre el anisakis entre los consumidores: el caso de Sicilia"
+title: "Qué saben los consumidores sobre el anisakis: un estudio en Sicilia"
 date: 2025-09-07
 image: "/img/noticias/falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.webp"
-summary: "Un estudio reciente publicado en la revista científica Food and Humanity ha revelado un preocupante nivel de desconocimiento entre los consumidores sicilianos acerca del anisakis, un parásito marino presente en muchos…"
+summary: "Un estudio publicado en la revista Food and Humanity analiza qué saben los consumidores sicilianos sobre el anisakis, cómo perciben el riesgo y si pagarían más por un pescado libre del parásito."
 ---
-Un estudio reciente publicado en la revista científica *Food and Humanity* ha revelado un preocupante **nivel de desconocimiento entre los consumidores sicilianos** acerca del **anisakis**, un parásito marino presente en muchos pescados que, si no se elimina adecuadamente, puede causar problemas de salud.
+Un estudio publicado en 2025 en la revista científica *Food and Humanity* ha analizado **qué saben los consumidores de Sicilia sobre el anisakis** y cómo influye este parásito en su forma de comprar y comer pescado.
 
-La investigación, realizada en la región italiana de **Sicilia**, encuestó a **676 personas** para analizar su conocimiento sobre el parásito y sus hábitos de consumo de pescado. Los resultados ponen de manifiesto que **más de la mitad de los participantes no supo identificar correctamente el anisakis ni su ubicación en el pescado**, y muchos creen erróneamente que la **congelación elimina todos los riesgos microbiológicos**, sin diferenciar entre parásitos, bacterias o virus.
+Se trata de un **estudio exploratorio** basado en una encuesta a consumidores sicilianos. Los investigadores les preguntaron por su conocimiento del parásito, por cómo perciben la **seguridad alimentaria** y la **calidad nutricional** del pescado y por su **disposición a pagar más por productos libres de anisakis**.
 
-**Frescura y origen, por encima de la seguridad**
+**Por qué es importante**
 
-El estudio muestra que los consumidores priorizan factores como la **frescura del pescado** y su **procedencia**, mientras que los **riesgos sanitarios o la sostenibilidad** quedan en un segundo plano. Este comportamiento refleja una desconexión entre la percepción de calidad inmediata y los **riesgos reales asociados al consumo de pescado sin las debidas garantías sanitarias**.
+El anisakis se puede prevenir con medidas sencillas, como congelar el pescado que se va a comer crudo o poco hecho y cocinarlo bien. Pero para aplicarlas, el consumidor tiene que conocer el riesgo. Estudios como este ayudan a saber qué información le falta a la población y a orientar mejor las campañas de divulgación y el etiquetado de los productos pesqueros.
 
-**Disposición a pagar más, pero sin verdadera conciencia**
+**Un tema que también preocupa al sector**
 
-A pesar de la desinformación, el **77 % de los encuestados** se mostró dispuesto a **pagar hasta un 10 % más** por pescado certificado como libre de anisakis. Esto sugiere una **preocupación latente por la seguridad alimentaria**, aunque todavía no se traduce en **hábitos de compra conscientes o exigencias al sector**.
+La percepción del riesgo no solo afecta a la salud: también influye en las decisiones de compra. Por eso, informar bien al consumidor, sin alarmar, es útil tanto para la salud pública como para el propio sector pesquero.
 
-**La importancia de informar y formar**
-
-Los autores del estudio insisten en la **necesidad de reforzar la comunicación y la educación alimentaria**. Proponen campañas de divulgación más efectivas, una mejora en el **etiquetado de los productos pesqueros** y una **formación más completa para los profesionales** del ámbito sanitario y alimentario.
-La **prevención de la anisakiasis** es totalmente posible, pero requiere **consumidores informados y decisiones responsables**.
-
-**Un reto para la salud pública y el sector pesquero**
-
-El estudio también subraya la importancia de **equilibrar la seguridad alimentaria con la estabilidad económica del sector pesquero**. La clave está en informar sin alarmar, mantener la confianza del consumidor y garantizar un acceso seguro al pescado sin elevar excesivamente los precios.
-
-En definitiva, la investigación advierte que el anisakis sigue siendo un **riesgo poco visible**, agravado por la **falta de información del consumidor**. Solo un enfoque conjunto que combine **educación, regulación y transparencia** permitirá avanzar hacia un **consumo de pescado más seguro, responsable y sostenible**.
+Fuente: [Food and Humanity (Sciortino, Giamporcaro y otros, 2025)](https://doi.org/10.1016/j.foohum.2025.100668)

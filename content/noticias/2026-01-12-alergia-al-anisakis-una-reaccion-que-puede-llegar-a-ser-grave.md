@@ -2,14 +2,26 @@
 title: "Alergia al anisakis: una reacción que puede llegar a ser grave"
 date: 2026-01-12
 image: "/img/noticias/alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.webp"
-summary: "La alergia al anisakis es una de las consecuencias más preocupantes del contacto con este parásito marino. Se produce como respuesta del sistema inmunitario a las proteínas del gusano, que pueden desencadenar una…"
+summary: "Además de la anisakiasis digestiva, el anisakis puede provocar reacciones alérgicas que van desde una urticaria leve hasta la anafilaxia. Suelen aparecer en minutos o pocas horas tras comer el pescado."
 ---
-La **alergia al anisakis** es una de las consecuencias más preocupantes del contacto con este parásito marino. Se produce como respuesta del sistema inmunitario **a las proteínas del gusano**, que **pueden desencadenar una reacción incluso aunque el parásito esté muerto**.
+El anisakis no solo puede causar molestias digestivas. En algunas personas, el contacto con este parásito provoca una **reacción alérgica**, que es una de sus consecuencias más preocupantes.
 
-Se calcula que aproximadamente un **10 % de las personas que ingieren anisakis desarrollan algún tipo de reacción alérgica**, una situación que puede convertirse en un problema serio y persistente. Los síntomas suelen aparecer entre las **24 y 48 horas posteriores al consumo** del pescado contaminado.
+**Cuándo aparece**
 
-Las manifestaciones alérgicas pueden ser muy variadas. En los casos más leves, se presentan como **urticaria**, **enrojecimiento de la piel o picor intenso**. Sin embargo, en situaciones más graves, la reacción puede evolucionar hacia una **anafilaxia**, el cuadro más peligroso, ya que puede provocar **dificultad respiratoria, bajadas bruscas de tensión, shock anafiláctico** e incluso poner en riesgo la vida de la persona afectada.
+Según la OCU, la reacción alérgica empieza **a los pocos minutos o, como mucho, unas horas después** de comer el pescado. En cambio, la anisakiasis digestiva (cuando la larva viva se fija en el estómago o el intestino) puede tardar hasta uno o dos días en dar síntomas. A veces se dan los dos cuadros a la vez.
 
-Por este motivo, la alergia al anisakis no debe tomarse a la ligera y requiere especial atención, tanto en el diagnóstico como en la prevención, para evitar exposiciones futuras y complicaciones graves.
+**Síntomas**
 
-Video relacionado: [**Facebook**](https://www.facebook.com/reel/1380168267232231)
+Las manifestaciones van de leves a muy graves:
+
+- **Leves:** urticaria, picor y enrojecimiento de la piel.
+- **Moderadas:** hinchazón de párpados, labios o lengua (angioedema).
+- **Graves:** **anafilaxia**, con dificultad para respirar, que puede poner en riesgo la vida y requiere atención urgente.
+
+Un detalle que suele despistar: muchas personas que han tenido una reacción después de comer pescado lo vuelven a tolerar más adelante, lo que indica que el problema no es el pescado, sino el parásito. En esos casos conviene acudir al alergólogo.
+
+**¿Y si el parásito está muerto?**
+
+Congelar o cocinar el pescado mata las larvas y evita la anisakiasis digestiva. Si las larvas muertas pueden provocar también la alergia es una cuestión en la que, según la OCU, **la comunidad científica no se pone de acuerdo**. Por eso, las personas diagnosticadas de alergia al anisakis deben seguir las indicaciones de su alergólogo.
+
+Fuentes: [OCU](https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/anisakis) · [Quirónsalud](https://www.quironsalud.com/valles/es/servicios-medicos/alergologia/consejos/alergia-anisakis) · [Clínica Universidad de Navarra](https://www.cun.es/enfermedades-tratamientos/cuidados-casa/alergia-anisakis)
