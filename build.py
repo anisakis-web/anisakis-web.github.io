@@ -6,9 +6,10 @@ Uso:  python build.py            → genera _site/
       python build.py --serve    → genera y sirve en http://localhost:8000
 
 Contenido:
-  content/noticias/*.md   noticias (cabecera YAML sencilla + texto en Markdown)
-  content/paginas/*.html  páginas informativas (cabecera + HTML)
-  content/legal/*.html    textos legales (cabecera + HTML)
+  content/noticias/es/*.md  noticias en español (cabecera YAML sencilla + texto en Markdown)
+  content/noticias/en/*.md  su versión en inglés, opcional (unidas por «translationKey»)
+  content/paginas/*.html    páginas informativas (cabecera + HTML); en inglés, content/en/paginas/
+  content/legal/*.html      textos legales (cabecera + HTML); en inglés, content/en/legal/
   static/                 imágenes, CSS, JS e iconos (se copian tal cual)
 """
 import hashlib
@@ -23,7 +24,7 @@ from email.utils import format_datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, '_site')
-SITE = 'https://www.anisakis.com'
+SITE = 'https://anisakis.com'
 NAME = 'Anisakis International Information Site'
 SHORT = 'Anisakis IIS'
 EMAIL = 'info@anisakis.com'
@@ -141,44 +142,83 @@ IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
 MAX_NEWS_BYTES = 200_000                       # una noticia normal ocupa 2–10 KB
 MAX_LINKS = 12                                 # «Fuentes y enlaces» por noticia
 
-# Noticias publicadas antes del panel (19/11/2026): conservan sus enlaces dentro del texto, pero SOLO si el texto
-# no ha cambiado (huella SHA-256 del cuerpo). Si se edita, pasa a regirse como una noticia nueva.
+# Noticias publicadas antes del panel (hasta el 23/11/2026, con sus enlaces revisados a mano) y sus traducciones al
+# inglés (25/11/2026): conservan sus enlaces dentro del texto, pero SOLO si el texto no ha cambiado (huella SHA-256 del
+# cuerpo; en las inglesas, también de su translationKey). Si se edita, pasa a regirse como una noticia nueva.
 # En las noticias nuevas el texto no puede llevar enlaces: van en «Fuentes y enlaces» (campo `enlaces`).
 LEGACY_NEWS = {
-    '2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md':
+    'es/2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md':
         '3fa031cfe801015895cdc75069d8444dffac7cb06e7a24001a47c00250b26574',
-    '2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
+    'es/2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
         'fd70bb6cc0d54fdba892ea7e1b720effb1dbddb6ad165bbbfcebbb25eda0b081',
-    '2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
+    'es/2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
         '69aa30e4978b38b20a68ac17d3f233ad1cc15373cc64d1e0c0f7558b55d09481',
-    '2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
+    'es/2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
         'ec526eb6922e0a8479dae2c6a10778f9a16e31b8eb718a0b6acd84dec92e6bd8',
-    '2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
+    'es/2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
         'b599cf3be3c3adcb367e9ceb956190cc80f5d58711a0701ed3fef25ef4ad97df',
-    '2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
+    'es/2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
         '1098bd285e88cf0ce35e54ca52268e80bdbb1b55bfd76089ef476900cf0f6aca',
-    '2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
+    'es/2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
         '5f4bce15316e812308b1a28233caaa2b93911e28eb165bfe619c4d6c3757897a',
-    '2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
+    'es/2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
         '73e4a72c293e4f17f39154f389268a3d5bb6c419200dfde1c02997d3440fb768',
-    '2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
+    'es/2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
         'a580fd16085e2315f3d4dbb5b8368d7b99a0d9625413cce5aadeb41118a23101',
-    '2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
+    'es/2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
         'fe1182e58a7fe2fddf85607798b565c4205cb276d5687e2c1c537d9ea1c7798b',
-    '2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md':
+    'es/2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md':
         '4b859116fa6724391cb945e73d5481c29501cbec27c840c20e21450a175d3a5d',
-    '2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md':
+    'es/2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md':
         'b58f9a29e82e0cd2313a6e643dd361e320a7176f33dcf0989288af797881cb4b',
-    '2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md':
+    'es/2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md':
         '7880d96475f4019c8fa02444b9e30574ca3c2a159db7c6f2f7146fdf0513c523',
-    '2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md':
+    'es/2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md':
         '1b612da88ff9e4271a73da50fd1219773569293149b04c0b80706ced4fa27def',
-    '2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md':
+    'es/2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md':
         '1b19e5bb9ddb11142c805e4000747f4e0421f5074f76331f3f2b43402ec4be22',
-    '2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md':
+    'es/2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md':
         'b547ca782bc32b730647e80196aee178293880ce140f90e6506fba19c7d11980',
-    '2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md':
+    'es/2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md':
         '79e22733a784b924920e18bedec8184668389cb109d09b6d94bbac2b9897c916',
+    'es/2026-11-23-controles-en-frontera-destruido-un-lote-de-pez-sable.md':
+        '552fb76e922001897bfbc80f348599d306032ba7cc736f3525f17eecbf498e04',
+    'en/2025-01-07-chilean-research-confirms-allergen-expression-in-anisakis-parasites.md':
+        '71958b64719f46d2622a030ba7a891620018abc69cbfc0e34e977b30662d7e7f',
+    'en/2025-06-23-consumption-habits-and-evisceration-at-sea-two-factors-behind-anisakis.md':
+        '07b65e50fad07cded1e13dbc665d6a1609924318dfd4f6d4833f3faa0d02461e',
+    'en/2025-09-06-new-recommendations-to-prevent-anisakis.md':
+        '2a37709d084f581221a87a39a13e9e3a6fc4031bb560f8b50e748a24ff96f575',
+    'en/2025-09-07-what-consumers-know-about-anisakis-a-study-in-sicily.md':
+        '6ce4262f4c56f558e2abe69cf81b431876d83d4f74b52fc725ab9b3177664aaa',
+    'en/2025-12-02-alert-over-parasites-in-a-healthy-mackerel-in-spain.md':
+        '39ee44e17360d5e25eca5b6460d0a986bfec987d9cd2cda0df1de37bd619f532',
+    'en/2025-12-02-first-confirmed-case-of-anisakiasis-in-greece-after-a-sushi-dinner.md':
+        '8b3ce25c7f6f52df49d84a011b2d1c8fc473b2135f7a58cc58ec5a18cde1eec3',
+    'en/2025-12-15-anisakis-is-present-in-100-of-european-hake-and-in-one-in-five.md':
+        '816eb0f50f9f4b7396cd6611fce6ee54cf8083ba1bc81449a68fd679a06d7a81',
+    'en/2026-01-12-anisakis-allergy-a-reaction-that-can-become-serious.md':
+        'f5f788776ccddebdffaeff3b508cad68bd79514c6b5a16952f69dfebbadf0772',
+    'en/2026-01-12-anisakis-as-a-cause-of-meat-allergy.md':
+        'ac26f48f36ca73707e29f27604db1d259c0b49ce2dd3d7d3a82da51c078330ff',
+    'en/2026-01-13-spanish-company-develops-technologies-against-the-anisakis-parasite.md':
+        '0d6e5ca881818602f039923987a7df56da83d35896b85ca07f245ca56d461577',
+    'en/2026-03-26-precautionary-recall-due-to-exceptional-presence-of-anisakis.md':
+        '096f6e9abef8725ebace1db4d18df5d7e415404977b86b29341f42a0c8db9541',
+    'en/2026-04-27-health-alert-massive-anisakis-infestation-in-oily-fish.md':
+        'c6d2450aa82c453a842df5f7537c812f126823c0e2117a271f630ab86d871810',
+    'en/2026-06-08-the-basque-government-launches-the-frescossi-anisakisno-campaign.md':
+        'cb9446f665533bb1feee745cb80b4ac1c498dc596d70792149f6d7a5fb4de378',
+    'en/2026-07-22-anisakis-genome-decoded-science-moves-towards-genetic-control.md':
+        'bc9f56f054b9fe1b2ff6d07edbaacbc015cf436347157f856f377a646a50a80c',
+    'en/2026-09-07-beyond-96-scientific-analysis-of-the-study-on-parasites-in-tuna.md':
+        'bbef2f82b3792ed55d0e782eca17445b86aaa9fb00d25a15c6bfbd3f178e2d07',
+    'en/2026-10-05-thermal-inactivation-of-anisakis-what-the-heatsakis-project-reveals.md':
+        'ab6d6e97752ec01f66551f0a38ea7a782988285bfa80938615ac99f0df1ca008',
+    'en/2026-10-26-anisakis-control-the-role-of-veterinarians-from-the-fish-market.md':
+        'ef3184381977547585551ff274cebef60be79edb339209b9454b8db1a69b5946',
+    'en/2026-11-23-border-controls-batch-of-imported-scabbardfish-destroyed.md':
+        'da74cca04600179d5db65b6d2a1020d88de0422a772424d9857c98e29b9373e7',
 }
 
 # Comprobación de las direcciones de «Fuentes y enlaces»
@@ -365,21 +405,93 @@ def markdown(src, links=True):
     return '\n'.join(out)
 
 
+# ------------------------------------------------------------------ idiomas
+# Español (principal, en la raíz) e inglés (en /en/). Las noticias en inglés son opcionales: si una noticia no
+# tiene versión inglesa, la lista inglesa la muestra en español con el aviso ONLY_ES.
+LANGS = ('es', 'en')
+MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+          'November', 'December']
+# Páginas fijas: nombre del archivo en español → dirección de la versión inglesa
+EN_SLUGS = {'anisakis': 'anisakis', 'informacion-cientifica': 'scientific-information', 'legislacion': 'legislation',
+            'aviso-legal': 'legal-notice', 'privacidad': 'privacy', 'cookies': 'cookies'}
+T = {
+    'es': dict(home='/', news='/noticias/', feed='/noticias/feed.xml', n_home='Inicio', n_news='Noticias',
+               more='Leer más', skip='Saltar al contenido', main_nav='Principal', contact='Contacto',
+               legal=('Aviso legal', 'Privacidad', 'Cookies'), locale='es_ES', home_word='inicio',
+               desc='Información rigurosa sobre el Anisakis: biología, riesgos para la salud, legislación y noticias.',
+               news_desc='Actualidad sobre el Anisakis: salud, investigación, pesca y legislación.',
+               feed_desc='Actualidad sobre el Anisakis', newer='← Más recientes', older='Anteriores →',
+               page_of='Página {} de {}', pages='Páginas', news_page='Noticias (página {})', lang_nav='Idioma',
+               nf_title='Página no encontrada', nf_text='La dirección que buscas no existe o ha cambiado.',
+               nf_home='Ir al inicio', nf_news='Ver noticias'),
+    'en': dict(home='/en/', news='/en/news/', feed='/en/news/feed.xml', n_home='Home', n_news='News',
+               more='Read more', skip='Skip to content', main_nav='Main', contact='Contact',
+               legal=('Legal notice', 'Privacy', 'Cookies'), locale='en_GB', home_word='home',
+               desc='Rigorous information about Anisakis: biology, health risks, legislation and news.',
+               news_desc='News about Anisakis: health, research, fisheries and legislation.',
+               feed_desc='News about Anisakis', newer='← Newer', older='Older →',
+               page_of='Page {} of {}', pages='Pages', news_page='News (page {})', lang_nav='Language',
+               nf_title='Page not found', nf_text='The page you are looking for does not exist or has moved.',
+               nf_home='Go to the home page', nf_news='See the news'),
+}
+ONLY_ES = 'Only available in Spanish'
+LINK_LABELS = {
+    'es': LINK_TYPES,
+    'en': {'fuente': ('Source', 'Sources'), 'video': ('Related video', 'Related videos'),
+           'enlace': ('Related link', 'Related links')},
+}
+
+
+def page_url(slug, lang):
+    """Dirección de una página fija (por el nombre de su archivo en español) en cada idioma."""
+    return f'/{slug}/' if lang == 'es' else f'/en/{EN_SLUGS[slug]}/'
+
+
+def fecha_l(d, lang):
+    return fecha(d) if lang == 'es' else f'{d.day} {MONTHS[d.month - 1]} {d.year}'
+
+
+def nav_items(lang):
+    t = T[lang]
+    return [(t['home'], t['n_home'])] + \
+        [(page_url(s, lang), n) for s, n in (('anisakis', 'Anisakis'),
+                                             ('informacion-cientifica', 'Información científica' if lang == 'es' else 'Scientific information'),
+                                             ('legislacion', 'Legislación' if lang == 'es' else 'Legislation'))] + \
+        [(t['news'], t['n_news'])]
+
+
+def localize_links(h, url_map):
+    """En el contenido inglés, las rutas internas de la web española pasan a su versión inglesa (si existe)."""
+    def rep(m):
+        return m.group(1) + url_map.get(m.group(2), m.group(2)) + m.group(3)
+    return re.sub(r'(href=")(/[^"#?]*)([#?][^"]*)?(?=")', lambda m: rep(m) if m.group(3) else
+                  m.group(1) + url_map.get(m.group(2), m.group(2)), h)
+
+
 # ------------------------------------------------------------------ plantilla
-NAV = [('/', 'Inicio'), ('/anisakis/', 'Anisakis'), ('/informacion-cientifica/', 'Información científica'),
-       ('/legislacion/', 'Legislación'), ('/noticias/', 'Noticias')]
-
-
-def layout(path, title, body, desc='', image='', kind='website', extra_head=''):
+def layout(path, title, body, desc='', image='', kind='website', extra_head='', lang='es', alt=None, fallback=None):
+    """alt: dirección de la misma página en el otro idioma. Si no existe (None), el selector de idioma lleva a
+    `fallback` o, si no se indica, a la portada del otro idioma."""
+    t = T[lang]
+    other = 'en' if lang == 'es' else 'es'
     full_title = f'{title} · {SHORT}' if title else NAME
-    desc = (desc or 'Información rigurosa sobre el Anisakis: biología, riesgos para la salud, legislación y noticias.')[:300]
+    desc = (desc or t['desc'])[:300]
     url = SITE + path
     img = SITE + (image or '/img/portada.webp')
     nav = ''.join(
-        f'<li><a href="{h}"' + (' aria-current="page"' if (h == path or (h != '/' and path.startswith(h))) else '') + f'>{t}</a></li>'
-        for h, t in NAV)
+        f'<li><a href="{h}"' + (' aria-current="page"' if (h == path or (h != t['home'] and path.startswith(h))) else '') + f'>{n}</a></li>'
+        for h, n in nav_items(lang))
+    paths = {lang: path, other: alt}
+    alternates = ''
+    if alt:
+        alternates = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE}{paths[l]}">\n' for l in LANGS) + \
+            f'<link rel="alternate" hreflang="x-default" href="{SITE}{paths["es"]}">\n'
+    switch = ''.join(
+        (f'<a href="{esc(path if path != "/404.html" else T[l]["home"])}" hreflang="{l}" lang="{l}" aria-current="true">{l.upper()}</a>' if l == lang else
+         f'<a href="{esc(alt or fallback or T[l]["home"])}" hreflang="{l}" lang="{l}">{l.upper()}</a>') for l in LANGS)
+    lt = t['legal']
     return f'''<!doctype html>
-<html lang="es">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -388,27 +500,28 @@ def layout(path, title, body, desc='', image='', kind='website', extra_head=''):
 <title>{esc(full_title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{url}">
-<meta property="og:type" content="{kind}">
+{alternates}<meta property="og:type" content="{kind}">
 <meta property="og:site_name" content="{NAME}">
 <meta property="og:title" content="{esc(title or NAME)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{img}">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="{t['locale']}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#263e8b">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="alternate" type="application/rss+xml" title="Noticias · {SHORT}" href="/noticias/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="{t['n_news']} · {SHORT}" href="{t['feed']}">
 <link rel="stylesheet" href="/css/site.css">
 {extra_head}</head>
 <body>
-<a class="skip" href="#main">Saltar al contenido</a>
+<a class="skip" href="#main">{t['skip']}</a>
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="/" aria-label="{NAME} — inicio"><img src="/img/logo-sm.webp" alt="{SHORT}" width="140" height="101"></a>
-    <nav aria-label="Principal"><ul>{nav}</ul></nav>
+    <a class="brand" href="{t['home']}" aria-label="{NAME} — {t['home_word']}"><img src="/img/logo-sm.webp" alt="{SHORT}" width="140" height="101"></a>
+    <nav aria-label="{t['main_nav']}"><ul>{nav}</ul></nav>
+    <nav class="lang" aria-label="{t['lang_nav']}">{switch}</nav>
   </div>
 </header>
 <main id="main">
@@ -417,8 +530,8 @@ def layout(path, title, body, desc='', image='', kind='website', extra_head=''):
 <footer class="foot">
   <div class="wrap foot-in">
     <div><img src="/img/logo-sm.webp" alt="" width="110" height="79" loading="lazy"><p>{NAME}</p></div>
-    <div><p>Contacto: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
-    <p class="legal"><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a></p></div>
+    <div><p>{t['contact']}: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+    <p class="legal"><a href="{page_url('aviso-legal', lang)}">{lt[0]}</a> · <a href="{page_url('privacidad', lang)}">{lt[1]}</a> · <a href="{page_url('cookies', lang)}">{lt[2]}</a></p></div>
   </div>
 </footer>
 <script src="/js/site.js" defer></script>
@@ -427,12 +540,15 @@ def layout(path, title, body, desc='', image='', kind='website', extra_head=''):
 '''
 
 
-def card(n):
+def card(n, lang='es', notice=''):
+    """Tarjeta de la lista. notice: aviso «solo en español» (lista inglesa, noticia sin versión inglesa)."""
     img = (f'<img src="{n["image"]}" alt="" loading="lazy" width="600" height="340">' if n['image']
            else '<span class="ph" aria-hidden="true"></span>')
+    tl = ' lang="es"' if notice else ''
+    note = f'<span class="only-es">{notice}</span>' if notice else ''
     return (f'<article class="card"><a href="{n["url"]}">{img}<div class="card-b">'
-            f'<time datetime="{n["date"].isoformat()}">{fecha(n["date"])}</time>'
-            f'<h3>{esc(n["title"])}</h3><p>{esc(n["summary"])}</p><span class="more">Leer más</span></div></a></article>')
+            f'<time datetime="{n["date"].isoformat()}">{fecha_l(n["date"], lang)}</time>{note}'
+            f'<h3{tl}>{esc(n["title"])}</h3><p{tl}>{esc(n["summary"])}</p><span class="more">{T[lang]["more"]}</span></div></a></article>')
 
 
 # ------------------------------------------------------------------ generación
@@ -444,60 +560,187 @@ def write(rel, content):
     open(p, 'w', encoding='utf-8', newline='\n').write(content)
 
 
+def render_links_lang(items, fname, lang):
+    """Como render_links, con los rótulos («Fuente», «Source»…) en el idioma de la noticia."""
+    global LINK_TYPES
+    saved, LINK_TYPES = LINK_TYPES, LINK_LABELS[lang]
+    try:
+        return render_links(items, fname)
+    finally:
+        LINK_TYPES = saved
+
+
+def legacy_hash(lang, key, body):
+    """Huella de una noticia de confianza: su texto; en las traducciones, también la clave que la une a la española
+    (así no se puede «reutilizar» una traducción revisada cambiándole solo la clave)."""
+    data = (key + '\n' if lang == 'en' else '') + body.strip()
+    return hashlib.sha256(data.encode('utf-8', 'replace')).hexdigest()
+
+
 def load_news():
-    d = os.path.join(ROOT, 'content', 'noticias')
-    items, seen = [], set()
-    # las noticias antiguas primero: una nueva nunca puede quitarles su dirección
-    for f in sorted(os.listdir(d), key=lambda f: (f not in LEGACY_NEWS, f)):
-        if not f.endswith('.md'):
+    """Lee content/noticias/es/*.md (obligatorio) y content/noticias/en/*.md (opcional), unidas por translationKey.
+    Devuelve [{'key', 'es': {...}, 'en': {...} o None}] de la más reciente a la más antigua."""
+    base = os.path.join(ROOT, 'content', 'noticias')
+    for f in sorted(os.listdir(base)):
+        if f not in LANGS:
+            warn(f'content/noticias/{f}: solo se admiten las carpetas es/ y en/ (no se publica)')
+    found = {'es': {}, 'en': {}}
+    seen = {'es': set(), 'en': set()}
+    for lang in LANGS:
+        d = os.path.join(base, lang)
+        if not os.path.isdir(d) or os.path.islink(d):
             continue
-        p = os.path.join(d, f)
-        if not os.path.isfile(p) or os.path.islink(p):
-            warn(f'{f} se omite (no es un archivo normal)')
-            continue
-        if os.path.getsize(p) > MAX_NEWS_BYTES:
-            warn(f'{f} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
-            continue
-        meta, body = read_doc(os.path.join(d, f))
-        # cada campo con su tipo: solo «enlaces» es una lista; el resto, texto
-        meta = {k: (v if (k == 'enlaces') == isinstance(v, list) else ([] if k == 'enlaces' else ''))
-                for k, v in meta.items()}
-        if meta.get('draft', '').lower() in ('true', 'si', 'sí', 'yes'):
-            continue
-        slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f[:-3])      # la dirección sale del nombre del archivo
-        if not SLUG_OK.fullmatch(slug) or len(slug) > 120:
-            warn(f'{f} se omite (dirección no válida: {slug!r})')
-            continue
-        base, n = slug, 2
-        while slug in seen:                     # dos noticias con el mismo título: -2, -3…
-            slug, n = f'{base}-{n}', n + 1
-        seen.add(slug)
-        try:
-            dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
-        except ValueError:
-            warn(f'{f} se omite (fecha no válida: {meta.get("date")!r})')
-            continue
-        image = meta.get('image', '').strip()
-        if image and not IMG_OK.fullmatch(image):
-            warn(f'{f}: imagen no válida, se publica sin imagen ({image!r})')
-            image = ''
-        legacy = LEGACY_NEWS.get(f) == hashlib.sha256(body.strip().encode('utf-8', 'replace')).hexdigest()
-        why = '' if legacy else (body_problem(body) or next((f'«{k}»: ' + body_problem(meta.get(k, ''))
-                                                            for k in ('title', 'summary', 'description')
-                                                            if body_problem(meta.get(k, ''))), ''))
-        if why:
-            warn(f'{f} NO se publica: {why}')
-            continue
-        h = markdown(body, links=legacy)
-        title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
-        summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
-        links_html = render_links(meta.get('enlaces', []), f)
-        if links_html:
-            h = h + '\n' + links_html
-        items.append({'slug': slug, 'url': f'/noticias/{slug}/', 'title': title, 'date': dt,
-                      'image': image, 'summary': summary, 'html': h})
-    items.sort(key=lambda n: (n['date'], n['slug']), reverse=True)
-    return items
+        # las noticias antiguas primero: una nueva nunca puede quitarles su dirección
+        for f in sorted(os.listdir(d), key=lambda f: (f'{lang}/{f}' not in LEGACY_NEWS, f)):
+            rel = f'{lang}/{f}'
+            p = os.path.join(d, f)
+            if not f.endswith('.md'):
+                warn(f'{rel}: archivo no permitido en las noticias')
+                continue
+            if not os.path.isfile(p) or os.path.islink(p):
+                warn(f'{rel} se omite (no es un archivo normal)')
+                continue
+            if os.path.getsize(p) > MAX_NEWS_BYTES:
+                warn(f'{rel} se omite (más de {MAX_NEWS_BYTES // 1000} KB)')
+                continue
+            meta, body = read_doc(p)
+            # cada campo con su tipo: solo «enlaces» es una lista; el resto, texto
+            meta = {k: (v if (k == 'enlaces') == isinstance(v, list) else ([] if k == 'enlaces' else ''))
+                    for k, v in meta.items()}
+            if meta.get('draft', '').lower() in ('true', 'si', 'sí', 'yes'):
+                continue
+            stem = f[:-3]
+            slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', stem)      # la dirección sale del nombre del archivo
+            if not SLUG_OK.fullmatch(slug) or len(slug) > 120:
+                warn(f'{rel} se omite (dirección no válida: {slug!r})')
+                continue
+            key = meta.get('translationKey', '') or (stem if lang == 'es' else '')
+            if not re.fullmatch(r'\d{4}-\d{2}-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*', key or ''):
+                warn(f'{rel} se omite (falta la clave que une los dos idiomas)')
+                continue
+            if key in found[lang]:
+                warn(f'{rel}: ya hay otra noticia con la misma clave ({key}); no se publica')
+                continue
+            b, n = slug, 2
+            while slug in seen[lang]:               # dos noticias con el mismo título: -2, -3…
+                slug, n = f'{b}-{n}', n + 1
+            seen[lang].add(slug)
+            try:
+                dt = date.fromisoformat(str(meta.get('date', f[:10]))[:10])
+            except ValueError:
+                warn(f'{rel} se omite (fecha no válida: {meta.get("date")!r})')
+                continue
+            image = meta.get('image', '').strip()
+            if image and not IMG_OK.fullmatch(image):
+                warn(f'{rel}: imagen no válida, se publica sin imagen ({image!r})')
+                image = ''
+            legacy = LEGACY_NEWS.get(rel) == legacy_hash(lang, key, body)
+            why = '' if legacy else (body_problem(body) or next((f'«{k}»: ' + body_problem(meta.get(k, ''))
+                                                                for k in ('title', 'summary', 'description')
+                                                                if body_problem(meta.get(k, ''))), ''))
+            if why:
+                warn(f'{rel} NO se publica: {why}')
+                continue
+            h = markdown(body, links=legacy)
+            title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
+            summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
+            links_html = render_links_lang(meta.get('enlaces', []), rel, lang)
+            if links_html:
+                h = h + '\n' + links_html
+            found[lang][key] = {'slug': slug, 'url': T[lang]['news'] + slug + '/', 'title': title, 'date': dt,
+                                'image': image, 'summary': summary, 'html': h}
+    for key in sorted(set(found['en']) - set(found['es'])):
+        warn(f'en: versión inglesa sin la española ({key}); no se publica')
+    news = [{'key': k, 'es': v, 'en': found['en'].get(k)} for k, v in found['es'].items()]
+    news.sort(key=lambda n: (n['es']['date'], n['es']['slug']), reverse=True)
+    return news
+
+
+HOME = {
+    'es': dict(
+        temas=[('/anisakis/', 'La biología del Anisakis y su ciclo vital en el medio marino.'),
+               ('/informacion-cientifica/', 'Los riesgos para la salud pública, desde alergias graves hasta cuadros gastrointestinales.'),
+               ('/legislacion/', 'La evolución normativa y legal relacionada con su control.'),
+               ('/noticias/', 'Las razones de su expansión en caladeros y especies concretas.'),
+               ('/noticias/', 'El impacto económico en la pesca y la distribución.'),
+               ('/noticias/', 'El seguimiento de su presencia en los medios de comunicación y la opinión pública.'),
+               ('/noticias/', 'Posibles soluciones para reducir su presencia en el mar y en los productos pesqueros.')],
+        lead='Esta web nace con el objetivo de sensibilizar a la sociedad y a los profesionales sobre los riesgos reales asociados al consumo de pescado contaminado, así como sobre las implicaciones ecológicas, sanitarias, comerciales y legales que conlleva su proliferación.',
+        b_news='Últimas noticias', b_contact='Contacto', eyebrow='Qué encontrarás',
+        h2='Mantengamos el pescado más saludable librándolo del Anisakis',
+        intro='En esta página web, a través de contenidos actualizados y contrastados, abordaremos temas como:',
+        all_news='Ver todas las noticias',
+        contact_text='El Anisakis no es un problema menor. Su proliferación está cambiando nuestros hábitos culinarios y afectando a toda la cadena alimentaria del pescado. Aquí encontrarás contenidos actualizados con información relevante, veraz y accesible para todos.',
+        contact_mail='Puede ponerse en contacto con nosotros a través de'),
+    'en': dict(
+        temas=[('/en/anisakis/', 'The biology of Anisakis and its life cycle in the marine environment.'),
+               ('/en/scientific-information/', 'The risks to public health, from severe allergies to gastrointestinal disorders.'),
+               ('/en/legislation/', 'The development of regulations and legislation related to its control.'),
+               ('/en/news/', 'The reasons for its spread in specific fishing grounds and species.'),
+               ('/en/news/', 'The economic impact on fisheries and distribution.'),
+               ('/en/news/', 'Monitoring its presence in the media and in public opinion.'),
+               ('/en/news/', 'Possible solutions to reduce its presence in the sea and in fishery products.')],
+        lead='This website was created to raise awareness among the public and professionals of the real risks associated with eating contaminated fish, and of the ecological, health, commercial and legal implications of its proliferation.',
+        b_news='Latest news', b_contact='Contact', eyebrow='What you will find',
+        h2='Let’s keep fish healthier by ridding it of Anisakis',
+        intro='On this website, through up-to-date and verified content, we will cover topics such as:',
+        all_news='See all the news',
+        contact_text='Anisakis is not a minor problem. Its proliferation is changing our eating habits and affecting the entire fish food chain. Here you will find up-to-date content with relevant, accurate information that is accessible to everyone.',
+        contact_mail='You can contact us at'),
+}
+
+
+def home_html(lang, cards_html):
+    h = HOME[lang]
+    t = T[lang]
+    return f'''<section class="hero">
+  <picture><source media="(max-width: 700px)" srcset="/img/portada-movil.webp"><img class="hero-bg" src="/img/portada.webp" alt="" width="1728" height="919" fetchpriority="high"></picture>
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="/img/logo.webp" alt="{SHORT}" width="560" height="404">
+    <h1>Anisakis International Information Site</h1>
+    <p class="lead">{h['lead']}</p>
+    <p class="cta"><a class="btn" href="#noticias">{h['b_news']}</a> <a class="btn btn-o" href="#contacto">{h['b_contact']}</a></p>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap temas">
+    <div class="temas-intro">
+      <p class="eyebrow">{h['eyebrow']}</p>
+      <h2>{h['h2']}</h2>
+      <p>{h['intro']}</p>
+    </div>
+    <ol class="topics">{''.join(f'<li><a href="{u}"><span class="num" aria-hidden="true">{i:02d}</span><span class="txt">{esc(x)}</span><span class="arr" aria-hidden="true">→</span></a></li>' for i, (u, x) in enumerate(h['temas'], 1))}</ol>
+  </div>
+</section>
+<section class="wrap" id="noticias">
+  <h2>{h['b_news']}</h2>
+  <div class="cards">{cards_html}</div>
+  <p class="center"><a class="btn" href="{t['news']}">{h['all_news']}</a></p>
+</section>
+<section class="band band-dark" id="contacto">
+  <div class="wrap narrow center">
+    <h2>{h['b_contact']}</h2>
+    <p>{h['contact_text']}</p>
+    <p>{h['contact_mail']} <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+  </div>
+</section>'''
+
+
+def list_cards(items, lang):
+    """Tarjetas de la lista de un idioma: en inglés, las noticias sin traducir salen en español con aviso."""
+    out = []
+    for n in items:
+        if n[lang]:
+            out.append(card(n[lang], lang))
+        else:
+            out.append(card(n['es'], lang, ONLY_ES))
+    return ''.join(out)
+
+
+def json_ld(d):
+    return ('<script type="application/ld+json">'
+            + json.dumps(d, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
+            + '</script>\n')
 
 
 def build():
@@ -521,126 +764,124 @@ def build():
         return bad
     shutil.copytree(os.path.join(ROOT, 'static'), OUT, ignore=only_images)
     news = load_news()
-    pages = []  # (url, lastmod) para el sitemap
+    pages = []  # (url, lastmod, {idioma: url de cada versión}) para el sitemap
 
-    # portada
-    temas = [
-        ('/anisakis/', 'La biología del Anisakis y su ciclo vital en el medio marino.'),
-        ('/informacion-cientifica/', 'Los riesgos para la salud pública, desde alergias graves hasta cuadros gastrointestinales.'),
-        ('/legislacion/', 'La evolución normativa y legal relacionada con su control.'),
-        ('/noticias/', 'Las razones de su expansión en caladeros y especies concretas.'),
-        ('/noticias/', 'El impacto económico en la pesca y la distribución.'),
-        ('/noticias/', 'El seguimiento de su presencia en los medios de comunicación y la opinión pública.'),
-        ('/noticias/', 'Posibles soluciones para reducir su presencia en el mar y en los productos pesqueros.'),
-    ]
-    home = f'''<section class="hero">
-  <picture><source media="(max-width: 700px)" srcset="/img/portada-movil.webp"><img class="hero-bg" src="/img/portada.webp" alt="" width="1728" height="919" fetchpriority="high"></picture>
-  <div class="wrap hero-in">
-    <img class="hero-logo" src="/img/logo.webp" alt="{SHORT}" width="560" height="404">
-    <h1>Anisakis International Information Site</h1>
-    <p class="lead">Esta web nace con el objetivo de sensibilizar a la sociedad y a los profesionales sobre los riesgos reales asociados al consumo de pescado contaminado, así como sobre las implicaciones ecológicas, sanitarias, comerciales y legales que conlleva su proliferación.</p>
-    <p class="cta"><a class="btn" href="#noticias">Últimas noticias</a> <a class="btn btn-o" href="#contacto">Contacto</a></p>
-  </div>
-</section>
-<section class="band">
-  <div class="wrap temas">
-    <div class="temas-intro">
-      <p class="eyebrow">Qué encontrarás</p>
-      <h2>Mantengamos el pescado más saludable librándolo del Anisakis</h2>
-      <p>En esta página web, a través de contenidos actualizados y contrastados, abordaremos temas como:</p>
-    </div>
-    <ol class="topics">{''.join(f'<li><a href="{h}"><span class="num" aria-hidden="true">{i:02d}</span><span class="txt">{esc(t)}</span><span class="arr" aria-hidden="true">→</span></a></li>' for i, (h, t) in enumerate(temas, 1))}</ol>
-  </div>
-</section>
-<section class="wrap" id="noticias">
-  <h2>Últimas noticias</h2>
-  <div class="cards">{''.join(card(n) for n in news[:6])}</div>
-  <p class="center"><a class="btn" href="/noticias/">Ver todas las noticias</a></p>
-</section>
-<section class="band band-dark" id="contacto">
-  <div class="wrap narrow center">
-    <h2>Contacto</h2>
-    <p>El Anisakis no es un problema menor. Su proliferación está cambiando nuestros hábitos culinarios y afectando a toda la cadena alimentaria del pescado. Aquí encontrarás contenidos actualizados con información relevante, veraz y accesible para todos.</p>
-    <p>Puede ponerse en contacto con nosotros a través de <a href="mailto:{EMAIL}">{EMAIL}</a></p>
-  </div>
-</section>'''
-    ld = {'@context': 'https://schema.org', '@type': 'WebSite', 'name': NAME, 'url': SITE + '/', 'inLanguage': 'es'}
-    write('/', layout('/', '', home, extra_head=''))
-    pages.append(('/', news[0]['date'] if news else None))
+    # Correspondencia de rutas españolas → inglesas (para los enlaces internos del contenido inglés)
+    url_map = {'/': '/en/', '/noticias/': '/en/news/'}
+    url_map.update({page_url(s, 'es'): page_url(s, 'en') for s in EN_SLUGS})
+    url_map.update({n['es']['url']: n['en']['url'] for n in news if n['en']})
 
-    # páginas informativas
-    for f in sorted(os.listdir(os.path.join(ROOT, 'content', 'paginas'))):
-        meta, body = read_doc(os.path.join(ROOT, 'content', 'paginas', f))
-        slug = f.rsplit('.', 1)[0]
-        url = f'/{slug}/'
-        desc = meta.get('description') or plain(body)[:180]
-        write(url, layout(url, meta['title'], f'<article class="wrap narrow page"><h1>{esc(meta["title"])}</h1>\n{body}</article>', desc))
-        pages.append((url, None))
+    # portadas
+    for lang in LANGS:
+        top = news[:6]
+        cards_html = list_cards(top, lang)
+        alt = T['en' if lang == 'es' else 'es']['home']
+        write(T[lang]['home'], layout(T[lang]['home'], '', home_html(lang, cards_html), lang=lang, alt=alt))
+    pages.append(('/', news[0]['es']['date'] if news else None, {'es': '/', 'en': '/en/'}))
 
-    # textos legales
-    for f in sorted(os.listdir(os.path.join(ROOT, 'content', 'legal'))):
-        meta, body = read_doc(os.path.join(ROOT, 'content', 'legal', f))
-        slug = f.rsplit('.', 1)[0]
-        url = f'/{slug}/'
-        write(url, layout(url, meta['title'], f'<article class="wrap narrow page legal-text"><h1>{esc(meta["title"])}</h1>\n{body}</article>', meta.get('description', '')))
-        pages.append((url, None))
+    # páginas informativas y textos legales (la versión inglesa está en content/en/, con el mismo nombre de archivo)
+    for folder, cls in (('paginas', 'page'), ('legal', 'page legal-text')):
+        for f in sorted(os.listdir(os.path.join(ROOT, 'content', folder))):
+            if not f.endswith('.html'):
+                continue
+            slug = f.rsplit('.', 1)[0]
+            if slug not in EN_SLUGS:
+                warn(f'content/{folder}/{f}: página sin dirección inglesa en EN_SLUGS')
+                continue
+            versions = {}
+            for lang in LANGS:
+                p = os.path.join(ROOT, 'content', folder, f) if lang == 'es' else os.path.join(ROOT, 'content', 'en', folder, f)
+                if os.path.isfile(p):
+                    versions[lang] = read_doc(p)
+            for lang, (meta, body) in versions.items():
+                url = page_url(slug, lang)
+                alt = page_url(slug, 'en' if lang == 'es' else 'es') if len(versions) == 2 else None
+                if lang == 'en':
+                    body = localize_links(body, url_map)
+                desc = meta.get('description') or (plain(body)[:180] if folder == 'paginas' else '')
+                write(url, layout(url, meta['title'], f'<article class="wrap narrow {cls}"><h1>{esc(meta["title"])}</h1>\n{body}</article>',
+                                  desc, lang=lang, alt=alt))
+            pages.append((page_url(slug, 'es'), None, {l: page_url(slug, l) for l in versions}))
 
-    # noticias
-    total = max(1, -(-len(news) // PER_PAGE))
-    for i in range(total):
-        chunk = news[i * PER_PAGE:(i + 1) * PER_PAGE]
-        url = '/noticias/' if i == 0 else f'/noticias/pagina/{i + 1}/'
-        pager = ''
-        if total > 1:
-            prev = '' if i == 0 else f'<a href="{"/noticias/" if i == 1 else f"/noticias/pagina/{i}/"}" rel="prev">← Más recientes</a>'
-            nxt = '' if i == total - 1 else f'<a href="/noticias/pagina/{i + 2}/" rel="next">Anteriores →</a>'
-            pager = f'<nav class="pager" aria-label="Páginas">{prev}<span>Página {i + 1} de {total}</span>{nxt}</nav>'
-        body = f'<section class="wrap"><h1>Noticias</h1><div class="cards">{"".join(card(n) for n in chunk)}</div>{pager}</section>'
-        write(url, layout(url, 'Noticias' if i == 0 else f'Noticias (página {i + 1})', body,
-                          'Actualidad sobre el Anisakis: salud, investigación, pesca y legislación.'))
-        pages.append((url, chunk[0]['date'] if chunk else None))
-    for idx, n in enumerate(news):
-        newer = news[idx - 1] if idx > 0 else None
-        older = news[idx + 1] if idx + 1 < len(news) else None
-        img = f'<figure class="lead-img"><img src="{n["image"]}" alt="" width="1200" height="680"></figure>' if n['image'] else ''
-        ld = {'@context': 'https://schema.org', '@type': 'NewsArticle', 'headline': n['title'][:110],
-              'datePublished': n['date'].isoformat(), 'inLanguage': 'es', 'mainEntityOfPage': SITE + n['url'],
-              'publisher': {'@type': 'Organization', 'name': NAME, 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo.png'}}}
-        if n['image']:
-            ld['image'] = SITE + n['image']
-        nav = '<nav class="pager">' + (f'<a href="{newer["url"]}" rel="prev">← {esc(newer["title"])}</a>' if newer else '<span></span>') + \
-              (f'<a href="{older["url"]}" rel="next">{esc(older["title"])} →</a>' if older else '<span></span>') + '</nav>'
-        body = (f'<article class="wrap narrow page news"><p class="meta"><a href="/noticias/">Noticias</a> · '
-                f'<time datetime="{n["date"].isoformat()}">{fecha(n["date"])}</time></p>'
-                f'<h1>{esc(n["title"])}</h1>{img}\n{n["html"]}\n{nav}</article>')
-        write(n['url'], layout(n['url'], n['title'], body, n['summary'], n['image'], 'article',
-                               '<script type="application/ld+json">'
-                               + json.dumps(ld, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
-                               + '</script>\n'))
-        pages.append((n['url'], n['date']))
+    # noticias: listas
+    for lang in LANGS:
+        t = T[lang]
+        total = max(1, -(-len(news) // PER_PAGE))
+        page_word = 'pagina' if lang == 'es' else 'page'
+        for i in range(total):
+            chunk = news[i * PER_PAGE:(i + 1) * PER_PAGE]
+            url = t['news'] if i == 0 else f'{t["news"]}{page_word}/{i + 1}/'
+            pager = ''
+            if total > 1:
+                prev_url = t['news'] if i == 1 else f"{t['news']}{page_word}/{i}/"
+                prev = '' if i == 0 else f'<a href="{prev_url}" rel="prev">{t["newer"]}</a>'
+                nxt = '' if i == total - 1 else f'<a href="{t["news"]}{page_word}/{i + 2}/" rel="next">{t["older"]}</a>'
+                pager = f'<nav class="pager" aria-label="{t["pages"]}">{prev}<span>{t["page_of"].format(i + 1, total)}</span>{nxt}</nav>'
+            body = f'<section class="wrap"><h1>{t["n_news"]}</h1><div class="cards">{list_cards(chunk, lang)}</div>{pager}</section>'
+            other = T['en' if lang == 'es' else 'es']
+            alt = other['news'] if i == 0 else f'{other["news"]}{"page" if lang == "es" else "pagina"}/{i + 1}/'
+            write(url, layout(url, t['n_news'] if i == 0 else t['news_page'].format(i + 1), body, t['news_desc'], lang=lang, alt=alt))
+            if lang == 'es':
+                pages.append((url, chunk[0]['es']['date'] if chunk else None,
+                              {'es': url, 'en': '/en/news/' if i == 0 else f'/en/news/page/{i + 1}/'}))
 
-    # 404, sitemap, robots, RSS, CNAME
-    write('404.html', layout('/404.html', 'Página no encontrada',
-                             '<section class="wrap narrow page center"><h1>Página no encontrada</h1>'
-                             '<p>La dirección que buscas no existe o ha cambiado.</p>'
-                             '<p><a class="btn" href="/">Ir al inicio</a> <a class="btn btn-o" href="/noticias/">Ver noticias</a></p></section>'))
-    sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for url, lm in pages:
-        sm.append(f'<url><loc>{SITE}{url}</loc>' + (f'<lastmod>{lm.isoformat()}</lastmod>' if lm else '') + '</url>')
+    # noticias: una página por noticia y idioma
+    for lang in LANGS:
+        t = T[lang]
+        mine = [n for n in news if n[lang]]
+        for idx, n in enumerate(mine):
+            v = n[lang]
+            newer = mine[idx - 1][lang] if idx > 0 else None
+            older = mine[idx + 1][lang] if idx + 1 < len(mine) else None
+            img = f'<figure class="lead-img"><img src="{v["image"]}" alt="" width="1200" height="680"></figure>' if v['image'] else ''
+            ld = {'@context': 'https://schema.org', '@type': 'NewsArticle', 'headline': v['title'][:110],
+                  'datePublished': v['date'].isoformat(), 'inLanguage': lang, 'mainEntityOfPage': SITE + v['url'],
+                  'publisher': {'@type': 'Organization', 'name': NAME, 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo.png'}}}
+            if v['image']:
+                ld['image'] = SITE + v['image']
+            nav = '<nav class="pager">' + (f'<a href="{newer["url"]}" rel="prev">← {esc(newer["title"])}</a>' if newer else '<span></span>') + \
+                  (f'<a href="{older["url"]}" rel="next">{esc(older["title"])} →</a>' if older else '<span></span>') + '</nav>'
+            h = localize_links(v['html'], url_map) if lang == 'en' else v['html']
+            body = (f'<article class="wrap narrow page news"><p class="meta"><a href="{t["news"]}">{t["n_news"]}</a> · '
+                    f'<time datetime="{v["date"].isoformat()}">{fecha_l(v["date"], lang)}</time></p>'
+                    f'<h1>{esc(v["title"])}</h1>{img}\n{h}\n{nav}</article>')
+            other = n['en' if lang == 'es' else 'es']
+            write(v['url'], layout(v['url'], v['title'], body, v['summary'], v['image'], 'article', json_ld(ld),
+                                   lang=lang, alt=other['url'] if other else None,
+                                   fallback=T['en' if lang == 'es' else 'es']['news']))
+            if lang == 'es':
+                pages.append((v['url'], v['date'], {l: n[l]['url'] for l in LANGS if n[l]}))
+
+    # 404 (una sola para toda la web: en los dos idiomas), sitemap, robots, RSS, CNAME
+    nf = ''.join(f'<section class="wrap narrow page center" lang="{l}"><h1>{T[l]["nf_title"]}</h1><p>{T[l]["nf_text"]}</p>'
+                 f'<p><a class="btn" href="{T[l]["home"]}">{T[l]["nf_home"]}</a> <a class="btn btn-o" href="{T[l]["news"]}">{T[l]["nf_news"]}</a></p></section>'
+                 for l in LANGS)
+    write('404.html', layout('/404.html', 'Página no encontrada · Page not found', nf))
+    sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
+    for _, lm, versions in pages:
+        alts = ''.join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{SITE}{u}"/>' for l, u in versions.items()) \
+            if len(versions) > 1 else ''
+        for l, u in versions.items():
+            sm.append(f'<url><loc>{SITE}{u}</loc>' + (f'<lastmod>{lm.isoformat()}</lastmod>' if lm else '') + alts + '</url>')
     sm.append('</urlset>')
     write('sitemap.xml', '\n'.join(sm) + '\n')
     write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {SITE}/sitemap.xml\n')
-    items = []
-    for n in news[:20]:
-        dt = datetime(n['date'].year, n['date'].month, n['date'].day, 9, 0, tzinfo=timezone.utc)
-        items.append(f'<item><title>{esc(n["title"])}</title><link>{SITE}{n["url"]}</link><guid>{SITE}{n["url"]}</guid>'
-                     f'<pubDate>{format_datetime(dt)}</pubDate><description>{esc(n["summary"])}</description></item>')
-    write('noticias/feed.xml', f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Noticias · {NAME}</title>'
-          f'<link>{SITE}/noticias/</link><description>Actualidad sobre el Anisakis</description><language>es</language>'
-          + ''.join(items) + '</channel></rss>\n')
-    write('CNAME', 'www.anisakis.com\n')
+    for lang in LANGS:
+        t = T[lang]
+        items = []
+        for n in [n for n in news if n[lang]][:20]:
+            v = n[lang]
+            dt = datetime(v['date'].year, v['date'].month, v['date'].day, 9, 0, tzinfo=timezone.utc)
+            items.append(f'<item><title>{esc(v["title"])}</title><link>{SITE}{v["url"]}</link><guid>{SITE}{v["url"]}</guid>'
+                         f'<pubDate>{format_datetime(dt)}</pubDate><description>{esc(v["summary"])}</description></item>')
+        write(t['feed'].lstrip('/'), f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>{t["n_news"]} · {NAME}</title>'
+              f'<link>{SITE}{t["news"]}</link><description>{t["feed_desc"]}</description><language>{lang}</language>'
+              + ''.join(items) + '</channel></rss>\n')
+    write('CNAME', SITE.split('//', 1)[1] + '\n')
     write('.nojekyll', '')
-    print(f'OK: {len(news)} noticias, {len(pages)} páginas en el sitemap → {OUT}')
+    n_en = sum(1 for n in news if n['en'])
+    print(f'OK: {len(news)} noticias ({n_en} en inglés), {sum(len(v) for _, _, v in pages)} direcciones en el sitemap → {OUT}')
     if PROBLEMS:
         for m in PROBLEMS:
             print(f'::error::{m}')

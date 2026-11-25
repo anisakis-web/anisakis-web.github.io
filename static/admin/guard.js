@@ -8,7 +8,7 @@
   var KEY = 'sveltia-cms.user';
 
   if (window.top !== window.self) {
-    document.body.textContent = 'Por seguridad, el panel de noticias solo se puede abrir directamente en www.anisakis.com/admin/.';
+    document.body.textContent = 'Por seguridad, el panel de noticias solo se puede abrir directamente en anisakis.com/admin/.';
     return;
   }
 

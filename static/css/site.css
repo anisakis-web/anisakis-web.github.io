@@ -44,6 +44,10 @@ figure img { border-radius: var(--radio); }
 .top nav a { display: block; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: 500; color: var(--azul); }
 .top nav a:hover { background: var(--fondo); }
 .top nav a[aria-current="page"] { background: var(--azul); color: #fff; }
+.top .lang { display: flex; gap: 2px; border: 1px solid var(--linea); border-radius: 999px; padding: 2px; }
+.top .lang a { padding: 4px 10px; border-radius: 999px; font-size: .85rem; font-weight: 600; letter-spacing: .03em; }
+.top .lang a[aria-current="true"] { background: var(--azul); color: #fff; }
+.card .only-es { display: inline-block; margin: 4px 0 2px; padding: 2px 9px; border-radius: 999px; background: var(--fondo); color: var(--azul); font-size: .78rem; font-weight: 600; }
 
 /* portada */
 .hero { position: relative; overflow: hidden; text-align: center; padding: clamp(40px, 8vw, 96px) 0 clamp(48px, 8vw, 88px); }

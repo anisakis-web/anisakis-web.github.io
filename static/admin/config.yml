@@ -43,17 +43,26 @@ output:
   yaml:
     quote: double
 
+# Idiomas: cada noticia en español (obligatorio) y, si se quiere, en inglés. Se guardan en content/noticias/es/ y
+# content/noticias/en/, unidas por «translationKey». El inglés se activa en cada noticia desde el menú ⋮ del editor.
+i18n:
+  structure: multiple_folders
+  locales: [es, en]
+  default_locale: es
+  initial_locales: default
+
 collections:
   - name: noticias
     label: Noticias
     label_singular: Noticia
-    description: "Noticias de anisakis.com. Al guardar, la noticia se publica sola en la web en uno o dos minutos (salvo si está marcada como borrador)."
+    description: "Noticias de anisakis.com. Se escriben en español; para añadir la versión en inglés, abre el menú ⋮ (arriba a la derecha) y activa «English». Si una noticia no tiene versión en inglés, la web en inglés la muestra en español con el aviso «Only available in Spanish». Al guardar, se publica sola en uno o dos minutos (salvo si es un borrador)."
     folder: content/noticias
     extension: md
     format: yaml-frontmatter
+    i18n: true
     create: true
     delete: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{title | localize}}"
     identifier_field: title
     summary: "{{date}} · {{title}}"
     sortable_fields: [date, title]
@@ -63,11 +72,13 @@ collections:
         pattern: true
     fields:
       - name: title
+        i18n: true
         label: Título
         widget: string
         hint: "Título de la noticia, tal como se verá en la web. También se usa para crear la dirección de la página, que no cambia aunque luego edites el título."
         pattern: ['^.{5,200}$', 'Entre 5 y 200 caracteres']
       - name: date
+        i18n: duplicate
         label: Fecha
         widget: datetime
         type: date
@@ -75,6 +86,7 @@ collections:
         default: "{{now}}"
         hint: "Fecha de publicación de la noticia. Las noticias se ordenan por esta fecha, de la más reciente a la más antigua."
       - name: image
+        i18n: duplicate
         label: Imagen principal
         widget: image
         required: false
@@ -82,18 +94,21 @@ collections:
         accept: image/webp,image/jpeg,image/png,image/gif,image/avif
         hint: "Opcional. Una sola imagen por noticia (JPG, PNG, WebP, GIF o AVIF; máximo 5 MB), mejor en horizontal. Se optimiza y se convierte a WebP automáticamente. No se admiten otros archivos."
       - name: summary
+        i18n: true
         label: Resumen
         widget: text
         required: false
         hint: "Opcional. Una o dos frases que aparecen en la lista de noticias y en Google. Si lo dejas vacío, se usa el principio del texto."
         pattern: ['^[\s\S]{0,300}$', 'Máximo 300 caracteres']
       - name: draft
+        i18n: duplicate
         label: Borrador (no se publica)
         widget: boolean
         default: false
         required: false
         hint: "Actívalo para guardar la noticia sin que aparezca en la web. Desactívalo cuando quieras publicarla. Ojo: un borrador no es privado; su contenido queda guardado en GitHub y su imagen se sube igualmente, así que no escribas nada confidencial."
       - name: body
+        i18n: true
         label: Texto
         widget: markdown
         hint: "Solo texto, con negrita, cursiva, subtítulos, listas y citas. Por seguridad, el texto NO puede contener enlaces ni direcciones web (http…, www…) ni imágenes. Las fuentes, vídeos y enlaces se añaden abajo, en «Fuentes y enlaces»."
@@ -102,6 +117,7 @@ collections:
         modes: [rich_text]
         pattern: ['^(?![\s\S]*(?:\]\s*[(\[]|\[[^\]\n]{0,300}\]:\s*\S|\[\s*\.\s*\]|\(\s*\.\s*\)|<\s*/?\s*(?:[aA]|[iI][mM][gG]|[iI][fF][rR][aA][mM][eE]|[sS][cC][rR][iI][pP][tT]|[oO][bB][jJ][eE][cC][tT]|[eE][mM][bB][eE][dD])\b|\b(?:[hH][tT][tT][pP][sS]?|[fF][tT][pP]|[mM][aA][iI][lL][tT][oO]|[jJ][aA][vV][aA][sS][cC][rR][iI][pP][tT]|[dD][aA][tT][aA]|[fF][iI][lL][eE]|[hH][xX][xX][pP][sS]?)\s*:|\b[wW][wW][wW]\s*\.|\b[a-z0-9-A-Z]{1,63}\.(?:[cC][oO][mM]|[eE][sS]|[oO][rR][gG]|[nN][eE][tT]|[eE][uU]|[iI][nN][fF][oO]|[iI][oO]|[lL][yY]|[mM][eE]|[gG][aA][lL]|[cC][aA][tT]|[cC][oO]|[uU][kK]|[dD][eE]|[fF][rR]|[iI][tT]|[pP][tT]|[gG][oO][vV]|[eE][dD][uU]|[tT][vV]|[bB][iI][zZ]|[aA][pP][pP]|[dD][eE][vV]|[rR][uU]|[sS][uU]|[cC][nN]|[xX][yY][zZ]|[tT][oO][pP]|[sS][iI][tT][eE]|[oO][nN][lL][iI][nN][eE]|[sS][hH][oO][pP]|[sS][tT][oO][rR][eE]|[cC][lL][uU][bB]|[lL][iI][nN][kK]|[cC][lL][iI][cC][kK]|[lL][iI][vV][eE]|[pP][rR][oO]|[cC][cC]|[wW][sS]|[uU][sS]|[cC][aA]|[mM][xX]|[aA][rR]|[cC][lL]|[bB][rR]|[nN][lL]|[bB][eE]|[cC][hH]|[aA][tT]|[pP][lL]|[sS][eE]|[nN][oO]|[dD][kK]|[fF][iI]|[iI][eE]|[rR][oO]|[gG][rR]|[tT][rR]|[uU][aA]|[jJ][pP]|[kK][rR]|[iI][nN]|[aA][uU]|[nN][zZ]|[zZ][aA]|[aA][iI]|[tT][oO]|[gG][gG]|[zZ][iI][pP]|[mM][oO][vV]|[vV][iI][pP]|[wW][iI][nN]|[bB][iI][dD]|[lL][oO][cC]|[lL][aA][tT]|[iI][cC][uU]|[cC][fF][dD]|[sS][bB][sS]|[rR][eE][sS][tT]|[fF][uU][nN]|[sS][pP][aA][cC][eE]|[wW][eE][bB][sS][iI][tT][eE]|[tT][eE][cC][hH])\b))[\s\S]*$', 'El texto no puede contener enlaces ni direcciones web. Quítalos y añádelos en «Fuentes y enlaces».']
       - name: enlaces
+        i18n: duplicate
         label: Fuentes y enlaces
         label_singular: enlace
         widget: list

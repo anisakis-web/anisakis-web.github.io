@@ -10,7 +10,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 h=$(git ls-tree -r HEAD \
-    | grep -vE $'\t(content/noticias/[^/]+\\.md|static/img/noticias/[^/]+\\.(webp|jpe?g|png|gif|avif)|\\.github/workflows/[^/]+)$' \
+    | grep -vE $'\t(content/noticias/(es|en)/[^/]+\\.md|static/img/noticias/[^/]+\\.(webp|jpe?g|png|gif|avif)|\\.github/workflows/[^/]+)$' \
     | sha256sum | cut -c1-64)
 if [ "${1:-}" = "--update" ]; then
   sed -i -E "s/^(\s*CODE_TREE: )[0-9a-f]{64}$/\1$h/" .github/workflows/pages.yml

@@ -4,7 +4,7 @@ Web estática de *Anisakis International Information Site*.
 
 ## Cómo funciona
 
-- `content/noticias/` — una noticia por archivo Markdown (`AAAA-MM-DD-titulo.md`) con una cabecera:
+- `content/noticias/es/` y `content/noticias/en/` — una noticia por archivo Markdown (`AAAA-MM-DD-titulo.md`; la inglesa es opcional y lleva `translationKey` con el nombre del archivo español) con una cabecera:
   ```
   ---
   title: "Título de la noticia"
@@ -23,7 +23,7 @@ Cada cambio en la rama `main` regenera y publica la web automáticamente (GitHub
 
 ## Panel de noticias
 
-En `https://www.anisakis.com/admin/` hay un panel (Sveltia CMS) para **crear, editar y borrar noticias** sin tocar
+En `https://anisakis.com/admin/` hay un panel (Sveltia CMS) para **crear, editar y borrar noticias** sin tocar
 código. Solo gestiona `content/noticias/` y las imágenes de `static/img/noticias/`; el resto de la web se cambia
 editando el repositorio.
 
@@ -35,7 +35,7 @@ editando el repositorio.
 - **Guardia (`static/admin/guard.js`, código propio):** se carga antes de Sveltia; no deja abrir el panel dentro de
   otra web (iframe) y borra al momento cualquier token que no sea *fine-grained*.
 - **Control de integridad (en `.github/workflows/pages.yml`):** solo se publica si todo lo que no son noticias
-  (`content/noticias/*.md`, `static/img/noticias/*.{webp,jpg,png,gif,avif}`) coincide con la huella `CODE_TREE`. Con un
+  (`content/noticias/{es,en}/*.md`, `static/img/noticias/*.{webp,jpg,png,gif,avif}`) coincide con la huella `CODE_TREE`. Con un
   token de editor solo se pueden cambiar noticias. **Tras cambiar código:** commit, `bash tools/huella_codigo.sh
   --update` y commit de `pages.yml`. Cualquier problema de contenido también detiene la publicación (`::error::`) y
   GitHub avisa por correo (avisos@anisakis.com).
