@@ -8,7 +8,7 @@ Un reciente estudio de la *Universitat de València* (UV) ha puesto de manifiest
 
 **Qué se ha detectado**
 
-Los científicos analizaron 250 ejemplares de **caballa estornino**, comprados al azar en distintos supermercados españoles. Los resultados fueron preocupantes: cerca del **31 %** de los peces examinados contenían larvas vivas de parásitos, incluyendo miembros del género ***Anisakis*** —el principal agente causante de la **anisakiasis**. Además, se hallaron otros tipos de parásitos que, aunque no representan un riesgo directo para la salud, pueden comprometer la calidad, textura y sabor del pescado.
+Los científicos analizaron 250 ejemplares de **caballa estornino**, comprados al azar en distintos supermercados de la ciudad de Valencia y alrededores. Según los resultados, cerca del **31 %** de los peces examinados contenían larvas vivas de parásitos, incluyendo miembros del género ***Anisakis*** —el principal agente causante de la **anisakiasis**. Además, se hallaron otros tipos de parásitos que, aunque no representan un riesgo directo para la salud, pueden comprometer la calidad, textura y sabor del pescado.
 
 **Diferencias entre especies y origen del pescado**
 
@@ -26,6 +26,6 @@ Para reducir el riesgo, los expertos recomiendan aplicar las medidas preventivas
 
 **Conclusión**
 
-Aunque la caballa —incluida la variedad estornino— es valorada por sus aportes nutricionales, su consumo sin precaución puede implicar riesgos de parasitación. Este estudio alerta de que, en el contexto actual, no basta con asumir que todo pescado azul es seguro: es **esencial conocer la especie**, su **origen** y aplicar correctamente las **medidas de seguridad alimentaria**.
+Aunque la caballa —incluida la variedad estornino— es valorada por sus aportes nutricionales, su consumo sin precaución puede implicar riesgos de parasitación. Los autores califican de intermedio el riesgo de anisakiasis por consumo de caballa estornino, menor que el de la caballa atlántica, que está aún más parasitada, y aconsejan tomar medidas preventivas: es **esencial conocer la especie**, su **origen** y aplicar correctamente las **medidas de seguridad alimentaria**.
 
-Fuente: [elEconomista](https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html)
+Fuentes: [Universitat de València](https://www.uv.es/uvweb/uv-noticias/es/noticias/estudio-universitat-valencia-alerta-presencia-parasitos-variedad-caballa-estornino-1285973304159/Novetat.html?id=1286452133218&plantilla=UV_Noticies/Page/TPGDetaillNews), [Parasitologia (MDPI)](https://www.mdpi.com/2673-6772/5/3/37) y [elEconomista](https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html)

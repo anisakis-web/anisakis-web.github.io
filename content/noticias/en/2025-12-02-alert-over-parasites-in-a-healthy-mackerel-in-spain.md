@@ -9,7 +9,7 @@ A recent study by the *Universitat de València* (UV) has highlighted **health r
 
 **What has been detected**
 
-The scientists analysed 250 specimens of **Atlantic chub mackerel**, bought at random from different Spanish supermarkets. The results were worrying: around **31%** of the fish examined contained live parasite larvae, including members of the genus ***Anisakis*** —the main causative agent of **anisakiasis**. Other types of parasites were also found which, although they pose no direct risk to health, can compromise the quality, texture and flavour of the fish.
+The scientists analysed 250 specimens of **Atlantic chub mackerel**, bought at random from different supermarkets in and around the city of Valencia. According to the results, around **31%** of the fish examined contained live parasite larvae, including members of the genus ***Anisakis*** —the main causative agent of **anisakiasis**. Other types of parasites were also found which, although they pose no direct risk to health, can compromise the quality, texture and flavour of the fish.
 
 **Differences between species and origin of the fish**
 
@@ -27,6 +27,6 @@ To reduce the risk, experts recommend applying the preventive measures laid down
 
 **Conclusion**
 
-Although mackerel —including the chub mackerel variety— is valued for its nutritional benefits, eating it without precautions can involve a risk of parasitisation. This study warns that, in the current context, it is not enough to assume that all oily fish is safe: it is **essential to know the species**, its **origin** and to apply **food safety measures** correctly.
+Although mackerel —including the chub mackerel variety— is valued for its nutritional benefits, eating it without precautions can involve a risk of parasitisation. The authors rate the risk of anisakiasis from eating Atlantic chub mackerel as intermediate, lower than that of Atlantic mackerel, which is even more heavily parasitised, and advise taking preventive measures: it is **essential to know the species**, its **origin** and to apply **food safety measures** correctly.
 
-Source: [elEconomista](https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html)
+Sources: [Universitat de València](https://www.uv.es/uvweb/uv-noticias/es/noticias/estudio-universitat-valencia-alerta-presencia-parasitos-variedad-caballa-estornino-1285973304159/Novetat.html?id=1286452133218&plantilla=UV_Noticies/Page/TPGDetaillNews), [Parasitologia (MDPI)](https://www.mdpi.com/2673-6772/5/3/37) and [elEconomista](https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html)

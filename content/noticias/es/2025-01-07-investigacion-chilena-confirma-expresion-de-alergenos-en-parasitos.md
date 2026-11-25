@@ -1,10 +1,10 @@
 ---
-title: "Investigación chilena confirma expresión de alérgenos en parásitos Anisakis presentes en pescados comerciales"
+title: "Investigación chilena identifica la expresión de alérgenos en parásitos Anisakis presentes en pescados comerciales"
 date: 2025-01-07
 image: "/img/noticias/investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.webp"
-summary: "Un estudio desarrollado por investigadores de la Universidad Católica de la Santísima Concepción (UCSC) ha confirmado que el parásito marino Anisakis, frecuente en pescados de interés comercial, expresa genes asociados a alérgenos."
+summary: "Un estudio desarrollado por investigadores de la Universidad Católica de la Santísima Concepción (UCSC) ha identificado que el parásito marino Anisakis, frecuente en pescados de interés comercial, expresa genes asociados a alérgenos."
 ---
-Un estudio desarrollado por investigadores de la **Universidad Católica de la Santísima Concepción (UCSC)** ha confirmado que el parásito marino *Anisakis*, frecuente en pescados de interés comercial, expresa **genes asociados a alérgenos**, incluso tras someterse a diferentes métodos de preparación culinaria.
+Un estudio desarrollado por investigadores de la **Universidad Católica de la Santísima Concepción (UCSC)** ha identificado que el parásito marino *Anisakis*, frecuente en pescados de interés comercial, expresa **genes asociados a alérgenos**, incluso tras someterse a diferentes métodos de preparación culinaria.
 
 La investigación analizó larvas de *Anisakis pegreffii* encontradas en especies como **merluza, jurel y sierra**, evaluando su respuesta genética después de procesos habituales como cocción, refrigeración y exposición a jugo de limón. Los resultados muestran que la expresión de alérgenos se mantiene en todos los casos, lo que supone un **riesgo potencial para personas alérgicas o sensibilizadas**.
 
@@ -12,6 +12,6 @@ Los hallazgos indican que prácticas comunes como el consumo de pescado crudo o 
 
 **Implicaciones para la salud pública**
 
-El estudio refuerza la necesidad de extremar las medidas de **control sanitario del pescado** y de promover una correcta información al consumidor, especialmente en relación con la congelación adecuada y la cocción completa de los productos pesqueros.
+Según la investigación, ninguno de los cuatro tratamientos influyó de forma importante en la eliminación de los parásitos, y la cocción solo fue la opción más eficaz en algunos casos. Por ello, consumir pescado en **ceviche o con poca refrigeración** supone un riesgo importante, y siempre que un pescado esté infectado será peligroso ingerir una larva.
 
-Fuente: [UCSC](https://ecologiamarina.ucsc.cl/noticias/investigacion-identifica-expresion-genetica-de-alergenos-en-parasitos-presentes-en-pescados-de-interes-comercial/)
+Fuente: [Aqua](https://www.aqua.cl/identifican-expresion-genetica-de-alergenos-en-parasitos-presentes-en-peces-de-interes-comercial/)

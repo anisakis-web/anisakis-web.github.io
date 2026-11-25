@@ -2,37 +2,35 @@
 title: "Anisakis genome decoded: science moves towards genetic control of the fish parasite"
 date: 2026-07-22
 image: "/img/noticias/descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.webp"
-summary: "A scientific milestone led by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC deciphers the most complete genetic map of Anisakis simplex, opening the door to new tools for tracking, food safety and environmental monitoring."
+summary: "A study by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC produces the most contiguous genome assembly of Anisakis simplex to date and a low-cost tool to distinguish the parasite's species and hybrids."
 translationKey: "2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control"
 ---
-A scientific milestone led by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC deciphers the most complete genetic map of *Anisakis simplex*, opening the door to new tools for tracking, food safety and environmental monitoring.
+A study by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC has produced the most contiguous genome assembly of *Anisakis simplex* to date and a low-cost tool to distinguish the parasite's species and hybrids.
 
-*Anisakis* is one of the most closely monitored organisms in the fields of public health and the fishing industry. Although its risks to human health are well known and easily avoided by freezing or cooking, understanding the parasite's internal biology remained a challenge for the scientific community.
+*Anisakis* is a concern for the fishing sector and affects the marketing of key species such as hake. According to health recommendations, it poses no risk when the fish is cooked or frozen before preparation.
 
-A new international breakthrough has changed the rules of the game: researchers from the **Centro Nacional de Análisis Genómico (CNAG)**, in collaboration with the **Universidade de Santiago de Compostela (USC)** and the **Instituto de Investigaciones Marinas (IIM-CSIC)**, have succeeded in sequencing and assembling with unprecedented precision the genome of *Anisakis simplex*, the most widespread species in the Atlantic Ocean and the one responsible for most food consumption incidents.
+In this work, researchers from the **Centro Nacional de Análisis Genómico (CNAG)**, in collaboration with the **Universidade de Santiago de Compostela (USC)** and the **Instituto de Investigaciones Marinas (IIM-CSIC)**, have sequenced and assembled the genome of *Anisakis simplex*, the most abundant species in the Northeast Atlantic, producing the most contiguous assembly of this species to date.
 
-## A genetic map of 98.2% of the parasite
+## A genome with 98.2% complete genes
 
-The study, published in the journal *Scientific Reports*, has made it possible to decode **98.2% of the genes** of this marine nematode. To achieve this, the scientists analysed more than 2,000 specimens and identified nearly two million individual genetic variants.
+The study, published in the journal *Scientific Reports*, presents an assembly in which **98.2% of the reference nematode genes** are complete, a measure of the genome's completeness. The researchers identified nearly two million single-base variants and around 150,000 small structural variants, and the IIM-CSIC collected and characterised around 2,000 specimens of *A. simplex*, *A. pegreffii* and their hybrids.
 
-This scientific achievement is not just a theoretical map, but the basis for developing **immediate practical applications**:
+This scientific achievement is not just a theoretical map, but the basis for developing **practical applications**:
 
-- **A low-cost molecular «barcode»:** Thanks to the reference genomic information, the team has designed a rapid test capable of distinguishing between the two species (*Anisakis simplex* and *Anisakis pegreffii*) and even detecting hybrid specimens by analysing just ten key DNA variants.
-- **Monitoring population dynamics:** Accurately identifying each species makes it possible to map how these populations are distributed and spread among commercial marine species (such as hake, cod or blue whiting).
-- **Monitoring the impact of climate change:** Rising sea temperatures alter the migratory patterns of host species and the parasite's interaction within the ecosystem. This genetic map will be used to monitor how the nematode responds to changes in the marine environment.
+- **A low-cost molecular tool:** Using the genomic information, the team has designed a test based on ten genetic variants that distinguishes with high accuracy between *Anisakis simplex* and *Anisakis pegreffii* and also identifies their hybrids.
+- **Studying populations:** The USC team has defined a panel of nearly 500 genetic variants to study the historical and current dynamics of the parasite's populations. The specimens came from hosts in the Northeast Atlantic, including commercial species such as hake and blue whiting.
+- **Climate change:** According to the researchers, climate change is pushing Anisakis species to adapt genetically. As future work, they plan to study the link between marine heatwaves and changes in the parasite's gene expression and in the distribution of its populations.
 
 ## What does this breakthrough mean for consumers?
 
-The development of advanced molecular tools not only strengthens research capacity in marine biology, but also consolidates industry protocols to ensure that fish reaches the market in optimum condition in terms of quality and safety.
-
-At home, the discovery reinforces the reassuring message: **fish remains an irreplaceable cornerstone of a healthy diet**, and coordinated work between genomics laboratories, marine research centres and the fishing sector is continuously striving to safeguard the food chain.
+According to the researchers, the work will help improve control of the parasite both in the fishing industry and in food consumption. The scientific paper adds that these genomic resources will support surveillance programmes, anisakiasis management in fisheries and seafood safety.
 
 ## Basic reminder on prevention at home
 
 While science advances in the genomic traceability of the parasite, prevention guidelines in the kitchen remain effective:
 
-- **Prior freezing:** If eaten raw or marinated (such as anchovies in vinegar or sushi), freeze at **-20 °C** for at least **5 days** in 3-star (***) freezers or higher.
+- **Prior freezing:** If eaten raw or in preparations that do not kill the parasite (such as anchovies in vinegar or sushi), freeze at **-15 °C** or below for at least **4 days**, counting at least **5 days** from when it goes into the freezer. If in doubt about your freezer, buy the fish already frozen.
 
-- **Direct heat:** Cook at over **60 °C** at the centre of the piece for at least 1 minute (griddled, fried, baked or stewed).
+- **Heat:** Cook until the whole piece reaches **60 °C** for at least 1 minute (boiled, fried, baked or griddled).
 
-Source: [**industriaspesqueras.com**](https://www.industriaspesqueras.com/noticia-90375-seccion-Investigaci%C3%B3n)
+Sources: [**industriaspesqueras.com**](https://www.industriaspesqueras.com/noticia-90375-seccion-Investigaci%C3%B3n), [**cnag.eu**](https://www.cnag.eu/node/8239), [**Scientific Reports**](https://www.nature.com/articles/s41598-026-60679-4), [**aesan.gob.es**](https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis)
