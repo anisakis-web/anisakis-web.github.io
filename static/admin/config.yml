@@ -1,7 +1,7 @@
 # Panel de noticias (Sveltia CMS). SOLO gestiona las noticias: crear, editar y borrar.
 # El resto de la web se cambia editando el código del repositorio.
 # Para entrar hace falta una cuenta de GitHub con permiso de escritura en este repositorio
-# y una clave (token) limitada a él. Ver README.md, «Panel de noticias».
+# y una clave (token) limitada a él. Ver la documentación técnica interna.
 
 app_title: Panel de noticias · anisakis.com
 logo:

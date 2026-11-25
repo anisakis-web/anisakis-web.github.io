@@ -135,7 +135,7 @@ def warn(msg):
     PROBLEMS.append(msg)
 
 
-# Lo que llega del panel de noticias se trata como no fiable (ver README, «Panel de noticias»)
+# Lo que llega del panel de noticias se trata como no fiable (ver documentación técnica interna)
 SLUG_OK = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
 IMG_OK = re.compile(r'/img/noticias/[A-Za-z0-9._-]+\.(?:webp|jpe?g|png|gif|avif)')
 IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
