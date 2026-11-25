@@ -3,6 +3,13 @@ title: "El Gobierno Vasco lanza la campaña «#FrescosSíAnisakisNo» para impul
 date: 2026-06-08
 image: "/img/noticias/el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.webp"
 summary: "El Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca del Gobierno Vasco ha puesto en marcha una nueva iniciativa institucional bajo el lema «#FrescosSíAnisakisNo»."
+enlaces:
+  - tipo: fuente
+    nombre: "Industrias Pesqueras"
+    url: "https://industriaspesqueras.com/noticia-89684-sec-Pol%C3%ADtica"
+  - tipo: fuente
+    nombre: "Fresko Abaian Anisakisez"
+    url: "https://freskoabaianisakisez.eus/es/"
 ---
 El Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca del Gobierno Vasco ha puesto en marcha una nueva iniciativa institucional bajo el lema **«#FrescosSíAnisakisNo»**. El propósito principal de esta campaña de carácter informativo y práctico es potenciar el consumo de pescado fresco garantizando la máxima seguridad alimentaria, al tiempo que se busca afianzar la confianza de la ciudadanía en un producto que es pilar fundamental tanto de la dieta saludable como de la identidad gastronómica en el País Vasco.
 
@@ -21,5 +28,3 @@ Para mantener el control sobre el parásito en el ámbito doméstico y comercial
 La campaña cuenta con una estrategia de difusión directa que se ejecutará en las pescaderías de toda la comunidad autónoma vasca. En estos establecimientos se distribuirá material didáctico enfocado tanto a los profesionales del sector como a los consumidores finales. El despliegue se complementará con inserciones y mensajes en prensa escrita, radio y plataformas digitales.
 
 Esta acción ha sido promovida de manera directa por la Dirección de Pesca y Acuicultura del Gobierno Vasco, trabajando en estrecha colaboración con el Departamento de Salud autonómico. Asimismo, la iniciativa dispone del asesoramiento técnico especializado de **ELIKA** (la Fundación Vasca para la Seguridad Agroalimentaria), asegurando que todas las directrices comunicadas cumplan con el máximo rigor científico.
-
-Fuente: [**industriaspesqueras.com**](https://industriaspesqueras.com/noticia-89684-sec-Pol%C3%ADtica), [**freskoabaianisakisez.eus**](https://freskoabaianisakisez.eus/es/)

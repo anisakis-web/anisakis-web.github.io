@@ -3,6 +3,10 @@ title: "Investigación chilena identifica la expresión de alérgenos en parási
 date: 2025-01-07
 image: "/img/noticias/investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.webp"
 summary: "Un estudio desarrollado por investigadores de la Universidad Católica de la Santísima Concepción (UCSC) ha identificado que el parásito marino Anisakis, frecuente en pescados de interés comercial, expresa genes asociados a alérgenos."
+enlaces:
+  - tipo: fuente
+    nombre: "Aqua"
+    url: "https://www.aqua.cl/identifican-expresion-genetica-de-alergenos-en-parasitos-presentes-en-peces-de-interes-comercial/"
 ---
 Un estudio desarrollado por investigadores de la **Universidad Católica de la Santísima Concepción (UCSC)** ha identificado que el parásito marino *Anisakis*, frecuente en pescados de interés comercial, expresa **genes asociados a alérgenos**, incluso tras someterse a diferentes métodos de preparación culinaria.
 
@@ -13,5 +17,3 @@ Los hallazgos indican que prácticas comunes como el consumo de pescado crudo o 
 **Implicaciones para la salud pública**
 
 Según la investigación, ninguno de los cuatro tratamientos influyó de forma importante en la eliminación de los parásitos, y la cocción solo fue la opción más eficaz en algunos casos. Por ello, consumir pescado en **ceviche o con poca refrigeración** supone un riesgo importante, y siempre que un pescado esté infectado será peligroso ingerir una larva.
-
-Fuente: [Aqua](https://www.aqua.cl/identifican-expresion-genetica-de-alergenos-en-parasitos-presentes-en-peces-de-interes-comercial/)

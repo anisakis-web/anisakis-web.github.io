@@ -4,6 +4,10 @@ date: 2026-03-26
 image: "/img/noticias/retirada-preventiva-por-presencia-extraordinaria-de-anisakis.webp"
 summary: "The competent food safety authorities have issued an alert notification concerning the detection of a high parasite load of nematodes, consistent with Anisakis spp., in specific batches of fishery products."
 translationKey: "2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis"
+enlaces:
+  - tipo: fuente
+    nombre: "Hoy"
+    url: "https://www.hoy.es/sociedad/salud/retiran-pescado-supermercado-riesgo-anisakis-debes-saber-20260325125303-nt.html"
 ---
 The competent food safety authorities have issued an alert notification concerning the detection of a high parasite load of nematodes, consistent with *Anisakis spp.*, in specific batches of fishery products. As a precautionary measure and in compliance with public health protocols, the immediate withdrawal of these batches from the affected retail outlets has been ordered.
 
@@ -24,5 +28,3 @@ This precautionary recall underlines the importance of maintaining ongoing proph
 - **Early evisceration:** It is recommended to buy gutted fish or, failing that, to remove the viscera as soon as possible after purchase, in order to reduce the likelihood of larvae migrating from the abdominal cavity into the muscle tissue.
 
 We will continue to monitor updates from the health authorities on this platform in order to provide accurate and rigorous information.
-
-Source: [**hoy.es**](https://www.hoy.es/sociedad/salud/retiran-pescado-supermercado-riesgo-anisakis-debes-saber-20260325125303-nt.html)

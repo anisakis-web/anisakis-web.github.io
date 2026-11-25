@@ -4,6 +4,16 @@ date: 2026-01-12
 image: "/img/noticias/alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.webp"
 summary: "In addition to digestive anisakiasis, anisakis can cause allergic reactions ranging from mild urticaria to anaphylaxis. They usually appear within minutes or a few hours of eating the fish."
 translationKey: "2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave"
+enlaces:
+  - tipo: fuente
+    nombre: "OCU"
+    url: "https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/anisakis"
+  - tipo: fuente
+    nombre: "Quirónsalud"
+    url: "https://www.quironsalud.com/valles/es/servicios-medicos/alergologia/consejos/alergia-anisakis"
+  - tipo: fuente
+    nombre: "Clínica Universidad de Navarra"
+    url: "https://www.cun.es/enfermedades-tratamientos/cuidados-casa/alergia-anisakis"
 ---
 Anisakis does not only cause digestive discomfort. In some people, contact with this parasite triggers an **allergic reaction**, which is one of its most worrying consequences.
 
@@ -24,5 +34,3 @@ A detail that often causes confusion: many people who have had a reaction after 
 **What if the parasite is dead?**
 
 Freezing or cooking fish kills the larvae and prevents digestive anisakiasis. Whether dead larvae can also cause the allergy is a question on which, according to the OCU, **the scientific community does not agree**. For this reason, people diagnosed with an anisakis allergy should follow their allergist's advice.
-
-Sources: [OCU](https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/anisakis) · [Quirónsalud](https://www.quironsalud.com/valles/es/servicios-medicos/alergologia/consejos/alergia-anisakis) · [Clínica Universidad de Navarra](https://www.cun.es/enfermedades-tratamientos/cuidados-casa/alergia-anisakis)

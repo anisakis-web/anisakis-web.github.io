@@ -4,6 +4,19 @@ date: 2026-07-22
 image: "/img/noticias/descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.webp"
 summary: "A study by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC produces the most contiguous genome assembly of Anisakis simplex to date and a low-cost tool to distinguish the parasite's species and hybrids."
 translationKey: "2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control"
+enlaces:
+  - tipo: fuente
+    nombre: "Industrias Pesqueras"
+    url: "https://www.industriaspesqueras.com/noticia-90375-seccion-Investigaci%C3%B3n"
+  - tipo: fuente
+    nombre: "CNAG"
+    url: "https://www.cnag.eu/node/8239"
+  - tipo: fuente
+    nombre: "Scientific Reports"
+    url: "https://www.nature.com/articles/s41598-026-60679-4"
+  - tipo: fuente
+    nombre: "AESAN"
+    url: "https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis"
 ---
 A study by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC has produced the most contiguous genome assembly of *Anisakis simplex* to date and a low-cost tool to distinguish the parasite's species and hybrids.
 
@@ -32,5 +45,3 @@ While science advances in the genomic traceability of the parasite, prevention g
 - **Prior freezing:** If eaten raw or in preparations that do not kill the parasite (such as anchovies in vinegar or sushi), freeze at **-15 °C** or below for at least **4 days**, counting at least **5 days** from when it goes into the freezer. If in doubt about your freezer, buy the fish already frozen.
 
 - **Heat:** Cook until the whole piece reaches **60 °C** for at least 1 minute (boiled, fried, baked or griddled).
-
-Sources: [**industriaspesqueras.com**](https://www.industriaspesqueras.com/noticia-90375-seccion-Investigaci%C3%B3n), [**cnag.eu**](https://www.cnag.eu/node/8239), [**Scientific Reports**](https://www.nature.com/articles/s41598-026-60679-4), [**aesan.gob.es**](https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis)

@@ -3,6 +3,10 @@ title: "Anisakis como causante de alergia a la carne"
 date: 2026-01-12
 image: "/img/noticias/anisakis-como-causante-de-alergia-a-la-carne.webp"
 summary: "Un estudio reciente realizado por investigadores españoles ha aportado nuevas pistas sobre cómo el parásito Anisakis —conocido por causar anisakiosis tras comer pescado crudo o mal cocinado— puede también actuar como un desencadenante de alergias alimentarias en humanos."
+enlaces:
+  - tipo: fuente
+    nombre: "Diario Veterinario"
+    url: "https://www.diarioveterinario.com/t/5390873/medicos-veterinarios-espanoles-parasito-zoonotico-causante-alergia-carne"
 ---
 Un estudio reciente realizado por investigadores españoles ha aportado nuevas pistas sobre cómo el parásito *Anisakis* —conocido por causar anisakiosis tras comer pescado crudo o mal cocinado— puede también **actuar como un desencadenante de alergias alimentarias en humanos**.
 
@@ -27,5 +31,3 @@ La gravedad de la reacción suele depender de la cantidad de proteínas que cont
 **¿Qué nos aporta esta investigación?**
 
 Este estudio es uno de los primeros en **demostrar la presencia de estas proteínas alergénicas en *Anisakis*** y cómo **pueden activar respuestas inmunitarias específicas en personas con alergias**. Su hallazgo abre nuevas puertas para entender mejor cómo los parásitos pueden influir en enfermedades alérgicas más allá de las infecciones clásicas.
-
-Fuente: [**Diario Veterinario**](https://www.diarioveterinario.com/t/5390873/medicos-veterinarios-espanoles-parasito-zoonotico-causante-alergia-carne)

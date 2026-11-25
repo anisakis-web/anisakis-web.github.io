@@ -3,6 +3,10 @@ title: "Nuevas recomendaciones para prevenir el anisakis"
 date: 2025-09-06
 image: "/img/noticias/nuevas-recomendaciones-para-prevenir-el-anisakis.webp"
 summary: "Un artículo reciente de Consumer alerta de que congelar el pescado un par de días ya no es suficiente para garantizar la eliminación del parásito anisakis, y presenta recomendaciones actualizadas para reducir el riesgo en el consumo de pescado."
+enlaces:
+  - tipo: fuente
+    nombre: "Consumer Eroski"
+    url: "https://www.consumer.es/seguridad-alimentaria/nuevas-recomendaciones-para-prevenir-el-anisakis.html"
 ---
 Un artículo reciente de *Consumer* alerta de que **congelar el pescado un par de días ya no es suficiente** para garantizar la eliminación del parásito **anisakis**, y presenta recomendaciones actualizadas para reducir el riesgo en el consumo de pescado.
 
@@ -32,5 +36,3 @@ Por ello, las recomendaciones han cambiado:
 - Manipular y limpiar bien el pescado antes de congelarlo o cocinarlo.
 
 Estas nuevas pautas buscan **reforzar la seguridad alimentaria** y reducir el riesgo de anisakiasis en los hogares, recordando que **una buena práctica en la manipulación y preparación del pescado** sigue siendo la mejor forma de prevenir este tipo de infecciones.
-
-Fuente: [Consumer Eroski](https://www.consumer.es/seguridad-alimentaria/nuevas-recomendaciones-para-prevenir-el-anisakis.html)

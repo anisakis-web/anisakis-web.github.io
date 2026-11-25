@@ -13,6 +13,14 @@ backend:
   name: github
   repo: anisakis-web/anisakis-web.github.io
   branch: main
+  # Mensajes de los cambios hechos desde el panel: empiezan por «Panel:» y llevan la cuenta que los hizo,
+  # para distinguirlos en el historial y en el resumen que se ve al aprobar la publicación.
+  commit_messages:
+    create: "Panel: nueva noticia {{slug}} ({{author-login}})"
+    update: "Panel: edita la noticia {{slug}} ({{author-login}})"
+    delete: "Panel: borra la noticia {{slug}} ({{author-login}})"
+    uploadMedia: "Panel: sube la imagen {{path}} ({{author-login}})"
+    deleteMedia: "Panel: borra la imagen {{path}} ({{author-login}})"
 
 # Imágenes de las noticias: se guardan en static/img/noticias y se publican en /img/noticias.
 # Se convierten a WebP (máx. 1600 px) y el nombre se limpia (sin espacios ni acentos).
@@ -55,7 +63,7 @@ collections:
   - name: noticias
     label: Noticias
     label_singular: Noticia
-    description: "Noticias de anisakis.com. Se escriben en español; para añadir la versión en inglés, abre el menú ⋮ (arriba a la derecha) y activa «English». Si una noticia no tiene versión en inglés, la web en inglés la muestra en español con el aviso «Only available in Spanish». Al guardar, se publica sola en uno o dos minutos (salvo si es un borrador)."
+    description: "Se publican al aprobarse (normalmente en el día). Se escriben en español; para añadir la versión en inglés, abre el menú ⋮ (arriba a la derecha) y activa «English». Si una noticia no tiene versión en inglés, la web en inglés la muestra en español con el aviso «Only available in Spanish». Los borradores no se publican."
     folder: content/noticias
     extension: md
     format: yaml-frontmatter
@@ -75,7 +83,7 @@ collections:
         i18n: true
         label: Título
         widget: string
-        hint: "Título de la noticia, tal como se verá en la web. También se usa para crear la dirección de la página, que no cambia aunque luego edites el título."
+        hint: "Importante: al guardar, la noticia NO sale en la web al momento; queda pendiente de revisión y se publica en cuanto se aprueba (normalmente en el mismo día). — Título de la noticia, tal como se verá en la web. También se usa para crear la dirección de la página, que no cambia aunque luego edites el título."
         pattern: ['^.{5,200}$', 'Entre 5 y 200 caracteres']
       - name: date
         i18n: duplicate
@@ -106,7 +114,7 @@ collections:
         widget: boolean
         default: false
         required: false
-        hint: "Actívalo para guardar la noticia sin que aparezca en la web. Desactívalo cuando quieras publicarla. Ojo: un borrador no es privado; su contenido queda guardado en GitHub y su imagen se sube igualmente, así que no escribas nada confidencial."
+        hint: "Actívalo para guardar la noticia sin que aparezca en la web. Desactívalo cuando quieras publicarla: al guardar, queda pendiente de revisión y aparece en la web en cuanto se aprueba (normalmente en el mismo día). Ojo: un borrador no es privado; su contenido queda guardado en GitHub y su imagen se sube igualmente, así que no escribas nada confidencial."
       - name: body
         i18n: true
         label: Texto

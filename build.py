@@ -12,7 +12,6 @@ Contenido:
   content/legal/*.html      textos legales (cabecera + HTML); en inglés, content/en/legal/
   static/                 imágenes, CSS, JS e iconos (se copian tal cual)
 """
-import hashlib
 import html
 import json
 import os
@@ -142,84 +141,8 @@ IMG_EXT = ('.webp', '.jpg', '.jpeg', '.png', '.gif', '.avif')
 MAX_NEWS_BYTES = 200_000                       # una noticia normal ocupa 2–10 KB
 MAX_LINKS = 12                                 # «Fuentes y enlaces» por noticia
 
-# Noticias publicadas antes del panel (hasta el 23/11/2026, con sus enlaces revisados a mano) y sus traducciones al
-# inglés (25/11/2026): conservan sus enlaces dentro del texto, pero SOLO si el texto no ha cambiado (huella SHA-256 del
-# cuerpo; en las inglesas, también de su translationKey). Si se edita, pasa a regirse como una noticia nueva.
-# En las noticias nuevas el texto no puede llevar enlaces: van en «Fuentes y enlaces» (campo `enlaces`).
-LEGACY_NEWS = {
-    'es/2025-01-07-investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.md':
-        '168b60067fc351a50c925d10f0b3b5277c96267f9c69edf5969f7d87ab919f79',
-    'es/2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
-        'fd70bb6cc0d54fdba892ea7e1b720effb1dbddb6ad165bbbfcebbb25eda0b081',
-    'es/2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
-        'e9c81c410ddaf305846ed89d622a614fe1a4ba8c89fe9cd2cc9f8c94cf116bfb',
-    'es/2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
-        'ec526eb6922e0a8479dae2c6a10778f9a16e31b8eb718a0b6acd84dec92e6bd8',
-    'es/2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
-        '829a7520c8ece1edd94acd298abf4e827619e7fe4e8b9bc0cbd3d03334088d27',
-    'es/2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
-        'f9967c51f060ec21e3d6922159b96c452f924f61a3ba59007535db08ead331f5',
-    'es/2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
-        '9699e2a6cf2e85c5347f1d632845712398653c39b2b69c9ebba3d2ae415217cd',
-    'es/2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
-        '73e4a72c293e4f17f39154f389268a3d5bb6c419200dfde1c02997d3440fb768',
-    'es/2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
-        'e190dd327e1d7d489a00c5d1298ab63fb43e5aee885fb2c497060fac50d36097',
-    'es/2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
-        '6ebc4e50d4eaa02726077d0285356f98ab609a33e8f8686cd8f3c1c2c4afa231',
-    'es/2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md':
-        '90e416f8246d69e6906fc983865bfb8cffcae586e92377fb6bfafc135eefbf46',
-    'es/2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md':
-        'bfc2a5cd77e65d2d91207d65fd6ac8e84690383d8090122e3787039b380ed82b',
-    'es/2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md':
-        '7880d96475f4019c8fa02444b9e30574ca3c2a159db7c6f2f7146fdf0513c523',
-    'es/2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md':
-        '57a08ae65d415d7aa1c30a26336f8db46a68ab7252e76a5fb87caa53e16b5ec2',
-    'es/2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md':
-        '78e52b2f07ea34f0206b1ee6eceb0199c756a50a4c0fcc7a172881b6752c02ff',
-    'es/2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md':
-        'b547ca782bc32b730647e80196aee178293880ce140f90e6506fba19c7d11980',
-    'es/2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md':
-        '79e22733a784b924920e18bedec8184668389cb109d09b6d94bbac2b9897c916',
-    'es/2026-11-23-controles-en-frontera-destruido-un-lote-de-pez-sable.md':
-        '552fb76e922001897bfbc80f348599d306032ba7cc736f3525f17eecbf498e04',
-    'en/2025-01-07-chilean-research-confirms-allergen-expression-in-anisakis-parasites.md':
-        'edd828e6577aec779ac4291229724cfb825e0d324dd0262f1681825ebc275abf',
-    'en/2025-06-23-consumption-habits-and-evisceration-at-sea-two-factors-behind-anisakis.md':
-        '07b65e50fad07cded1e13dbc665d6a1609924318dfd4f6d4833f3faa0d02461e',
-    'en/2025-09-06-new-recommendations-to-prevent-anisakis.md':
-        'dd44fd8a0e2d13732be0d5798f5e197cb6a0fc74a7f45678949f3210e31460a5',
-    'en/2025-09-07-what-consumers-know-about-anisakis-a-study-in-sicily.md':
-        '6ce4262f4c56f558e2abe69cf81b431876d83d4f74b52fc725ab9b3177664aaa',
-    'en/2025-12-02-alert-over-parasites-in-a-healthy-mackerel-in-spain.md':
-        '1435d3dcdf8fb785beb2790c17cfb0f063155c50a41333380cb972f9d737047a',
-    'en/2025-12-02-first-confirmed-case-of-anisakiasis-in-greece-after-a-sushi-dinner.md':
-        '9de9bf1aa00555989507bd8da58054d50bee53ace1dd689599c5e1dc27243537',
-    'en/2025-12-15-anisakis-is-present-in-100-of-european-hake-and-in-one-in-five.md':
-        '2a0413bb8ba078f02d19bb4a1d8198b0391e70e6d33673d98fe1641fd87026b2',
-    'en/2026-01-12-anisakis-allergy-a-reaction-that-can-become-serious.md':
-        'f5f788776ccddebdffaeff3b508cad68bd79514c6b5a16952f69dfebbadf0772',
-    'en/2026-01-12-anisakis-as-a-cause-of-meat-allergy.md':
-        'ac26f48f36ca73707e29f27604db1d259c0b49ce2dd3d7d3a82da51c078330ff',
-    'en/2026-01-13-spanish-company-develops-technologies-against-the-anisakis-parasite.md':
-        '10314319dc7b1148d21e2d3c77b9f0612faea033e8ad40f9113681c4fde9c92e',
-    'en/2026-03-26-precautionary-recall-due-to-exceptional-presence-of-anisakis.md':
-        'b0b1a8d9c01d6d8eabe6a7bd169fca1f893546c141687b85bb682635e3517206',
-    'en/2026-04-27-health-alert-massive-anisakis-infestation-in-oily-fish.md':
-        'f65ff2b7e25deb35cbda637d1b329d84bcea6dca8f107176a64cb5a92ce9229a',
-    'en/2026-06-08-the-basque-government-launches-the-frescossi-anisakisno-campaign.md':
-        '6bb82ba67606a708f9b5275628b2d4506adb1105aba94b3db2e6a2bbbb47d723',
-    'en/2026-07-22-anisakis-genome-decoded-science-moves-towards-genetic-control.md':
-        '9ef8fba955a566a951a510fdba9e2ae3d0a5978dbcc8c88140c16d798e37ac99',
-    'en/2026-09-07-beyond-96-scientific-analysis-of-the-study-on-parasites-in-tuna.md':
-        '9e063d7699bbef96ea35a2e828f56811fbc174100a37bba7d5f51324b57e9db4',
-    'en/2026-10-05-thermal-inactivation-of-anisakis-what-the-heatsakis-project-reveals.md':
-        'ab6d6e97752ec01f66551f0a38ea7a782988285bfa80938615ac99f0df1ca008',
-    'en/2026-10-26-anisakis-control-the-role-of-veterinarians-from-the-fish-market.md':
-        'ef3184381977547585551ff274cebef60be79edb339209b9454b8db1a69b5946',
-    'en/2026-11-23-border-controls-batch-of-imported-scabbardfish-destroyed.md':
-        'da74cca04600179d5db65b6d2a1020d88de0422a772424d9857c98e29b9373e7',
-}
+# En las noticias el texto no puede llevar enlaces: van en «Fuentes y enlaces» (campo `enlaces`). Desde el 25/11/2026
+# también las publicadas antes del panel (sus enlaces se pasaron a ese campo), así que todas se rigen igual.
 
 # Comprobación de las direcciones de «Fuentes y enlaces»
 LINK_TYPES = {'fuente': ('Fuente', 'Fuentes'), 'video': ('Vídeo relacionado', 'Vídeos relacionados'),
@@ -379,6 +302,7 @@ def md_inline(t, links=True):
     t = re.sub(r'\*\*((?:[^*\n]|\*(?!\*))+?)\*\*', r'<strong>\1</strong>', t)
     t = re.sub(r'(?<![\w*])\*(?![\s*])([^*\n]+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
     t = t.replace('  \n', '<br>\n')
+    t = t.replace('\\\n', '<br>\n')                 # salto de línea escrito como «\» al final (editor del panel)
     return re.sub(r'\x00(\d+)\x00', lambda m: hold[int(m.group(1))], t)
 
 
@@ -570,13 +494,6 @@ def render_links_lang(items, fname, lang):
         LINK_TYPES = saved
 
 
-def legacy_hash(lang, key, body):
-    """Huella de una noticia de confianza: su texto; en las traducciones, también la clave que la une a la española
-    (así no se puede «reutilizar» una traducción revisada cambiándole solo la clave)."""
-    data = (key + '\n' if lang == 'en' else '') + body.strip()
-    return hashlib.sha256(data.encode('utf-8', 'replace')).hexdigest()
-
-
 def load_news():
     """Lee content/noticias/es/*.md (obligatorio) y content/noticias/en/*.md (opcional), unidas por translationKey.
     Devuelve [{'key', 'es': {...}, 'en': {...} o None}] de la más reciente a la más antigua."""
@@ -591,7 +508,7 @@ def load_news():
         if not os.path.isdir(d) or os.path.islink(d):
             continue
         # las noticias antiguas primero: una nueva nunca puede quitarles su dirección
-        for f in sorted(os.listdir(d), key=lambda f: (f'{lang}/{f}' not in LEGACY_NEWS, f)):
+        for f in sorted(os.listdir(d)):
             rel = f'{lang}/{f}'
             p = os.path.join(d, f)
             if not f.endswith('.md'):
@@ -634,14 +551,13 @@ def load_news():
             if image and not IMG_OK.fullmatch(image):
                 warn(f'{rel}: imagen no válida, se publica sin imagen ({image!r})')
                 image = ''
-            legacy = LEGACY_NEWS.get(rel) == legacy_hash(lang, key, body)
-            why = '' if legacy else (body_problem(body) or next((f'«{k}»: ' + body_problem(meta.get(k, ''))
-                                                                for k in ('title', 'summary', 'description')
-                                                                if body_problem(meta.get(k, ''))), ''))
+            why = body_problem(body) or next((f'«{k}»: ' + body_problem(meta.get(k, ''))
+                                              for k in ('title', 'summary', 'description')
+                                              if body_problem(meta.get(k, ''))), '')
             if why:
                 warn(f'{rel} NO se publica: {why}')
                 continue
-            h = markdown(body, links=legacy)
+            h = markdown(body, links=False)
             title = re.sub(r'\s+', ' ', meta.get('title', '')).strip()[:200] or slug
             summary = re.sub(r'\s+', ' ', meta.get('summary', '')).strip()[:300] or plain(h)[:200]
             links_html = render_links_lang(meta.get('enlaces', []), rel, lang)

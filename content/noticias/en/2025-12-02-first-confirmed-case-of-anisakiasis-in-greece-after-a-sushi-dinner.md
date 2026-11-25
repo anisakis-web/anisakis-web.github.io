@@ -4,6 +4,10 @@ date: 2025-12-02
 image: "/img/noticias/primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.webp"
 summary: "A 22-year-old man living in the Greek city of Thessaloniki was hospitalised, becoming the first confirmed case of anisakiasis in Greece. The incident occurred shortly after the young man ate sushi; he began to experience sudden, intense abdominal pain after the dinner."
 translationKey: "2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi"
+enlaces:
+  - tipo: fuente
+    nombre: "Greek City Times"
+    url: "https://greekcitytimes.com/2025/11/24/young-man-hospitalized-greeces-inaugural-anisakiasis-case-sushi/"
 ---
 A 22-year-old man living in the Greek city of Thessaloniki was hospitalised, becoming the first confirmed case of **anisakiasis** in Greece. The incident occurred shortly after the young man ate **sushi**; he began to experience sudden, intense abdominal pain after the dinner.
 
@@ -30,5 +34,3 @@ To avoid **Anisakis** infection when eating raw or semi-raw fish (sushi, sashimi
 This case is particularly relevant because it is the **first officially documented in Greece**, which shows that **anisakiasis** is not exclusive to regions traditionally associated with eating raw fish. It also highlights the risks linked to the **rising popularity of sushi** and similar dishes: without correct preparation of the fish, there is a **real danger of infection**.
 
 The health authorities have taken the opportunity to stress the importance of prevention, proper handling of fish and the need to **inform those who eat raw or semi-raw fish** about the possible risks.
-
-Source: [Greek City Times](https://greekcitytimes.com/2025/11/24/young-man-hospitalized-greeces-inaugural-anisakiasis-case-sushi/)

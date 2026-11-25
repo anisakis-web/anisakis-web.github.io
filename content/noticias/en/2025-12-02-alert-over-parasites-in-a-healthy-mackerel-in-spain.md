@@ -4,6 +4,16 @@ date: 2025-12-02
 image: "/img/noticias/alerta-por-parasitos-en-una-caballa-saludable-en-espana.webp"
 summary: "A recent study by the Universitat de València (UV) has highlighted health risks associated with a species of mackerel commonly regarded as healthy: the Atlantic chub mackerel (Scomber colias), which is often confused on the market with Atlantic mackerel."
 translationKey: "2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana"
+enlaces:
+  - tipo: fuente
+    nombre: "Universitat de València"
+    url: "https://www.uv.es/uvweb/uv-noticias/es/noticias/estudio-universitat-valencia-alerta-presencia-parasitos-variedad-caballa-estornino-1285973304159/Novetat.html?id=1286452133218&plantilla=UV_Noticies/Page/TPGDetaillNews"
+  - tipo: fuente
+    nombre: "Parasitologia (MDPI)"
+    url: "https://www.mdpi.com/2673-6772/5/3/37"
+  - tipo: fuente
+    nombre: "elEconomista"
+    url: "https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html"
 ---
 A recent study by the *Universitat de València* (UV) has highlighted **health risks** associated with a species of mackerel commonly regarded as healthy: the **Atlantic chub mackerel** (*Scomber colias*), which is often confused on the market with Atlantic mackerel.
 
@@ -28,5 +38,3 @@ To reduce the risk, experts recommend applying the preventive measures laid down
 **Conclusion**
 
 Although mackerel —including the chub mackerel variety— is valued for its nutritional benefits, eating it without precautions can involve a risk of parasitisation. The authors rate the risk of anisakiasis from eating Atlantic chub mackerel as intermediate, lower than that of Atlantic mackerel, which is even more heavily parasitised, and advise taking preventive measures: it is **essential to know the species**, its **origin** and to apply **food safety measures** correctly.
-
-Sources: [Universitat de València](https://www.uv.es/uvweb/uv-noticias/es/noticias/estudio-universitat-valencia-alerta-presencia-parasitos-variedad-caballa-estornino-1285973304159/Novetat.html?id=1286452133218&plantilla=UV_Noticies/Page/TPGDetaillNews), [Parasitologia (MDPI)](https://www.mdpi.com/2673-6772/5/3/37) and [elEconomista](https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html)

@@ -3,6 +3,10 @@ title: "Inactivación térmica del Anisakis: lo que revela el proyecto HEATSAKIS
 date: 2026-10-05
 image: "/img/noticias/inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.webp"
 summary: "Para garantizar la seguridad en el consumo de pescado, la recomendación sanitaria general es clara: alcanzar al menos 60 °C en el centro del producto durante un mínimo de 1 minuto. Sin embargo, la efectividad del calor sobre los parásitos abarca más matices que una cifra fija."
+enlaces:
+  - tipo: fuente
+    nombre: "Ruta Pesquera"
+    url: "https://www.rutapesquera.com/nuevas-bases-cientificas-para-la-inactivacion-termica-de-anisakis/"
 ---
 Para garantizar la seguridad en el consumo de pescado, la recomendación sanitaria general es clara: alcanzar al menos 60 °C en el centro del producto durante un mínimo de 1 minuto. Sin embargo, la efectividad del calor sobre los parásitos abarca más matices que una cifra fija.
 
@@ -39,5 +43,3 @@ Dos piezas de pescado que alcancen la misma temperatura máxima pueden presentar
 El conocimiento generado en el proyecto se ha traducido en **modelos matemáticos y software de simulación** orientados a evaluar escenarios reales de procesado y cocinado.
 
 Asimismo, los conjuntos de datos experimentales se han integrado en el repositorio institucional **DIGITAL.CSIC**. Esta documentación permite a investigadores, autoridades sanitarias y a la industria pesquera optimizar las estrategias de control y adaptar los procesos de cocinado según el nivel de riesgo real.
-
-Fuente: [**rutapesquera**](https://www.rutapesquera.com/nuevas-bases-cientificas-para-la-inactivacion-termica-de-anisakis/)

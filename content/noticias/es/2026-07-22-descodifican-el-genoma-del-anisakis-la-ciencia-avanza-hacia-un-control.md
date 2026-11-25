@@ -3,6 +3,19 @@ title: "Descodifican el genoma del anisakis: la ciencia avanza hacia un control 
 date: 2026-07-22
 image: "/img/noticias/descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.webp"
 summary: "Un estudio del CNAG, la Universidade de Santiago de Compostela y el IIM-CSIC obtiene el ensamblaje del genoma de Anisakis simplex más contiguo hasta la fecha y una herramienta de bajo coste para distinguir especies e híbridos del parásito."
+enlaces:
+  - tipo: fuente
+    nombre: "Industrias Pesqueras"
+    url: "https://www.industriaspesqueras.com/noticia-90375-seccion-Investigaci%C3%B3n"
+  - tipo: fuente
+    nombre: "CNAG"
+    url: "https://www.cnag.eu/node/8239"
+  - tipo: fuente
+    nombre: "Scientific Reports"
+    url: "https://www.nature.com/articles/s41598-026-60679-4"
+  - tipo: fuente
+    nombre: "AESAN"
+    url: "https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis"
 ---
 Un estudio del CNAG, la Universidade de Santiago de Compostela y el IIM-CSIC ha obtenido el ensamblaje del genoma de *Anisakis simplex* más contiguo hasta la fecha y una herramienta de bajo coste para distinguir especies e híbridos del parásito.
 
@@ -31,5 +44,3 @@ Mientras la ciencia avanza en la trazabilidad genómica del parásito, las pauta
 - **Congelación previa:** Si se consume en crudo o en preparaciones que no matan al parásito (como boquerones en vinagre o sushi), congelar a **-15 °C** o menos durante al menos **4 días**, contando al menos **5 días** desde que se introduce en el congelador. En caso de duda sobre el congelador, comprar el pescado ya congelado.
 
 - **Calor:** Cocinar hasta alcanzar **60 °C** durante al menos 1 minuto en toda la pieza (cocción, fritura, horneado o plancha).
-
-Fuentes: [**industriaspesqueras.com**](https://www.industriaspesqueras.com/noticia-90375-seccion-Investigaci%C3%B3n), [**cnag.eu**](https://www.cnag.eu/node/8239), [**Scientific Reports**](https://www.nature.com/articles/s41598-026-60679-4), [**aesan.gob.es**](https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis)

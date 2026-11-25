@@ -4,6 +4,10 @@ date: 2026-01-12
 image: "/img/noticias/anisakis-como-causante-de-alergia-a-la-carne.webp"
 summary: "A recent study by Spanish researchers has provided new clues as to how the parasite Anisakis —known for causing anisakiosis after eating raw or undercooked fish— may also act as a trigger of food allergies in humans."
 translationKey: "2026-01-12-anisakis-como-causante-de-alergia-a-la-carne"
+enlaces:
+  - tipo: fuente
+    nombre: "Diario Veterinario"
+    url: "https://www.diarioveterinario.com/t/5390873/medicos-veterinarios-espanoles-parasito-zoonotico-causante-alergia-carne"
 ---
 A recent study by Spanish researchers has provided new clues as to how the parasite *Anisakis* —known for causing anisakiosis after eating raw or undercooked fish— may also **act as a trigger of food allergies in humans**.
 
@@ -28,5 +32,3 @@ The severity of the reaction usually depends on the amount of α-Gal-containing 
 **What does this research tell us?**
 
 This study is one of the first to **demonstrate the presence of these allergenic proteins in *Anisakis*** and how **they can activate specific immune responses in people with allergies**. Its findings open up new avenues for better understanding how parasites can influence allergic diseases beyond classic infections.
-
-Source: [**Diario Veterinario**](https://www.diarioveterinario.com/t/5390873/medicos-veterinarios-espanoles-parasito-zoonotico-causante-alergia-carne)

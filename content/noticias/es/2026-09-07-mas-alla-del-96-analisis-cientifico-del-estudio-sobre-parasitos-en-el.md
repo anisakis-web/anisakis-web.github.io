@@ -3,6 +3,10 @@ title: "Más allá del 96 %: análisis científico del estudio sobre parásitos 
 date: 2026-09-07
 image: "/img/noticias/mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.webp"
 summary: "Un análisis riguroso de la seguridad alimentaria requiere examinar la reciente investigación sobre el atún listado (Katsuwonus pelamis) publicada en Ocean and Coastal Research desde una perspectiva estrictamente objetiva y divulgativa."
+enlaces:
+  - tipo: fuente
+    nombre: "Muy Interesante"
+    url: "https://muyinteresante.okdiario.com/ciencia/atun-con-parasitos-96-estudio.html"
 ---
 Un análisis riguroso de la seguridad alimentaria requiere examinar la reciente investigación sobre el atún listado (*Katsuwonus pelamis*) publicada en *Ocean and Coastal Research* desde una perspectiva estrictamente objetiva y divulgativa. Frente al eco mediático generado por la cifra del 96 % de detección parasitaria, la literatura científica invita a matizar los datos estructurales del estudio y a ampliar el foco hacia factores clínicos complementarios que habitualmente no se detallan en las notas informativas de gran consumo.
 
@@ -29,5 +33,3 @@ El manejo seguro de los túnidos requiere separar dos problemáticas de naturale
 2. **Histamina (escombrotoxismo):** Surge por la descomposición bacteriana derivada de deficiencias en la cadena de frío. Al tratarse de un compuesto químico termoestable, una vez generada en el músculo del pescado, cocinarlo o congelarlo no elimina la toxina, lo que subraya la importancia capital de la conservación en frío desde las fases iniciales de captura.
 
 En conclusión, los datos aportados por la investigación científica en el medio marino reflejan la realidad ecológica natural de las poblaciones de peces silvestres. Comprender la diferencia entre la detección en laboratorio, la seguridad culinaria frente al parásito vivo y la respuesta inmunológica ante sus alérgenos permite valorar con exactitud las pautas de manipulación y consumo responsable.
-
-Fuente: [**muyInteresante**](https://muyinteresante.okdiario.com/ciencia/atun-con-parasitos-96-estudio.html)

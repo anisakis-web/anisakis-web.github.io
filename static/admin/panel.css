@@ -212,3 +212,24 @@ nav.primary-sidebar [aria-current='page'] {
 
 /* Barra de desplazamiento discreta */
 * { scrollbar-color: hsl(222 26% 78%) transparent; }
+
+/* ---- Imagen principal: vista previa grande (no la miniatura de 120 px) --- */
+/* Imagen entera, sin recortar, hasta 480 px de ancho; nombre y botones debajo. Comprobado en móvil, tableta y ordenador. */
+.drop-target > .filled {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  height: auto !important;
+  gap: 8px;
+}
+.drop-target > .filled > .preview.tile {
+  width: 100% !important;
+  max-width: 480px !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+}
+.drop-target > .filled > .preview.tile > img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain;
+}

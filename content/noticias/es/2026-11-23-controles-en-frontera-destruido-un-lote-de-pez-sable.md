@@ -3,6 +3,13 @@ title: "Controles en frontera: destruido un lote de pez sable importado por pres
 date: 2026-11-23
 image: "/img/noticias/controles-en-frontera-destruido-un-lote-de-pez-sable.webp"
 summary: "Un lote de pez sable procedente de Marruecos fue destruido el 13 de octubre tras encontrarse anisakis en la inspección en frontera. Fue una de las tres incidencias con productos pesqueros de ese origen que España notificó a las autoridades europeas en nueve días."
+enlaces:
+  - tipo: fuente
+    nombre: "AS"
+    url: "https://as.com/actualidad/sociedad/espana-frena-en-la-frontera-tres-partidas-de-productos-pesqueros-de-marruecos-en-nueve-dias-anisakis-salmonela-y-problemas-de-conservacion-f202610-n/"
+  - tipo: fuente
+    nombre: "La Razón"
+    url: "https://www.larazon.es/salud/alerta-sanitaria-lote-surimi-procedente-marruecos-espana-rechaza-ordena-destruirlo_202610286ae22e82a5f83c2fb8e6c338.html"
 ---
 Los alimentos que llegan a España desde fuera de sus fronteras están sometidos a controles sanitarios. Según han informado los diarios *AS* y *La Razón*, en una de esas inspecciones se encontró *Anisakis* en un lote de **pez sable** procedente de Marruecos y destinado a la venta para consumo, que acabó **destruido el 13 de octubre**.
 
@@ -19,5 +26,3 @@ El del pez sable no fue el único caso. En nueve días, las autoridades español
 Este parásito puede causar en las personas problemas digestivos y alergias, por lo que, cuando aparece en un producto pensado para el consumo, hay que impedir que llegue a la venta. En el surimi, el riesgo era otro: si se rompe la cadena de frío durante el transporte o el almacenamiento, los microorganismos pueden multiplicarse.
 
 Los tres casos de octubre, recogidos por ambos medios, ilustran el papel de estas inspecciones: frenar en la frontera los productos con problemas sanitarios antes de que entren en la cadena comercial.
-
-Fuentes: [**AS**](https://as.com/actualidad/sociedad/espana-frena-en-la-frontera-tres-partidas-de-productos-pesqueros-de-marruecos-en-nueve-dias-anisakis-salmonela-y-problemas-de-conservacion-f202610-n/), [**La Razón**](https://www.larazon.es/salud/alerta-sanitaria-lote-surimi-procedente-marruecos-espana-rechaza-ordena-destruirlo_202610286ae22e82a5f83c2fb8e6c338.html)

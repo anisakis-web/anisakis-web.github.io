@@ -3,8 +3,12 @@ title: "Control del Anisakis: el papel de los veterinarios desde la lonja hasta 
 date: 2026-10-26
 image: "/img/noticias/control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.webp"
 summary: "La prevención de la anisakiasis y de las infecciones alimentarias no comienza en el congelador del hogar, sino mucho antes."
+enlaces:
+  - tipo: fuente
+    nombre: "ConSalud"
+    url: "https://www.consalud.es/animalcare/salud-animal/anisakis-los-veterinarios-refuerzan-el-control-del-pescado-desde-la-lonja-hasta-la-cocina.html"
 ---
-La prevención de la anisakiasis y de las infecciones alimentarias no comienza en el congelador del hogar, sino mucho antes. Tal y como destaca el diario especializado *ConSalud.es*, la labor de los profesionales de la veterinaria resulta fundamental para garantizar la seguridad de los productos pesqueros a lo largo de toda la cadena de suministro, actuando como la primera línea de defensa de la salud pública.
+La prevención de la anisakiasis y de las infecciones alimentarias no comienza en el congelador del hogar, sino mucho antes. Tal y como destaca el diario especializado *ConSalud*, la labor de los profesionales de la veterinaria resulta fundamental para garantizar la seguridad de los productos pesqueros a lo largo de toda la cadena de suministro, actuando como la primera línea de defensa de la salud pública.
 
 **INSPECCIÓN EN PUERTO Y PRIMERA VENTA (LONJAS)**
 
@@ -30,6 +34,4 @@ El último eslabón de la cadena requiere la máxima atención previa al consumo
 
 **UNA LABOR CONTINUADA QUE PROTEGE AL CONSUMIDOR**
 
-Como refleja la información de *ConSalud.es*, la seguridad alimentaria frente al anisakis es el resultado de una vigilancia veterinaria coordinada que acompaña al pescado desde la extracción en el mar hasta su entrega final al consumidor o comensal.
-
-Fuente: [**consalud.es**](https://www.consalud.es/animalcare/salud-animal/anisakis-los-veterinarios-refuerzan-el-control-del-pescado-desde-la-lonja-hasta-la-cocina.html)
+Como refleja la información de *ConSalud*, la seguridad alimentaria frente al anisakis es el resultado de una vigilancia veterinaria coordinada que acompaña al pescado desde la extracción en el mar hasta su entrega final al consumidor o comensal.

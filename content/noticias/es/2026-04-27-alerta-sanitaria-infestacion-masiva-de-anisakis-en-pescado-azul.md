@@ -3,6 +3,13 @@ title: "Alerta alimentaria: infestación masiva de anisakis en caballa procedent
 date: 2026-04-27
 image: "/img/noticias/alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.webp"
 summary: "El Sistema de Alerta Rápida para Alimentos y Piensos (RASFF) de la UE ha publicado una alerta de «riesgo potencial», notificada por Italia, por la presencia masiva de anisakis en caballa procedente de España. Italia ha paralizado su distribución y los lotes afectados se han retirado del mercado."
+enlaces:
+  - tipo: fuente
+    nombre: "El Correo"
+    url: "https://www.elcorreo.com/sociedad/salud/alerta-alimentaria-riesgo-potencial-infestacion-masiva-anisakis-20260411164650-nt.html"
+  - tipo: fuente
+    nombre: "AESAN"
+    url: "https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis"
 ---
 El Sistema de Alerta Rápida para Alimentos y Piensos (RASFF) de la Unión Europea ha publicado una alerta alimentaria de **riesgo potencial** por la presencia «masiva» de larvas de anisakis en caballa procedente de España. La notificación la han hecho las autoridades italianas, que detectaron el parásito en sus inspecciones. Italia ha paralizado la distribución del producto desde España y los lotes afectados ya se han retirado del mercado.
 
@@ -24,5 +31,3 @@ Las recomendaciones de la Agencia Española de Seguridad Alimentaria y Nutrició
 
 - No dé por cocinada una pieza gruesa hasta que toda ella haya alcanzado esa temperatura; compruébelo pinchando con un tenedor o un cuchillo.
 - Evite preparaciones caseras de boquerones en vinagre o sushi sin haber realizado la congelación previa de 5 días.
-
-Fuentes: [**elcorreo.com**](https://www.elcorreo.com/sociedad/salud/alerta-alimentaria-riesgo-potencial-infestacion-masiva-anisakis-20260411164650-nt.html), [**aesan.gob.es**](https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis)

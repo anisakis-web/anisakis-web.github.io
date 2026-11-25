@@ -4,6 +4,16 @@ date: 2025-06-23
 image: "/img/noticias/el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.webp"
 summary: "Around 8,000 cases of anisakiasis are estimated to occur in Spain each year. Eating raw or undercooked fish and the practice of throwing viscera into the sea help to explain this."
 translationKey: "2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del"
+enlaces:
+  - tipo: fuente
+    nombre: "Scientific Reports (Bao et al., 2017)"
+    url: "https://doi.org/10.1038/srep43699"
+  - tipo: fuente
+    nombre: "OCU"
+    url: "https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/anisakis"
+  - tipo: fuente
+    nombre: "Comunidad de Madrid"
+    url: "https://www.comunidad.madrid/salud/anisakiasis-zoonosis-facil-prevenir"
 ---
 **Anisakiasis** is common in Spain. A study published in *Scientific Reports* (Bao et al., 2017) estimated that **between 7,700 and 8,320 cases** requiring medical attention occur in the country every year from the consumption of home-prepared anchovies in vinegar alone. The OCU puts the figure at **around 8,000 cases a year**.
 
@@ -23,5 +33,3 @@ According to the recommendations of the Comunidad de Madrid:
 - **Cook** fish until it reaches **60 °C at the centre for at least one minute**.
 
 Consumer information and good practices on board are therefore two key tools for reducing the presence of the parasite.
-
-Sources: [Scientific Reports (Bao et al., 2017)](https://doi.org/10.1038/srep43699) · [OCU](https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/anisakis) · [Comunidad de Madrid](https://www.comunidad.madrid/salud/anisakiasis-zoonosis-facil-prevenir)

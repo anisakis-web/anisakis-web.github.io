@@ -4,8 +4,12 @@ date: 2026-10-26
 image: "/img/noticias/control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.webp"
 summary: "The prevention of anisakiasis and foodborne infections does not begin in the home freezer, but much earlier."
 translationKey: "2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta"
+enlaces:
+  - tipo: fuente
+    nombre: "ConSalud"
+    url: "https://www.consalud.es/animalcare/salud-animal/anisakis-los-veterinarios-refuerzan-el-control-del-pescado-desde-la-lonja-hasta-la-cocina.html"
 ---
-The prevention of anisakiasis and foodborne infections does not begin in the home freezer, but much earlier. As highlighted by the specialist newspaper *ConSalud.es*, the work of veterinary professionals is essential to guarantee the safety of fishery products throughout the entire supply chain, acting as the first line of defence for public health.
+The prevention of anisakiasis and foodborne infections does not begin in the home freezer, but much earlier. As highlighted by the specialist newspaper *ConSalud*, the work of veterinary professionals is essential to guarantee the safety of fishery products throughout the entire supply chain, acting as the first line of defence for public health.
 
 **INSPECTION IN PORT AND AT FIRST SALE (FISH MARKETS)**
 
@@ -31,6 +35,4 @@ The last link in the chain requires the utmost attention before consumption, esp
 
 **ONGOING WORK THAT PROTECTS CONSUMERS**
 
-As the information from *ConSalud.es* reflects, food safety with regard to anisakis is the result of coordinated veterinary surveillance that accompanies the fish from its harvesting at sea to its final delivery to the consumer or diner.
-
-Source: [**consalud.es**](https://www.consalud.es/animalcare/salud-animal/anisakis-los-veterinarios-refuerzan-el-control-del-pescado-desde-la-lonja-hasta-la-cocina.html)
+As the information from *ConSalud* reflects, food safety with regard to anisakis is the result of coordinated veterinary surveillance that accompanies the fish from its harvesting at sea to its final delivery to the consumer or diner.

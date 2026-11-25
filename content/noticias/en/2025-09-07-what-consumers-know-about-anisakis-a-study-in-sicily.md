@@ -4,6 +4,10 @@ date: 2025-09-07
 image: "/img/noticias/falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.webp"
 summary: "A study published in the journal Food and Humanity analyses what Sicilian consumers know about anisakis, how they perceive the risk and whether they would pay more for parasite-free fish."
 translationKey: "2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso"
+enlaces:
+  - tipo: fuente
+    nombre: "Food and Humanity (Sciortino, Giamporcaro et al., 2025)"
+    url: "https://doi.org/10.1016/j.foohum.2025.100668"
 ---
 A study published in 2025 in the scientific journal *Food and Humanity* has analysed **what consumers in Sicily know about anisakis** and how this parasite influences the way they buy and eat fish.
 
@@ -16,5 +20,3 @@ Anisakis can be prevented with simple measures, such as freezing fish that is to
 **An issue that also concerns the sector**
 
 Risk perception does not only affect health: it also influences purchasing decisions. That is why informing consumers properly, without causing alarm, is useful both for public health and for the fishing sector itself.
-
-Source: [Food and Humanity (Sciortino, Giamporcaro et al., 2025)](https://doi.org/10.1016/j.foohum.2025.100668)

@@ -4,8 +4,39 @@ date: 2026-01-13
 image: "/img/noticias/empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.webp"
 summary: "Vigo-based company Marexi makes equipment that treats fish viscera with microwaves on board before they are returned to the sea, and a range of systems to detect anisakis in fish. The prototype was tested in the European PARASITE project, coordinated by the CSIC."
 translationKey: "2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis"
+enlaces:
+  - tipo: fuente
+    nombre: "RTVE"
+    url: "https://www.rtve.es/play/videos/directo-al-grano/alerta-anisakis-pescado-consumimos/16812207/"
+  - tipo: fuente
+    nombre: "CORDIS (European Commission): PARASITE final report"
+    url: "https://cordis.europa.eu/project/id/312068/reporting"
+  - tipo: fuente
+    nombre: "BOE"
+    url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-24655"
+  - tipo: fuente
+    nombre: "Marexi: Tedepad"
+    url: "https://marexi.com/en/tedepad/"
+  - tipo: fuente
+    nombre: "Tedepad: who we are"
+    url: "https://tedepad.com/en/who-we-are/"
+  - tipo: fuente
+    nombre: "Marexi: Anisakischeck"
+    url: "https://marexi.com/en/anisakischeck/"
+  - tipo: fuente
+    nombre: "Marexi: Anisakischeck Inline"
+    url: "https://marexi.com/anisakischeck/inline/"
+  - tipo: fuente
+    nombre: "Marexi: ScanisakiS"
+    url: "https://marexi.com/anisakischeck/scanisakis/"
+  - tipo: fuente
+    nombre: "Marexi: UVPress"
+    url: "https://marexi.com/anisakischeck/uvpress/"
+  - tipo: enlace
+    nombre: "Marexi"
+    url: "https://marexi.com/"
 ---
-The technology used at sea and in factories to keep anisakis off the plate was the subject of a report on the RTVE programme *Directo al grano*. This is the field in which the Vigo-based company [**Marexi**](https://marexi.com/) (Tecnología Marina Ximo, S.L.) works, making equipment for two different stages: treating viscera on the vessel and detecting the parasite in fish.
+The technology used at sea and in factories to keep anisakis off the plate was the subject of a report on the RTVE programme *Directo al grano*. This is the field in which the Vigo-based company **Marexi** (Tecnología Marina Ximo, S.L.) works, making equipment for two different stages: treating viscera on the vessel and detecting the parasite in fish.
 
 **TREATING VISCERA BEFORE THEY GO BACK TO THE SEA**
 
@@ -24,5 +55,3 @@ The second line, **Anisakischeck**, brings together detection systems for indust
 - **Anisakischeck Inline:** an optical scanner with artificial intelligence for pieces moving along a conveyor belt, at up to 1.2 m/s.
 - **ScanisakiS:** analyses individual pieces and shows the number, position and infection percentage.
 - **ScanisakiS UVPress:** counts larvae in samples under ultraviolet light, following the method of the ISO/DIS 23036 standard; it is designed for laboratories and quality control.
-
-Sources: [**RTVE**](https://www.rtve.es/play/videos/directo-al-grano/alerta-anisakis-pescado-consumimos/16812207/), [**CORDIS (European Commission): PARASITE final report**](https://cordis.europa.eu/project/id/312068/reporting), [**BOE**](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-24655), [**Marexi: Tedepad**](https://marexi.com/en/tedepad/), [**Tedepad: who we are**](https://tedepad.com/en/who-we-are/), [**Marexi: Anisakischeck**](https://marexi.com/en/anisakischeck/), [**Marexi: Anisakischeck Inline**](https://marexi.com/anisakischeck/inline/), [**Marexi: ScanisakiS**](https://marexi.com/anisakischeck/scanisakis/), [**Marexi: UVPress**](https://marexi.com/anisakischeck/uvpress/)

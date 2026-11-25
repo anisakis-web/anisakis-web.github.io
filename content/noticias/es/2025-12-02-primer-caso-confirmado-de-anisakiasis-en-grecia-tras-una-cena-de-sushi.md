@@ -3,6 +3,10 @@ title: "Primer caso confirmado de anisakiasis en Grecia tras una cena de sushi"
 date: 2025-12-02
 image: "/img/noticias/primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.webp"
 summary: "Un joven de 22 años residente en la ciudad griega de Tesalónica fue hospitalizado, convirtiéndose en el primer caso confirmado de anisakiasis en Grecia. El incidente ocurrió poco después de que el joven comiera sushi; comenzó a sentir intensos dolores abdominales de forma aguda tras la cena."
+enlaces:
+  - tipo: fuente
+    nombre: "Greek City Times"
+    url: "https://greekcitytimes.com/2025/11/24/young-man-hospitalized-greeces-inaugural-anisakiasis-case-sushi/"
 ---
 Un joven de 22 años residente en la ciudad griega de Tesalónica fue hospitalizado, convirtiéndose en el primer caso confirmado de **anisakiasis** en Grecia. El incidente ocurrió poco después de que el joven comiera **sushi**; comenzó a sentir intensos dolores abdominales de forma aguda tras la cena.
 
@@ -29,5 +33,3 @@ Para evitar la infección por **Anisakis** al consumir pescado crudo o semicrudo
 Este caso es especialmente relevante porque se trata del **primero documentado oficialmente en Grecia**, lo que evidencia que la **anisakiasis** no es exclusiva de regiones tradicionalmente ligadas al consumo de pescado crudo. Además, subraya los riesgos relacionados con el **auge de la popularidad del sushi** y platos similares: sin una preparación correcta del pescado, existe el **peligro real de infección**.
 
 Las autoridades sanitarias han aprovechado el suceso para recordar la importancia de la prevención, la correcta manipulación del pescado y la necesidad de **informar a quienes consumen pescado crudo o semicrudo** sobre los posibles riesgos.
-
-Fuente: [Greek City Times](https://greekcitytimes.com/2025/11/24/young-man-hospitalized-greeces-inaugural-anisakiasis-case-sushi/)

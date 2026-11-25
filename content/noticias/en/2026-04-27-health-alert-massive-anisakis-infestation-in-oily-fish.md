@@ -4,6 +4,13 @@ date: 2026-04-27
 image: "/img/noticias/alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.webp"
 summary: "The EU Rapid Alert System for Food and Feed (RASFF) has published a «potential risk» alert, notified by Italy, over a massive presence of Anisakis in mackerel from Spain. Italy has halted its distribution and the affected batches have been withdrawn from the market."
 translationKey: "2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul"
+enlaces:
+  - tipo: fuente
+    nombre: "El Correo"
+    url: "https://www.elcorreo.com/sociedad/salud/alerta-alimentaria-riesgo-potencial-infestacion-masiva-anisakis-20260411164650-nt.html"
+  - tipo: fuente
+    nombre: "AESAN"
+    url: "https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis"
 ---
 The European Union's Rapid Alert System for Food and Feed (RASFF) has published a **potential risk** food alert over a «massive» presence of Anisakis larvae in mackerel from Spain. The notification was made by the Italian authorities, who detected the parasite during their inspections. Italy has halted distribution of the product from Spain and the affected batches have already been withdrawn from the market.
 
@@ -25,5 +32,3 @@ The recommendations of the Spanish Agency for Food Safety and Nutrition (AESAN) 
 
 - Do not consider a thick piece cooked until all of it has reached that temperature; check by pricking it with a fork or knife.
 - Avoid home-made preparations of anchovies in vinegar or sushi without first freezing the fish for 5 days.
-
-Sources: [**elcorreo.com**](https://www.elcorreo.com/sociedad/salud/alerta-alimentaria-riesgo-potencial-infestacion-masiva-anisakis-20260411164650-nt.html), [**aesan.gob.es**](https://www.aesan.gob.es/actualidad/campanyas-seguridad-alimentaria/anisakis)

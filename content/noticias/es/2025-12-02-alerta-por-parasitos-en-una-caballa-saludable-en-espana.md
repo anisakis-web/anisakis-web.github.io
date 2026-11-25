@@ -3,6 +3,16 @@ title: "Alerta por parásitos en una caballa “saludable” en España"
 date: 2025-12-02
 image: "/img/noticias/alerta-por-parasitos-en-una-caballa-saludable-en-espana.webp"
 summary: "Un reciente estudio de la Universitat de València (UV) ha puesto de manifiesto riesgos sanitarios asociados a una especie de caballa comúnmente considerada saludable: la caballa estornino (Scomber colias), que a menudo se confunde en el mercado con la caballa atlántica."
+enlaces:
+  - tipo: fuente
+    nombre: "Universitat de València"
+    url: "https://www.uv.es/uvweb/uv-noticias/es/noticias/estudio-universitat-valencia-alerta-presencia-parasitos-variedad-caballa-estornino-1285973304159/Novetat.html?id=1286452133218&plantilla=UV_Noticies/Page/TPGDetaillNews"
+  - tipo: fuente
+    nombre: "Parasitologia (MDPI)"
+    url: "https://www.mdpi.com/2673-6772/5/3/37"
+  - tipo: fuente
+    nombre: "elEconomista"
+    url: "https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html"
 ---
 Un reciente estudio de la *Universitat de València* (UV) ha puesto de manifiesto **riesgos sanitarios** asociados a una especie de caballa comúnmente considerada saludable: la **caballa estornino** (*Scomber colias*), que a menudo se confunde en el mercado con la caballa atlántica.
 
@@ -27,5 +37,3 @@ Para reducir el riesgo, los expertos recomiendan aplicar las medidas preventivas
 **Conclusión**
 
 Aunque la caballa —incluida la variedad estornino— es valorada por sus aportes nutricionales, su consumo sin precaución puede implicar riesgos de parasitación. Los autores califican de intermedio el riesgo de anisakiasis por consumo de caballa estornino, menor que el de la caballa atlántica, que está aún más parasitada, y aconsejan tomar medidas preventivas: es **esencial conocer la especie**, su **origen** y aplicar correctamente las **medidas de seguridad alimentaria**.
-
-Fuentes: [Universitat de València](https://www.uv.es/uvweb/uv-noticias/es/noticias/estudio-universitat-valencia-alerta-presencia-parasitos-variedad-caballa-estornino-1285973304159/Novetat.html?id=1286452133218&plantilla=UV_Noticies/Page/TPGDetaillNews), [Parasitologia (MDPI)](https://www.mdpi.com/2673-6772/5/3/37) y [elEconomista](https://www.eleconomista.es/salud-bienestar/ultimas-noticias/noticias/13663805/11/25/cientificos-piden-prestar-especial-atencion-a-este-pescado-que-contiene-parasitos-se-confunde-con-uno-de-los-mas-saludables-de-espana.html)

@@ -4,6 +4,10 @@ date: 2025-09-06
 image: "/img/noticias/nuevas-recomendaciones-para-prevenir-el-anisakis.webp"
 summary: "A recent article in Consumer warns that freezing fish for a couple of days is no longer enough to guarantee that the anisakis parasite is eliminated, and sets out updated recommendations to reduce the risk when eating fish."
 translationKey: "2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis"
+enlaces:
+  - tipo: fuente
+    nombre: "Consumer Eroski"
+    url: "https://www.consumer.es/seguridad-alimentaria/nuevas-recomendaciones-para-prevenir-el-anisakis.html"
 ---
 A recent article in *Consumer* warns that **freezing fish for a couple of days is no longer enough** to guarantee that the **anisakis** parasite is eliminated, and sets out updated recommendations to reduce the risk when eating fish.
 
@@ -33,5 +37,3 @@ For this reason, the recommendations have changed:
 - Handle and clean fish thoroughly before freezing or cooking it.
 
 These new guidelines aim to **strengthen food safety** and reduce the risk of anisakiasis in the home, bearing in mind that **good practice in handling and preparing fish** remains the best way to prevent this type of infection.
-
-Source: [Consumer Eroski](https://www.consumer.es/seguridad-alimentaria/nuevas-recomendaciones-para-prevenir-el-anisakis.html)
