@@ -1,10 +1,10 @@
 ---
-title: "Alerta Sanitaria: Infestación masiva de Anisakis en pescado azul"
+title: "Alerta sanitaria: infestación masiva de Anisakis en pescado azul"
 date: 2026-04-27
 image: "/img/noticias/alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.webp"
-summary: "La Red de Alerta Alimentaria (RASFF) ha emitido una notificación de riesgo grave tras detectar una presencia masiva de larvas de Anisakis en un lote de pescado comercializado en España. Las autoridades ya han iniciado…"
+summary: "El Sistema de Alerta Rápida para Alimentos y Piensos (RASFF) ha emitido una notificación de riesgo potencial tras detectar una presencia masiva de larvas de Anisakis en un lote de pescado procedente de España. Las autoridades ya han iniciado la retirada del producto."
 ---
-La Red de Alerta Alimentaria (RASFF) ha emitido una notificación de **riesgo grave** tras detectar una presencia masiva de larvas de Anisakis en un lote de pescado comercializado en España. Las autoridades ya han iniciado la retirada del producto, pero se pide máxima precaución a los consumidores.
+El Sistema de Alerta Rápida para Alimentos y Piensos (RASFF) ha emitido una notificación de **riesgo potencial** tras detectar una presencia masiva de larvas de Anisakis en un lote de pescado procedente de España. Las autoridades ya han iniciado la retirada del producto, pero se pide máxima precaución a los consumidores.
 
 ### Puntos clave de la alerta
 

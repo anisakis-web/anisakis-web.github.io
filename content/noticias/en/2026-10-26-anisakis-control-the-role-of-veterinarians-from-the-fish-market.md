@@ -1,8 +1,8 @@
 ---
-title: "Anisakis control: The role of veterinarians from the fish market to the table"
+title: "Anisakis control: the role of veterinarians from the fish market to the table"
 date: 2026-10-26
 image: "/img/noticias/control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.webp"
-summary: "The prevention of anisakiasis and foodborne infections does not begin in the home freezer, but much earlier. As highlighted by the specialist newspaper ConSalud.es, the work of veterinary…"
+summary: "The prevention of anisakiasis and foodborne infections does not begin in the home freezer, but much earlier."
 translationKey: "2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta"
 ---
 The prevention of anisakiasis and foodborne infections does not begin in the home freezer, but much earlier. As highlighted by the specialist newspaper *ConSalud.es*, the work of veterinary professionals is essential to guarantee the safety of fishery products throughout the entire supply chain, acting as the first line of defence for public health.

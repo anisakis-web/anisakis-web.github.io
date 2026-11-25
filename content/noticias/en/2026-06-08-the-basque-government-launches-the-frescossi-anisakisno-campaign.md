@@ -1,13 +1,13 @@
 ---
-title: "The Basque Government launches the «#FrescosSí AnisakisNo» campaign to promote the safe consumption of fresh fish"
+title: "The Basque Government launches the «#FrescosSíAnisakisNo» campaign to promote the safe consumption of fresh fish"
 date: 2026-06-08
 image: "/img/noticias/el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.webp"
-summary: "The Basque Government's Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca has launched a new institutional initiative under the slogan «#FrescosSíAnisakisNo». The main purpose of this…"
+summary: "The Basque Government's Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca has launched a new institutional initiative under the slogan «#FrescosSíAnisakisNo»."
 translationKey: "2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar"
 ---
 The Basque Government's Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca has launched a new institutional initiative under the slogan **«#FrescosSíAnisakisNo»**. The main purpose of this informative and practical campaign is to boost the consumption of fresh fish while guaranteeing the highest level of food safety, as well as to strengthen public confidence in a product that is a cornerstone both of a healthy diet and of the Basque Country's gastronomic identity.
 
-Regional minister Amaia Barredo stressed that fish is a safe and essential food, explaining that the campaign aims to give the public simple tools so they can continue to enjoy it with complete peace of mind. The campaign points out that avoiding the risks associated with the parasite does not require giving up fresh produce, but rather applying a series of basic habits when handling and preparing it.
+Regional minister Amaia Barredo stressed that fish is a safe and essential food, explaining that the campaign aims to give the public simple tools so they can continue to enjoy it with complete peace of mind. The campaign points out that avoiding the risks associated with the parasite does not require giving up fresh fish, but rather applying a series of basic habits when handling and preparing it.
 
 ## Key prevention guidelines promoted by the campaign
 

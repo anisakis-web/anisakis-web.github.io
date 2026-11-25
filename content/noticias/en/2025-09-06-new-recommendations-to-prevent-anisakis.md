@@ -2,7 +2,7 @@
 title: "New recommendations to prevent anisakis"
 date: 2025-09-06
 image: "/img/noticias/nuevas-recomendaciones-para-prevenir-el-anisakis.webp"
-summary: "A recent article in Consumer warns that freezing fish for a couple of days is no longer enough to guarantee that the anisakis parasite is eliminated, and sets out updated recommendations to reduce the risk…"
+summary: "A recent article in Consumer warns that freezing fish for a couple of days is no longer enough to guarantee that the anisakis parasite is eliminated, and sets out updated recommendations to reduce the risk when eating fish."
 translationKey: "2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis"
 ---
 A recent article in *Consumer* warns that **freezing fish for a couple of days is no longer enough** to guarantee that the **anisakis** parasite is eliminated, and sets out updated recommendations to reduce the risk when eating fish.
@@ -15,7 +15,7 @@ Furthermore, even if the larva is already dead, the **protein compounds it produ
 
 **Why is freezing for two days not enough?**
 
-Until now, the recommendation was to freeze fish at –20 °C for a couple of days if it was going to be eaten raw or undercooked. However, cases of poisoning have been documented that occurred despite following this practice. This indicates that some larvae can withstand those conditions or that domestic freezers do not actually reach –20 °C.
+Until now, the recommendation was to freeze fish at –20 °C for a couple of days if it was going to be eaten raw or undercooked. However, cases of Anisakis infection have been documented that occurred despite following this practice. This indicates that some larvae can withstand those conditions or that domestic freezers do not actually reach –20 °C.
 
 For this reason, the recommendations have changed:
 

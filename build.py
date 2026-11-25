@@ -152,31 +152,31 @@ LEGACY_NEWS = {
     'es/2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.md':
         'fd70bb6cc0d54fdba892ea7e1b720effb1dbddb6ad165bbbfcebbb25eda0b081',
     'es/2025-09-06-nuevas-recomendaciones-para-prevenir-el-anisakis.md':
-        '69aa30e4978b38b20a68ac17d3f233ad1cc15373cc64d1e0c0f7558b55d09481',
+        'e9c81c410ddaf305846ed89d622a614fe1a4ba8c89fe9cd2cc9f8c94cf116bfb',
     'es/2025-09-07-falta-de-informacion-sobre-el-anisakis-entre-los-consumidores-el-caso.md':
         'ec526eb6922e0a8479dae2c6a10778f9a16e31b8eb718a0b6acd84dec92e6bd8',
     'es/2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana.md':
-        'b599cf3be3c3adcb367e9ceb956190cc80f5d58711a0701ed3fef25ef4ad97df',
+        'dbc1faa3f77918a551c6dbdc69c3d95675c08a03f42302bc318114b2f5ed0b13',
     'es/2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.md':
-        '1098bd285e88cf0ce35e54ca52268e80bdbb1b55bfd76089ef476900cf0f6aca',
+        'f9967c51f060ec21e3d6922159b96c452f924f61a3ba59007535db08ead331f5',
     'es/2025-12-15-el-anisakis-esta-presente-en-el-100-de-las-merluzas-europeas-y-en-una.md':
-        '5f4bce15316e812308b1a28233caaa2b93911e28eb165bfe619c4d6c3757897a',
+        '9699e2a6cf2e85c5347f1d632845712398653c39b2b69c9ebba3d2ae415217cd',
     'es/2026-01-12-alergia-al-anisakis-una-reaccion-que-puede-llegar-a-ser-grave.md':
         '73e4a72c293e4f17f39154f389268a3d5bb6c419200dfde1c02997d3440fb768',
     'es/2026-01-12-anisakis-como-causante-de-alergia-a-la-carne.md':
-        'a580fd16085e2315f3d4dbb5b8368d7b99a0d9625413cce5aadeb41118a23101',
+        'e190dd327e1d7d489a00c5d1298ab63fb43e5aee885fb2c497060fac50d36097',
     'es/2026-01-13-empresa-espanola-crea-tecnologias-contra-el-parasito-anisakis.md':
         'fe1182e58a7fe2fddf85607798b565c4205cb276d5687e2c1c537d9ea1c7798b',
     'es/2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis.md':
-        '4b859116fa6724391cb945e73d5481c29501cbec27c840c20e21450a175d3a5d',
+        '90e416f8246d69e6906fc983865bfb8cffcae586e92377fb6bfafc135eefbf46',
     'es/2026-04-27-alerta-sanitaria-infestacion-masiva-de-anisakis-en-pescado-azul.md':
-        'b58f9a29e82e0cd2313a6e643dd361e320a7176f33dcf0989288af797881cb4b',
+        '395af83b14a6165589fbc8c2013e84cbaf1e6eedab8c2af57fafc83cfdea34d7',
     'es/2026-06-08-el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.md':
         '7880d96475f4019c8fa02444b9e30574ca3c2a159db7c6f2f7146fdf0513c523',
     'es/2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.md':
-        '1b612da88ff9e4271a73da50fd1219773569293149b04c0b80706ced4fa27def',
+        '8bcb6454181b88bec5cc97e9b25a40fb363b858a1abad4e2616cc48d32b3b51d',
     'es/2026-09-07-mas-alla-del-96-analisis-cientifico-del-estudio-sobre-parasitos-en-el.md':
-        '1b19e5bb9ddb11142c805e4000747f4e0421f5074f76331f3f2b43402ec4be22',
+        '78e52b2f07ea34f0206b1ee6eceb0199c756a50a4c0fcc7a172881b6752c02ff',
     'es/2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.md':
         'b547ca782bc32b730647e80196aee178293880ce140f90e6506fba19c7d11980',
     'es/2026-10-26-control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.md':
@@ -184,19 +184,19 @@ LEGACY_NEWS = {
     'es/2026-11-23-controles-en-frontera-destruido-un-lote-de-pez-sable.md':
         '552fb76e922001897bfbc80f348599d306032ba7cc736f3525f17eecbf498e04',
     'en/2025-01-07-chilean-research-confirms-allergen-expression-in-anisakis-parasites.md':
-        '71958b64719f46d2622a030ba7a891620018abc69cbfc0e34e977b30662d7e7f',
+        '55dfdfbcf810fb09817f03fc6b1f02ef67dba91ec3a48cdb28102a7fc07f1d66',
     'en/2025-06-23-consumption-habits-and-evisceration-at-sea-two-factors-behind-anisakis.md':
         '07b65e50fad07cded1e13dbc665d6a1609924318dfd4f6d4833f3faa0d02461e',
     'en/2025-09-06-new-recommendations-to-prevent-anisakis.md':
-        '2a37709d084f581221a87a39a13e9e3a6fc4031bb560f8b50e748a24ff96f575',
+        'dd44fd8a0e2d13732be0d5798f5e197cb6a0fc74a7f45678949f3210e31460a5',
     'en/2025-09-07-what-consumers-know-about-anisakis-a-study-in-sicily.md':
         '6ce4262f4c56f558e2abe69cf81b431876d83d4f74b52fc725ab9b3177664aaa',
     'en/2025-12-02-alert-over-parasites-in-a-healthy-mackerel-in-spain.md':
         '39ee44e17360d5e25eca5b6460d0a986bfec987d9cd2cda0df1de37bd619f532',
     'en/2025-12-02-first-confirmed-case-of-anisakiasis-in-greece-after-a-sushi-dinner.md':
-        '8b3ce25c7f6f52df49d84a011b2d1c8fc473b2135f7a58cc58ec5a18cde1eec3',
+        '9de9bf1aa00555989507bd8da58054d50bee53ace1dd689599c5e1dc27243537',
     'en/2025-12-15-anisakis-is-present-in-100-of-european-hake-and-in-one-in-five.md':
-        '816eb0f50f9f4b7396cd6611fce6ee54cf8083ba1bc81449a68fd679a06d7a81',
+        '2a0413bb8ba078f02d19bb4a1d8198b0391e70e6d33673d98fe1641fd87026b2',
     'en/2026-01-12-anisakis-allergy-a-reaction-that-can-become-serious.md':
         'f5f788776ccddebdffaeff3b508cad68bd79514c6b5a16952f69dfebbadf0772',
     'en/2026-01-12-anisakis-as-a-cause-of-meat-allergy.md':
@@ -204,15 +204,15 @@ LEGACY_NEWS = {
     'en/2026-01-13-spanish-company-develops-technologies-against-the-anisakis-parasite.md':
         '0d6e5ca881818602f039923987a7df56da83d35896b85ca07f245ca56d461577',
     'en/2026-03-26-precautionary-recall-due-to-exceptional-presence-of-anisakis.md':
-        '096f6e9abef8725ebace1db4d18df5d7e415404977b86b29341f42a0c8db9541',
+        'b0b1a8d9c01d6d8eabe6a7bd169fca1f893546c141687b85bb682635e3517206',
     'en/2026-04-27-health-alert-massive-anisakis-infestation-in-oily-fish.md':
-        'c6d2450aa82c453a842df5f7537c812f126823c0e2117a271f630ab86d871810',
+        '72eb124f4b2c05e7f30ae534d43318ce0c2cd297fcc0c93fc8538907d0a8d0ef',
     'en/2026-06-08-the-basque-government-launches-the-frescossi-anisakisno-campaign.md':
-        'cb9446f665533bb1feee745cb80b4ac1c498dc596d70792149f6d7a5fb4de378',
+        '6bb82ba67606a708f9b5275628b2d4506adb1105aba94b3db2e6a2bbbb47d723',
     'en/2026-07-22-anisakis-genome-decoded-science-moves-towards-genetic-control.md':
-        'bc9f56f054b9fe1b2ff6d07edbaacbc015cf436347157f856f377a646a50a80c',
+        '95075e48c15262b3b793423e502951f76efdb6d5ffb4870ebe35d0caef7de063',
     'en/2026-09-07-beyond-96-scientific-analysis-of-the-study-on-parasites-in-tuna.md':
-        'bbef2f82b3792ed55d0e782eca17445b86aaa9fb00d25a15c6bfbd3f178e2d07',
+        '9e063d7699bbef96ea35a2e828f56811fbc174100a37bba7d5f51324b57e9db4',
     'en/2026-10-05-thermal-inactivation-of-anisakis-what-the-heatsakis-project-reveals.md':
         'ab6d6e97752ec01f66551f0a38ea7a782988285bfa80938615ac99f0df1ca008',
     'en/2026-10-26-anisakis-control-the-role-of-veterinarians-from-the-fish-market.md':
@@ -671,7 +671,7 @@ HOME = {
         intro='En esta página web, a través de contenidos actualizados y contrastados, abordaremos temas como:',
         all_news='Ver todas las noticias',
         contact_text='El Anisakis no es un problema menor. Su proliferación está cambiando nuestros hábitos culinarios y afectando a toda la cadena alimentaria del pescado. Aquí encontrarás contenidos actualizados con información relevante, veraz y accesible para todos.',
-        contact_mail='Puede ponerse en contacto con nosotros a través de'),
+        contact_mail='Puedes ponerte en contacto con nosotros a través de'),
     'en': dict(
         temas=[('/en/anisakis/', 'The biology of Anisakis and its life cycle in the marine environment.'),
                ('/en/scientific-information/', 'The risks to public health, from severe allergies to gastrointestinal disorders.'),

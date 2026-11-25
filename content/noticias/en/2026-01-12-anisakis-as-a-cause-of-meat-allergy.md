@@ -2,7 +2,7 @@
 title: "Anisakis as a cause of meat allergy"
 date: 2026-01-12
 image: "/img/noticias/anisakis-como-causante-de-alergia-a-la-carne.webp"
-summary: "A recent study by Spanish researchers has provided new clues as to how the parasite Anisakis —known for causing anisakiosis after eating raw or undercooked fish— may also act as a…"
+summary: "A recent study by Spanish researchers has provided new clues as to how the parasite Anisakis —known for causing anisakiosis after eating raw or undercooked fish— may also act as a trigger of food allergies in humans."
 translationKey: "2026-01-12-anisakis-como-causante-de-alergia-a-la-carne"
 ---
 A recent study by Spanish researchers has provided new clues as to how the parasite *Anisakis* —known for causing anisakiosis after eating raw or undercooked fish— may also **act as a trigger of food allergies in humans**.

@@ -1,8 +1,8 @@
 ---
-title: "Control del Anisakis: El papel de los veterinarios desde la lonja hasta la mesa"
+title: "Control del Anisakis: el papel de los veterinarios desde la lonja hasta la mesa"
 date: 2026-10-26
 image: "/img/noticias/control-del-anisakis-el-papel-de-los-veterinarios-desde-la-lonja-hasta.webp"
-summary: "La prevención de la anisakiasis y de las infecciones alimentarias no comienza en el congelador del hogar, sino mucho antes. Tal y como destaca el diario especializado ConSalud.es, la labor de los profesionales de la…"
+summary: "La prevención de la anisakiasis y de las infecciones alimentarias no comienza en el congelador del hogar, sino mucho antes."
 ---
 La prevención de la anisakiasis y de las infecciones alimentarias no comienza en el congelador del hogar, sino mucho antes. Tal y como destaca el diario especializado *ConSalud.es*, la labor de los profesionales de la veterinaria resulta fundamental para garantizar la seguridad de los productos pesqueros a lo largo de toda la cadena de suministro, actuando como la primera línea de defensa de la salud pública.
 

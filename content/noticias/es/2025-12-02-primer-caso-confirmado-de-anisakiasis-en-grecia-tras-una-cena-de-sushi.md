@@ -2,7 +2,7 @@
 title: "Primer caso confirmado de anisakiasis en Grecia tras una cena de sushi"
 date: 2025-12-02
 image: "/img/noticias/primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.webp"
-summary: "Un joven de 22 años residente en la ciudad griega de Tesalónica fue hospitalizado, convirtiéndose en el primer caso confirmado de anisakiasis en Grecia. El incidente ocurrió poco después de que el joven comiera sushi;…"
+summary: "Un joven de 22 años residente en la ciudad griega de Tesalónica fue hospitalizado, convirtiéndose en el primer caso confirmado de anisakiasis en Grecia. El incidente ocurrió poco después de que el joven comiera sushi; comenzó a sentir intensos dolores abdominales de forma aguda tras la cena."
 ---
 Un joven de 22 años residente en la ciudad griega de Tesalónica fue hospitalizado, convirtiéndose en el primer caso confirmado de **anisakiasis** en Grecia. El incidente ocurrió poco después de que el joven comiera **sushi**; comenzó a sentir intensos dolores abdominales de forma aguda tras la cena.
 
@@ -20,7 +20,7 @@ Aunque es una enfermedad más habitual en países con gran consumo de pescado cr
 
 Para evitar la infección por **Anisakis** al consumir pescado crudo o semicrudo (sushi, sashimi, ceviche, etc.), las **recomendaciones sanitarias** son claras:
 
-- **Cocinar bien** el pescado, alcanzando una temperatura interna mínima de unos **63 °C.**
+- **Cocinar bien** el pescado, alcanzando una temperatura interna mínima de unos **63 °C**.
 - **Congelar** el pescado de forma adecuada antes de consumirlo crudo: por ejemplo, a **−20 °C** durante al menos 7 días, o a **−35 °C** durante al menos 15 horas.
 - Asegurarse de que el pescado **procede de proveedores fiables** que sigan las normas de seguridad alimentaria —sobre todo si se consume crudo.
 

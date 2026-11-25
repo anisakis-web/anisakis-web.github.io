@@ -2,7 +2,7 @@
 title: "First confirmed case of anisakiasis in Greece after a sushi dinner"
 date: 2025-12-02
 image: "/img/noticias/primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi.webp"
-summary: "A 22-year-old man living in the Greek city of Thessaloniki was hospitalised, becoming the first confirmed case of anisakiasis in Greece. The incident occurred shortly after the young man ate sushi;…"
+summary: "A 22-year-old man living in the Greek city of Thessaloniki was hospitalised, becoming the first confirmed case of anisakiasis in Greece. The incident occurred shortly after the young man ate sushi; he began to experience sudden, intense abdominal pain after the dinner."
 translationKey: "2025-12-02-primer-caso-confirmado-de-anisakiasis-en-grecia-tras-una-cena-de-sushi"
 ---
 A 22-year-old man living in the Greek city of Thessaloniki was hospitalised, becoming the first confirmed case of **anisakiasis** in Greece. The incident occurred shortly after the young man ate **sushi**; he began to experience sudden, intense abdominal pain after the dinner.
@@ -21,7 +21,7 @@ Although the disease is more common in countries with high consumption of raw fi
 
 To avoid **Anisakis** infection when eating raw or semi-raw fish (sushi, sashimi, ceviche, etc.), the **health recommendations** are clear:
 
-- **Cook fish thoroughly**, reaching a minimum internal temperature of around **63 °C.**
+- **Cook fish thoroughly**, reaching a minimum internal temperature of around **63 °C**.
 - **Freeze** fish properly before eating it raw: for example, at **−20 °C** for at least 7 days, or at **−35 °C** for at least 15 hours.
 - Make sure the fish **comes from reliable suppliers** that follow food safety standards —especially if it is eaten raw.
 

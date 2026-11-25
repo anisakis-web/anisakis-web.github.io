@@ -2,7 +2,7 @@
 title: "Consumption habits and evisceration at sea: two factors behind anisakis"
 date: 2025-06-23
 image: "/img/noticias/el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.webp"
-summary: "A study estimates that around 8,000 cases of anisakiasis occur in Spain each year. Eating raw or undercooked fish and the practice of throwing viscera into the sea help to explain this."
+summary: "Around 8,000 cases of anisakiasis are estimated to occur in Spain each year. Eating raw or undercooked fish and the practice of throwing viscera into the sea help to explain this."
 translationKey: "2025-06-23-el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del"
 ---
 **Anisakiasis** is common in Spain. A study published in *Scientific Reports* (Bao et al., 2017) estimated that **between 7,700 and 8,320 cases** requiring medical attention occur in the country every year from the consumption of home-prepared anchovies in vinegar alone. The OCU puts the figure at **around 8,000 cases a year**.

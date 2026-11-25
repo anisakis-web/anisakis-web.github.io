@@ -2,7 +2,7 @@
 title: "Thermal inactivation of Anisakis: what the HEATSAKIS project reveals about time and temperature"
 date: 2026-10-05
 image: "/img/noticias/inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.webp"
-summary: "To ensure safety when eating fish, the general health recommendation is clear: reach at least 60 °C at the centre of the product for a minimum of 1 minute. However, the effectiveness of heat…"
+summary: "To ensure safety when eating fish, the general health recommendation is clear: reach at least 60 °C at the centre of the product for a minimum of 1 minute. However, the effectiveness of heat against parasites involves more nuances than a single fixed figure."
 translationKey: "2026-10-05-inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis"
 ---
 To ensure safety when eating fish, the general health recommendation is clear: reach at least 60 °C at the centre of the product for a minimum of 1 minute. However, the effectiveness of heat against parasites involves more nuances than a single fixed figure.

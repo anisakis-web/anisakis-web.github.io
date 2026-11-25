@@ -2,7 +2,7 @@
 title: "Investigación chilena confirma expresión de alérgenos en parásitos Anisakis presentes en pescados comerciales"
 date: 2025-01-07
 image: "/img/noticias/investigacion-chilena-confirma-expresion-de-alergenos-en-parasitos.webp"
-summary: "Un estudio desarrollado por investigadores de la Universidad Católica de la Santísima Concepción (UCSC) ha confirmado que el parásito marino Anisakis, frecuente en pescados de interés comercial, expresa genes asociados…"
+summary: "Un estudio desarrollado por investigadores de la Universidad Católica de la Santísima Concepción (UCSC) ha confirmado que el parásito marino Anisakis, frecuente en pescados de interés comercial, expresa genes asociados a alérgenos."
 ---
 Un estudio desarrollado por investigadores de la **Universidad Católica de la Santísima Concepción (UCSC)** ha confirmado que el parásito marino *Anisakis*, frecuente en pescados de interés comercial, expresa **genes asociados a alérgenos**, incluso tras someterse a diferentes métodos de preparación culinaria.
 

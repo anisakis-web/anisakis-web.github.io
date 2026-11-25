@@ -2,7 +2,7 @@
 title: "Hábitos de consumo y evisceración en alta mar: dos factores detrás del anisakis"
 date: 2025-06-23
 image: "/img/noticias/el-cambio-climatico-y-las-practicas-de-pesca-aceleran-el-ciclo-del.webp"
-summary: "Un estudio estima que en España se producen unos 8.000 casos de anisakiasis al año. El consumo de pescado crudo o poco hecho y la práctica de tirar las vísceras al mar ayudan a explicarlo."
+summary: "Se estima que en España se producen unos 8.000 casos de anisakiasis al año. El consumo de pescado crudo o poco hecho y la práctica de tirar las vísceras al mar ayudan a explicarlo."
 ---
 La **anisakiasis** es frecuente en España. Un estudio publicado en *Scientific Reports* (Bao y otros, 2017) estimó que cada año se producen en el país **entre 7.700 y 8.320 casos** que necesitan atención médica, solo por el consumo de boquerones en vinagre preparados en casa. La OCU habla de **unos 8.000 casos al año**.
 

@@ -2,9 +2,9 @@
 title: "Alerta por parásitos en una caballa “saludable” en España"
 date: 2025-12-02
 image: "/img/noticias/alerta-por-parasitos-en-una-caballa-saludable-en-espana.webp"
-summary: "Un reciente estudio de Universitat de València (UV) ha puesto de manifiesto riesgos sanitarios asociados a una especie de caballa comúnmente considerada saludable: el caballa estornino (Scomber colias), que a menudo se…"
+summary: "Un reciente estudio de la Universitat de València (UV) ha puesto de manifiesto riesgos sanitarios asociados a una especie de caballa comúnmente considerada saludable: la caballa estornino (Scomber colias), que a menudo se confunde en el mercado con la caballa atlántica."
 ---
-Un reciente estudio de *Universitat de València* (UV) ha puesto de manifiesto **riesgos sanitarios** asociados a una especie de caballa comúnmente considerada saludable: el **caballa estornino** (*Scomber colias*), que a menudo se confunde en el mercado con la caballa atlántica.
+Un reciente estudio de la *Universitat de València* (UV) ha puesto de manifiesto **riesgos sanitarios** asociados a una especie de caballa comúnmente considerada saludable: la **caballa estornino** (*Scomber colias*), que a menudo se confunde en el mercado con la caballa atlántica.
 
 **Qué se ha detectado**
 
@@ -14,7 +14,7 @@ Los científicos analizaron 250 ejemplares de **caballa estornino**, comprados a
 
 En España se comercializan **dos especies de caballa**: la caballa estornino (*Scomber colias*) y la caballa atlántica (*Scomber scombrus*). A pesar de sus diferencias biológicas, estas especies a menudo se confunden tanto por consumidores como por vendedores.
 
-El estudio señala que la prevalencia de larvas de **Anisakis** y otros parásitos puede variar según el origen geográfico del pescado: los ejemplares capturados en el Océano Atlántico mostraron una parasitación más elevada que los capturados en el Mediterráneo.
+El estudio señala que la prevalencia de larvas de **Anisakis** y otros parásitos puede variar según el origen geográfico del pescado: los ejemplares capturados en el océano Atlántico mostraron una parasitación más elevada que los capturados en el Mediterráneo.
 
 Por ello, los investigadores llaman la atención sobre la importancia de **distinguir claramente** la especie de caballa que se compra y su procedencia, preferentemente verificando la etiqueta del envase o mostrador.
 

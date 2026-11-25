@@ -2,7 +2,7 @@
 title: "Nuevas recomendaciones para prevenir el anisakis"
 date: 2025-09-06
 image: "/img/noticias/nuevas-recomendaciones-para-prevenir-el-anisakis.webp"
-summary: "Un artículo reciente de Consumer alerta de que congelar el pescado un par de días ya no es suficiente para garantizar la eliminación del parásito anisakis, y presenta recomendaciones actualizadas para reducir el riesgo…"
+summary: "Un artículo reciente de Consumer alerta de que congelar el pescado un par de días ya no es suficiente para garantizar la eliminación del parásito anisakis, y presenta recomendaciones actualizadas para reducir el riesgo en el consumo de pescado."
 ---
 Un artículo reciente de *Consumer* alerta de que **congelar el pescado un par de días ya no es suficiente** para garantizar la eliminación del parásito **anisakis**, y presenta recomendaciones actualizadas para reducir el riesgo en el consumo de pescado.
 
@@ -14,7 +14,7 @@ Además, incluso si la larva ya está muerta, los **compuestos proteicos que pro
 
 **¿Por qué la congelación por dos días no basta?**
 
-Hasta ahora se recomendaba congelar el pescado a –20 °C durante un par de días si iba a consumirse crudo o poco cocinado. Sin embargo, se han documentado casos de intoxicación que ocurrieron pese a aplicar esa práctica. Esto indica que algunas larvas pueden resistir esas condiciones o que los congeladores domésticos no alcanzan realmente los –20 °C.
+Hasta ahora se recomendaba congelar el pescado a –20 °C durante un par de días si iba a consumirse crudo o poco cocinado. Sin embargo, se han documentado casos de infección por anisakis que ocurrieron pese a aplicar esa práctica. Esto indica que algunas larvas pueden resistir esas condiciones o que los congeladores domésticos no alcanzan realmente los –20 °C.
 
 Por ello, las recomendaciones han cambiado:
 

@@ -1,8 +1,8 @@
 ---
-title: "El Gobierno Vasco lanza la campaña «#FrescosSí AnisakisNo» para impulsar el consumo seguro de pescado fresco"
+title: "El Gobierno Vasco lanza la campaña «#FrescosSíAnisakisNo» para impulsar el consumo seguro de pescado fresco"
 date: 2026-06-08
 image: "/img/noticias/el-gobierno-vasco-lanza-la-campana-frescossi-anisakisno-para-impulsar.webp"
-summary: "El Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca del Gobierno Vasco ha puesto en marcha una nueva iniciativa institucional bajo el lema «#FrescosSíAnisakisNo». El propósito principal de esta…"
+summary: "El Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca del Gobierno Vasco ha puesto en marcha una nueva iniciativa institucional bajo el lema «#FrescosSíAnisakisNo»."
 ---
 El Departamento de Alimentación, Desarrollo Rural, Agricultura y Pesca del Gobierno Vasco ha puesto en marcha una nueva iniciativa institucional bajo el lema **«#FrescosSíAnisakisNo»**. El propósito principal de esta campaña de carácter informativo y práctico es potenciar el consumo de pescado fresco garantizando la máxima seguridad alimentaria, al tiempo que se busca afianzar la confianza de la ciudadanía en un producto que es pilar fundamental tanto de la dieta saludable como de la identidad gastronómica en el País Vasco.
 

@@ -2,7 +2,7 @@
 title: "Anisakis genome decoded: science moves towards genetic control of the fish parasite"
 date: 2026-07-22
 image: "/img/noticias/descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control.webp"
-summary: "A scientific milestone led by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC deciphers the most complete genetic map of Anisakis simplex, opening the door to new tools for tracking, food safety…"
+summary: "A scientific milestone led by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC deciphers the most complete genetic map of Anisakis simplex, opening the door to new tools for tracking, food safety and environmental monitoring."
 translationKey: "2026-07-22-descodifican-el-genoma-del-anisakis-la-ciencia-avanza-hacia-un-control"
 ---
 A scientific milestone led by the CNAG, the Universidade de Santiago de Compostela and the IIM-CSIC deciphers the most complete genetic map of *Anisakis simplex*, opening the door to new tools for tracking, food safety and environmental monitoring.
@@ -17,8 +17,8 @@ The study, published in the journal *Scientific Reports*, has made it possible t
 
 This scientific achievement is not just a theoretical map, but the basis for developing **immediate practical applications**:
 
-- **A low-cost molecular «barcode»:** Thanks to the reference genomic information, the team has designed a rapid test capable of distinguishing between the two main variants (*Anisakis simplex* and *Anisakis pegreffii*) and even detecting hybrid specimens by analysing just ten key DNA variants.
-- **Monitoring population dynamics:** Accurately identifying each variety makes it possible to map how these populations are distributed and spread among commercial marine species (such as hake, cod or blue whiting).
+- **A low-cost molecular «barcode»:** Thanks to the reference genomic information, the team has designed a rapid test capable of distinguishing between the two species (*Anisakis simplex* and *Anisakis pegreffii*) and even detecting hybrid specimens by analysing just ten key DNA variants.
+- **Monitoring population dynamics:** Accurately identifying each species makes it possible to map how these populations are distributed and spread among commercial marine species (such as hake, cod or blue whiting).
 - **Monitoring the impact of climate change:** Rising sea temperatures alter the migratory patterns of host species and the parasite's interaction within the ecosystem. This genetic map will be used to monitor how the nematode responds to changes in the marine environment.
 
 ## What does this breakthrough mean for consumers?

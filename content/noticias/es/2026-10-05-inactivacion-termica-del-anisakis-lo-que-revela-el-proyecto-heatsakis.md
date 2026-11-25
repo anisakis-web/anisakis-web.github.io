@@ -2,7 +2,7 @@
 title: "Inactivación térmica del Anisakis: lo que revela el proyecto HEATSAKIS sobre tiempo y temperatura"
 date: 2026-10-05
 image: "/img/noticias/inactivacion-termica-del-anisakis-lo-que-revela-el-proyecto-heatsakis.webp"
-summary: "Para garantizar la seguridad en el consumo de pescado, la recomendación sanitaria general es clara: alcanzar al menos 60 °C en el centro del producto durante un mínimo de 1 minuto. Sin embargo, la efectividad del calor…"
+summary: "Para garantizar la seguridad en el consumo de pescado, la recomendación sanitaria general es clara: alcanzar al menos 60 °C en el centro del producto durante un mínimo de 1 minuto. Sin embargo, la efectividad del calor sobre los parásitos abarca más matices que una cifra fija."
 ---
 Para garantizar la seguridad en el consumo de pescado, la recomendación sanitaria general es clara: alcanzar al menos 60 °C en el centro del producto durante un mínimo de 1 minuto. Sin embargo, la efectividad del calor sobre los parásitos abarca más matices que una cifra fija.
 

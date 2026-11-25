@@ -2,7 +2,7 @@
 title: "Alert over parasites in a “healthy” mackerel in Spain"
 date: 2025-12-02
 image: "/img/noticias/alerta-por-parasitos-en-una-caballa-saludable-en-espana.webp"
-summary: "A recent study by the Universitat de València (UV) has highlighted health risks associated with a species of mackerel commonly regarded as healthy: the Atlantic chub mackerel (Scomber colias), which is often…"
+summary: "A recent study by the Universitat de València (UV) has highlighted health risks associated with a species of mackerel commonly regarded as healthy: the Atlantic chub mackerel (Scomber colias), which is often confused on the market with Atlantic mackerel."
 translationKey: "2025-12-02-alerta-por-parasitos-en-una-caballa-saludable-en-espana"
 ---
 A recent study by the *Universitat de València* (UV) has highlighted **health risks** associated with a species of mackerel commonly regarded as healthy: the **Atlantic chub mackerel** (*Scomber colias*), which is often confused on the market with Atlantic mackerel.
