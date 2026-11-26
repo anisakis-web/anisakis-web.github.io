@@ -32,7 +32,7 @@ jobs:
       # Tras cambiar el código de la web: commit, `bash tools/huella_codigo.sh --update` y commit de este archivo.
       - name: Comprobar que solo han cambiado noticias
         env:
-          CODE_TREE: e308563b6ff484bffd5d6ea17b31311dc8f09d671effa1741b9fd477270e3d0e
+          CODE_TREE: 112210f25d8dc95cc351e9d68e16ef6aab13a0299fe6ab169c0b10e6f656201c
         run: |
           set -euo pipefail
           bad=$(git ls-tree -r -l HEAD -- content/noticias static/img/noticias | awk '$1!="100644" || $2!="blob" || $4>5000000')
