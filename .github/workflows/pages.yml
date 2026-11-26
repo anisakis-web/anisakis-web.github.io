@@ -5,10 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Permisos mínimos: la generación (que ejecuta build.py) solo lee el repositorio;
+# solo el paso de publicación puede escribir en GitHub Pages.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -16,24 +16,58 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      # Acciones oficiales de GitHub fijadas por su huella exacta (no por etiqueta, que podría cambiar)
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
-          python-version: '3.12'
+          persist-credentials: false
+          fetch-depth: 0   # historial completo: el resumen compara con lo que está publicado
+
+      # Control de integridad: con la clave de un editor solo se pueden cambiar noticias e imágenes de noticias.
+      # Si cambia cualquier otra cosa, la huella no coincide y NO se publica (GitHub avisa por correo).
+      # Tras cambiar el código de la web: commit, `bash tools/huella_codigo.sh --update` y commit de este archivo.
+      - name: Comprobar que solo han cambiado noticias
+        env:
+          CODE_TREE: 7b735cd884f472ead2043edefb027c429a70a14e3f9d580696397575baee343b
+        run: |
+          set -euo pipefail
+          bad=$(git ls-tree -r -l HEAD -- content/noticias static/img/noticias | awk '$1!="100644" || $2!="blob" || $4>5000000')
+          if [ -n "$bad" ]; then echo "::error::Archivo no permitido en noticias (no es un archivo normal o pasa de 5 MB): $bad"; exit 1; fi
+          h=$(bash tools/huella_codigo.sh)
+          if [ "$h" != "$CODE_TREE" ]; then echo "::error::Hay cambios fuera de las noticias (huella $h). Revisar el historial antes de publicar."; exit 1; fi
+
+      - name: Comprobar que las reglas del panel coinciden con las de la web
+        run: python3 tools/reglas_panel.py --check
+
+      # Resumen de qué noticias cambian, visible en la página donde se aprueba la publicación (no detiene nada).
+      - name: Resumen para la aprobación
+        run: python3 tools/resumen_cambios.py
+
       - name: Generar la web
-        run: python build.py
-      - uses: actions/upload-pages-artifact@v3
+        run: python3 build.py
+
+      # Versión publicada (commit), para que el próximo resumen compare con lo que hay en la web.
+      - name: Anotar la versión
+        run: echo "$GITHUB_SHA" > _site/version.txt
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
         with:
           path: _site
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5.0.1
