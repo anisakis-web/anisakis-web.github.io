@@ -31,3 +31,5 @@ Las recomendaciones de la Agencia Española de Seguridad Alimentaria y Nutrició
 
 - No dé por cocinada una pieza gruesa hasta que toda ella haya alcanzado esa temperatura; compruébelo pinchando con un tenedor o un cuchillo.
 - Evite preparaciones caseras de boquerones en vinagre o sushi sin haber realizado la congelación previa de 5 días.
+
+*Imagen: Ann Wuyts (Wikimedia Commons), licencia CC BY 2.0.*

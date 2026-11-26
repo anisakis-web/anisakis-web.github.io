@@ -13,29 +13,8 @@ enlaces:
   - tipo: fuente
     nombre: "BOE"
     url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-24655"
-  - tipo: fuente
-    nombre: "Marexi: Tedepad"
-    url: "https://marexi.com/es/tedepad/"
-  - tipo: fuente
-    nombre: "Tedepad: quiénes somos"
-    url: "https://tedepad.com/quienes-somos/"
-  - tipo: fuente
-    nombre: "Marexi: Anisakischeck"
-    url: "https://marexi.com/es/anisakischeck/"
-  - tipo: fuente
-    nombre: "Marexi: Anisakischeck Inline"
-    url: "https://marexi.com/es/anisakischeck/inline/"
-  - tipo: fuente
-    nombre: "Marexi: ScanisakiS"
-    url: "https://marexi.com/es/anisakischeck/scanisakis/"
-  - tipo: fuente
-    nombre: "Marexi: UVPress"
-    url: "https://marexi.com/es/anisakischeck/uvpress/"
-  - tipo: enlace
-    nombre: "Marexi"
-    url: "https://marexi.com/"
 ---
-La tecnología que se emplea en alta mar y en las fábricas para que el anisakis no llegue al plato fue el tema de un reportaje del programa *Directo al grano*, de RTVE. En ese terreno trabaja la empresa viguesa **Marexi** (Tecnología Marina Ximo, S.L.), que fabrica equipos para dos fases distintas: el tratamiento de las vísceras en el barco y la detección del parásito en el pescado.
+La tecnología que se emplea en alta mar y en las fábricas para que el anisakis no llegue al plato fue el tema de un reportaje del programa *Directo al grano*, de RTVE. En ese terreno trabaja la empresa viguesa **Marexi**, que fabrica equipos para dos fases distintas: el tratamiento de las vísceras en el barco y la detección del parásito en el pescado.
 
 **TRATAR LAS VÍSCERAS ANTES DE DEVOLVERLAS AL MAR**
 

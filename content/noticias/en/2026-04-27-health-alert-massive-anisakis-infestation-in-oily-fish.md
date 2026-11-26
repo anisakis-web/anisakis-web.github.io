@@ -32,3 +32,5 @@ The recommendations of the Spanish Agency for Food Safety and Nutrition (AESAN) 
 
 - Do not consider a thick piece cooked until all of it has reached that temperature; check by pricking it with a fork or knife.
 - Avoid home-made preparations of anchovies in vinegar or sushi without first freezing the fish for 5 days.
+
+*Image: Ann Wuyts (Wikimedia Commons), licensed under CC BY 2.0.*

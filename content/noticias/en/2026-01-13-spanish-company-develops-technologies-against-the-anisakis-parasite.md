@@ -14,29 +14,8 @@ enlaces:
   - tipo: fuente
     nombre: "BOE"
     url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-24655"
-  - tipo: fuente
-    nombre: "Marexi: Tedepad"
-    url: "https://marexi.com/en/tedepad/"
-  - tipo: fuente
-    nombre: "Tedepad: who we are"
-    url: "https://tedepad.com/en/who-we-are/"
-  - tipo: fuente
-    nombre: "Marexi: Anisakischeck"
-    url: "https://marexi.com/en/anisakischeck/"
-  - tipo: fuente
-    nombre: "Marexi: Anisakischeck Inline"
-    url: "https://marexi.com/anisakischeck/inline/"
-  - tipo: fuente
-    nombre: "Marexi: ScanisakiS"
-    url: "https://marexi.com/anisakischeck/scanisakis/"
-  - tipo: fuente
-    nombre: "Marexi: UVPress"
-    url: "https://marexi.com/anisakischeck/uvpress/"
-  - tipo: enlace
-    nombre: "Marexi"
-    url: "https://marexi.com/"
 ---
-The technology used at sea and in factories to keep anisakis off the plate was the subject of a report on the RTVE programme *Directo al grano*. This is the field in which the Vigo-based company **Marexi** (Tecnología Marina Ximo, S.L.) works, making equipment for two different stages: treating viscera on the vessel and detecting the parasite in fish.
+The technology used at sea and in factories to keep anisakis off the plate was the subject of a report on the RTVE programme *Directo al grano*. This is the field in which the Vigo-based company **Marexi** works, making equipment for two different stages: treating viscera on the vessel and detecting the parasite in fish.
 
 **TREATING VISCERA BEFORE THEY GO BACK TO THE SEA**
 
