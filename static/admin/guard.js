@@ -1,8 +1,8 @@
 /* Guardia del panel de noticias de anisakis.com (código propio; se carga antes que Sveltia CMS).
  *  1. Si alguien mete el panel dentro de otra web (iframe), no se carga: evita engaños de «clickjacking».
- *  2. Solo admite claves de GitHub de tipo «fine-grained» (empiezan por github_pat_): si se pega una clave clásica o con
- *     más permisos, se borra al instante del navegador y se avisa. El panel solo debe usarse con claves limitadas a
- *     este repositorio. */
+ *  2. Solo admite claves de GitHub de tipo «fine-grained» (empiezan por github_pat_): si se pega una clave clásica, se
+ *     borra al instante del navegador y se avisa. NO comprueba los permisos de la clave: cada clave de editor debe crearse
+ *     limitada a este repositorio y solo con «Contents: Read and write» (nunca «Workflows» ni «Administration»). */
 (function () {
   'use strict';
   var KEY = 'sveltia-cms.user';

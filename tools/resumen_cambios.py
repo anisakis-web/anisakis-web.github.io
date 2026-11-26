@@ -2,7 +2,7 @@
 
 Lo ejecuta el workflow de publicación (paso «Resumen para la aprobación») y lo escribe en el resumen de la ejecución
 ($GITHUB_STEP_SUMMARY), que GitHub muestra en la misma página donde se aprueba. Compara lo que hay ahora en `main`
-con lo que está publicado en la web (https://anisakis.com/version.txt, que escribe el propio workflow).
+con lo que está publicado en la web (https://www.anisakis.com/version.txt, que escribe el propio workflow).
 
     python3 tools/resumen_cambios.py              → escribe el resumen (o lo muestra si no hay $GITHUB_STEP_SUMMARY)
     python3 tools/resumen_cambios.py --base <sha> → compara con ese commit (para probar en local)
@@ -16,7 +16,7 @@ import subprocess
 import sys
 import urllib.request
 
-SITE_VERSION = 'https://anisakis.com/version.txt'
+SITE_VERSION = 'https://www.anisakis.com/version.txt'
 NEWS = re.compile(r'^content/noticias/(es|en)/[^/]+\.md$')
 IMG = re.compile(r'^static/img/noticias/[^/]+$')
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -23,10 +23,11 @@ from email.utils import format_datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, '_site')
-SITE = 'https://anisakis.com'
+SITE = 'https://www.anisakis.com'
 NAME = 'Anisakis International Information Site'
 SHORT = 'Anisakis IIS'
 EMAIL = 'info@anisakis.com'
+LANG_NAMES = {'es': 'Español', 'en': 'English'}
 PER_PAGE = 12
 MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
          'septiembre', 'octubre', 'noviembre', 'diciembre']
@@ -411,9 +412,10 @@ def layout(path, title, body, desc='', image='', kind='website', extra_head='', 
         alternates = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE}{paths[l]}">\n' for l in LANGS) + \
             f'<link rel="alternate" hreflang="x-default" href="{SITE}{paths["es"]}">\n'
     switch = ''.join(
-        (f'<a href="{esc(path if path != "/404.html" else T[l]["home"])}" hreflang="{l}" lang="{l}" aria-current="true">{l.upper()}</a>' if l == lang else
-         f'<a href="{esc(alt or fallback or T[l]["home"])}" hreflang="{l}" lang="{l}">{l.upper()}</a>') for l in LANGS)
+        (f'<a href="{esc(path if path != "/404.html" else T[l]["home"])}" hreflang="{l}" lang="{l}" aria-current="true" aria-label="{LANG_NAMES[l]}">{l.upper()}</a>' if l == lang else
+         f'<a href="{esc(alt or fallback or T[l]["home"])}" hreflang="{l}" lang="{l}" aria-label="{LANG_NAMES[l]}">{l.upper()}</a>') for l in LANGS)
     lt = t['legal']
+    canon = '<meta name="robots" content="noindex">' if path == '/404.html' else f'<link rel="canonical" href="{url}">'
     return f'''<!doctype html>
 <html lang="{lang}">
 <head>
@@ -423,7 +425,7 @@ def layout(path, title, body, desc='', image='', kind='website', extra_head='', 
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{esc(full_title)}</title>
 <meta name="description" content="{esc(desc)}">
-<link rel="canonical" href="{url}">
+{canon}
 {alternates}<meta property="og:type" content="{kind}">
 <meta property="og:site_name" content="{NAME}">
 <meta property="og:title" content="{esc(title or NAME)}">
@@ -715,8 +717,15 @@ def build():
                 if lang == 'en':
                     body = localize_links(body, url_map)
                 desc = meta.get('description') or (plain(body)[:180] if folder == 'paginas' else '')
-                write(url, layout(url, meta['title'], f'<article class="wrap narrow {cls}"><h1>{esc(meta["title"])}</h1>\n{body}</article>',
-                                  desc, lang=lang, alt=alt))
+                if meta.get('intro'):
+                    # cabecera de página con entradilla (páginas informativas con diseño propio)
+                    html_page = (f'<header class="page-hero"><div class="wrap">'
+                                 f'<h1>{esc(meta["title"])}</h1><p class="page-intro">{esc(meta["intro"])}</p></div></header>\n'
+                                 f'<article class="wrap {cls} page-pro">\n{body}</article>')
+                    desc = meta.get('description') or meta['intro']
+                else:
+                    html_page = f'<article class="wrap narrow {cls}"><h1>{esc(meta["title"])}</h1>\n{body}</article>'
+                write(url, layout(url, meta['title'], html_page, desc, lang=lang, alt=alt))
             pages.append((page_url(slug, 'es'), None, {l: page_url(slug, l) for l in versions}))
 
     # noticias: listas
@@ -797,7 +806,7 @@ def build():
     write('CNAME', SITE.split('//', 1)[1] + '\n')
     write('.nojekyll', '')
     n_en = sum(1 for n in news if n['en'])
-    print(f'OK: {len(news)} noticias ({n_en} en inglés), {sum(len(v) for _, _, v in pages)} direcciones en el sitemap → {OUT}')
+    print(f'OK: {len(news)} noticias ({n_en} en inglés), {sum(len(v) for _, _, v in pages)} direcciones en el sitemap -> {OUT}')
     if PROBLEMS:
         for m in PROBLEMS:
             print(f'::error::{m}')
