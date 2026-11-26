@@ -7,6 +7,9 @@ enlaces:
   - tipo: fuente
     nombre: "Consumer Eroski"
     url: "https://www.consumer.es/seguridad-alimentaria/nuevas-recomendaciones-para-prevenir-el-anisakis.html"
+  - tipo: fuente
+    nombre: "AESAN: recomendaciones sobre el anisakis"
+    url: "https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/anisakis.htm"
 ---
 Un artículo reciente de *Consumer* alerta de que **congelar el pescado un par de días ya no es suficiente** para garantizar la eliminación del parásito **anisakis**, y presenta recomendaciones actualizadas para reducir el riesgo en el consumo de pescado.
 
@@ -36,3 +39,7 @@ Por ello, las recomendaciones han cambiado:
 - Manipular y limpiar bien el pescado antes de congelarlo o cocinarlo.
 
 Estas nuevas pautas buscan **reforzar la seguridad alimentaria** y reducir el riesgo de anisakiasis en los hogares, recordando que **una buena práctica en la manipulación y preparación del pescado** sigue siendo la mejor forma de prevenir este tipo de infecciones.
+
+**Qué dice la AESAN**
+
+La Agencia Española de Seguridad Alimentaria y Nutrición (AESAN) recomienda, para el consumo doméstico, congelar el pescado que se vaya a comer crudo o poco hecho a **−15 °C o menos durante al menos 4 días** (aconseja contar 5 días desde que se mete en el congelador) y, al cocinarlo, alcanzar **60 °C durante al menos un minuto en toda la pieza**; como orientación, una pieza de unos 2,5 cm de grosor necesita unos 10 minutos en total.

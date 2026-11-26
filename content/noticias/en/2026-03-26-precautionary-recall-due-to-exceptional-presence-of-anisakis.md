@@ -1,30 +1,28 @@
 ---
-title: "Precautionary recall due to exceptional presence of Anisakis"
+title: "Several batches of fresh mackerel withdrawn over anisakis risk"
 date: 2026-03-26
 image: "/img/noticias/retirada-preventiva-por-presencia-extraordinaria-de-anisakis.webp"
-summary: "The competent food safety authorities have issued an alert notification concerning the detection of a high parasite load of nematodes, consistent with Anisakis spp., in specific batches of fishery products."
 translationKey: "2026-03-26-retirada-preventiva-por-presencia-extraordinaria-de-anisakis"
+summary: "The authorities have ordered the withdrawal from sale of several batches of fresh mackerel after a potential risk of anisakis was detected, triggering food safety protocols at various distribution points."
 enlaces:
   - tipo: fuente
     nombre: "Hoy"
     url: "https://www.hoy.es/sociedad/salud/retiran-pescado-supermercado-riesgo-anisakis-debes-saber-20260325125303-nt.html"
+  - tipo: fuente
+    nombre: "AESAN: recommendations on anisakis"
+    url: "https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/anisakis.htm"
+  - tipo: fuente
+    nombre: "BOE: Royal Decree 1021/2022 (Article 8)"
+    url: "https://www.boe.es/buscar/act.php?id=BOE-A-2022-21681"
 ---
-The competent food safety authorities have issued an alert notification concerning the detection of a high parasite load of nematodes, consistent with *Anisakis spp.*, in specific batches of fishery products. As a precautionary measure and in compliance with public health protocols, the immediate withdrawal of these batches from the affected retail outlets has been ordered.
+The authorities have ordered the withdrawal of **several batches of fresh mackerel** after a **potential risk of anisakis** was detected, according to the Spanish newspaper *Hoy*. The alert has triggered food safety protocols at various distribution points.
 
-### Protocol for consumers
+**Why it matters**
 
-Consumers are urged to strictly follow these guidelines:
+Anisakis can cause **anisakiasis**, an infection that usually causes severe abdominal pain and digestive problems, and even allergic reactions in some people. The greatest risk arises when fish is eaten raw, marinated or undercooked, because the parasite can survive if the right temperatures are not reached.
 
-1. **Do not consume:** Eating the affected product is categorically discouraged, regardless of any heat treatment it was intended to undergo.
-2. **Return the product:** Consumers should return the product to the establishment where it was purchased. In accordance with current consumer protection regulations on food alerts, the purchase price will be refunded without the proof of purchase being strictly required.
-3. **Preventing cross-contamination:** If the product has been handled, all work surfaces, chopping boards and utensils used must be thoroughly sanitised with hot water and surfactants (soap/detergent) to avoid any possible cross-contamination in the kitchen.
+**How to reduce the risk**
 
-### Prophylaxis and standard control measures
-
-This precautionary recall underlines the importance of maintaining ongoing prophylactic measures against fish-borne parasitic diseases. We would like to remind readers of the key guidelines for inactivating the parasite, based on current scientific evidence:
-
-- **Inactivation by freezing:** For raw preparations, marinades, escabeche or insufficient cooking, the product must be frozen at -20 °C or lower at its core for a minimum of 24 hours (or at -35 °C for a minimum of 15 hours).
-- **Thermal inactivation:** For consumption after traditional cooking (frying, baking, griddling), the geometric centre of the product must reach a minimum temperature of 60 °C for at least one minute.
-- **Early evisceration:** It is recommended to buy gutted fish or, failing that, to remove the viscera as soon as possible after purchase, in order to reduce the likelihood of larvae migrating from the abdominal cavity into the muscle tissue.
-
-We will continue to monitor updates from the health authorities on this platform in order to provide accurate and rigorous information.
+- **Cooking:** cook fish until it reaches **60 °C for at least one minute** throughout the piece.
+- **Freezing:** if it is to be eaten raw or undercooked, freeze it first. Spanish law requires establishments that serve food to freeze it at **−20 °C for 24 hours** or at **−35 °C for 15 hours** (Article 8 of Royal Decree 1021/2022). At home, the Spanish food safety agency AESAN recommends freezing it at **−15 °C or below for at least 4 days**, counting 5 days from when it goes into the freezer.
+- **Buying:** buy from trusted outlets and keep an eye on health alerts.

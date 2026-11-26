@@ -8,6 +8,9 @@ enlaces:
   - tipo: fuente
     nombre: "Consumer Eroski"
     url: "https://www.consumer.es/seguridad-alimentaria/nuevas-recomendaciones-para-prevenir-el-anisakis.html"
+  - tipo: fuente
+    nombre: "AESAN: recommendations on anisakis"
+    url: "https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/anisakis.htm"
 ---
 A recent article in *Consumer* warns that **freezing fish for a couple of days is no longer enough** to guarantee that the **anisakis** parasite is eliminated, and sets out updated recommendations to reduce the risk when eating fish.
 
@@ -37,3 +40,7 @@ For this reason, the recommendations have changed:
 - Handle and clean fish thoroughly before freezing or cooking it.
 
 These new guidelines aim to **strengthen food safety** and reduce the risk of anisakiasis in the home, bearing in mind that **good practice in handling and preparing fish** remains the best way to prevent this type of infection.
+
+**What AESAN says**
+
+For home consumption, the Spanish Agency for Food Safety and Nutrition (AESAN) recommends freezing fish that is to be eaten raw or undercooked at **−15 °C or below for at least 4 days** (it advises counting 5 days from when it goes into the freezer) and, when cooking it, reaching **60 °C for at least one minute throughout the piece**; as a guide, a piece about 2.5 cm thick needs around 10 minutes in total.

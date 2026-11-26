@@ -1,29 +1,27 @@
 ---
-title: "Retirada preventiva por presencia extraordinaria de Anisakis"
+title: "Retiran varios lotes de caballa fresca por riesgo de anisakis"
 date: 2026-03-26
 image: "/img/noticias/retirada-preventiva-por-presencia-extraordinaria-de-anisakis.webp"
-summary: "Las autoridades competentes en seguridad alimentaria han emitido una notificación de alerta relativa a la detección de una alta carga parasitaria de nematodos, compatibles con Anisakis spp., en lotes específicos de productos pesqueros."
+summary: "Las autoridades han ordenado retirar de la venta varios lotes de caballa fresca tras detectarse un riesgo potencial de presencia de anisakis, lo que ha activado los protocolos de seguridad alimentaria en distintos puntos de distribución."
 enlaces:
   - tipo: fuente
     nombre: "Hoy"
     url: "https://www.hoy.es/sociedad/salud/retiran-pescado-supermercado-riesgo-anisakis-debes-saber-20260325125303-nt.html"
+  - tipo: fuente
+    nombre: "AESAN: recomendaciones sobre el anisakis"
+    url: "https://www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/anisakis.htm"
+  - tipo: fuente
+    nombre: "BOE: Real Decreto 1021/2022 (artículo 8)"
+    url: "https://www.boe.es/buscar/act.php?id=BOE-A-2022-21681"
 ---
-Las autoridades competentes en seguridad alimentaria han emitido una notificación de alerta relativa a la detección de una alta carga parasitaria de nematodos, compatibles con *Anisakis spp.*, en lotes específicos de productos pesqueros. Como medida de precaución y en cumplimiento de los protocolos de salud pública, se ha ordenado la retirada inmediata de dichos lotes en las superficies comerciales afectadas.
+Las autoridades han ordenado la retirada de **varios lotes de caballa fresca** tras detectarse un **riesgo potencial de presencia de anisakis**, según informa el diario *Hoy*. La alerta ha activado los protocolos de seguridad alimentaria en distintos puntos de distribución.
 
-### Protocolo de actuación para el consumidor
+**Por qué importa**
 
-Se insta a los consumidores a seguir estrictamente las siguientes directrices:
+El anisakis puede causar **anisakiasis**, una infección que suele provocar dolor abdominal intenso y problemas digestivos, e incluso reacciones alérgicas en algunas personas. El mayor riesgo aparece cuando el pescado se consume crudo, marinado o poco cocinado, porque el parásito puede sobrevivir si no se alcanzan las temperaturas adecuadas.
 
-1. **Abstención de consumo:** Se desaconseja categóricamente la ingesta del producto afectado, independientemente del tratamiento térmico al que se tuviera previsto someterlo.
-2. **Devolución del producto:** El consumidor debe retornar el producto al establecimiento donde fue adquirido. De acuerdo con la normativa vigente de protección al consumidor ante alertas alimentarias, se procederá al reembolso del importe sin que sea estrictamente obligatoria la presentación del comprobante de compra.
-3. **Prevención de contaminación cruzada:** Si el producto ha sido manipulado, es necesario proceder a la higienización exhaustiva de todas las superficies de trabajo, tablas de corte y utensilios empleados, utilizando agua caliente y agentes tensioactivos (jabón/detergente) para evitar cualquier posible contaminación cruzada en la cocina.
+**Cómo reducir el riesgo**
 
-### Profilaxis y medidas de control estándar
-
-Esta retirada preventiva subraya la importancia de mantener medidas de profilaxis continuas frente a las parasitosis transmitidas por el pescado. Recordamos las directrices fundamentales para la inactivación del parásito, basadas en la evidencia científica actual:
-
-- **Inactivación por congelación:** Para preparaciones en crudo, marinados, escabeches o cocciones insuficientes, es obligatorio someter el producto a una congelación a -20 °C o temperatura inferior en el centro del producto, durante un mínimo de 24 horas (o a -35 °C durante un mínimo de 15 horas).
-- **Inactivación térmica:** Para el consumo en cocinado tradicional (fritura, horneado, plancha), se debe garantizar que el centro geométrico del producto alcance una temperatura mínima de 60 °C durante al menos un minuto.
-- **Evisceración temprana:** Se recomienda la adquisición de pescado eviscerado o, en su defecto, la extracción de las vísceras con la mayor brevedad posible tras la compra, con el fin de reducir la probabilidad de migración de las larvas desde la cavidad abdominal hacia el tejido muscular.
-
-Desde esta plataforma continuaremos monitorizando las actualizaciones de las autoridades sanitarias para proporcionar información precisa y rigurosa.
+- **Cocinado:** cocinar el pescado hasta alcanzar **60 °C durante al menos un minuto** en toda la pieza.
+- **Congelación:** si se va a consumir crudo o poco hecho, congelarlo antes. La normativa obliga a los establecimientos que sirven comidas a congelarlo a **−20 °C durante 24 horas** o a **−35 °C durante 15 horas** (artículo 8 del Real Decreto 1021/2022). En casa, la AESAN recomienda congelarlo a **−15 °C o menos durante al menos 4 días**, contando 5 días desde que se mete en el congelador.
+- **Compra:** comprar en establecimientos de confianza y estar atento a las alertas sanitarias.
